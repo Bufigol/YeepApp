@@ -20,6 +20,8 @@ import android.view.ViewGroup;
 
 import android.widget.TextView;
 
+import com.parse.ParseObject;
+
 public class MainActivity extends AppCompatActivity {
 
     /**
@@ -41,6 +43,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Prueba de conexion con parse
+        ParseObject testObject = new ParseObject("TestObject");
+        testObject.put("foo", "bar");
+        testObject.saveInBackground();
+
+
+
         // Lanza al cargar la activity Login
         Intent intent = new Intent(this,LoginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

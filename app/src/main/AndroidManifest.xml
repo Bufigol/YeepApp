@@ -12,6 +12,8 @@
 
 
     <application
+
+        android:name=".YeepApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -21,6 +23,7 @@
 
         // Connect app to Parse
         <meta-data
+
             android:name="com.parse.APPLICATION_ID"
             android:value="Q7meZNZjY08OT3kGCHfiidn8BId6waKdBN3SV6mB" />
         <meta-data
