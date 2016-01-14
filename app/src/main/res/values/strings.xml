@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Yeep</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="username_hint">User name</string>
+    <string name="passwordField_hint">Enter password</string>
+    <string name="loginBtn_label">Login</string>
+    <string name="signUpText">Sing UP</string>
+    <string name="emailField_hint">Enter a email</string>
+    <string name="signBtn_label">Sign Up</string>
+    <string name="password_sing">Enter a password</string>
+</resources>
