@@ -3,6 +3,10 @@
     package="com.labs.josemanuel.yeep">
 
 
+    // Add the SDK to your app in Android Studio on build.gradle
+
+
+    // Request permissions
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
@@ -14,6 +18,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+
+        // Connect app to Parse
         <meta-data
             android:name="com.parse.APPLICATION_ID"
             android:value="Q7meZNZjY08OT3kGCHfiidn8BId6waKdBN3SV6mB" />
