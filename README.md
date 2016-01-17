@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/Bufigol/YeepApp.png?label=ready&title=Ready)](https://waffle.io/Bufigol/YeepApp)
 # WICK!
 
 ## Grafico de avances.
