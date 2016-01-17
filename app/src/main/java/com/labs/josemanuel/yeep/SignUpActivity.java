@@ -10,8 +10,8 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-
-
+        // elimina la barra superior
+        getSupportActionBar().hide();
 
 
     }
