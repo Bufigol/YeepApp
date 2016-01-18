@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.labs.josemanuel.yeep">
-
-
     // Add the SDK to your app in Android Studio on build.gradle
 
 
@@ -10,49 +8,41 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
-
     <application
-
         android:name=".YeepApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-
         // Connect app to Parse
         <meta-data
-
             android:name="com.parse.APPLICATION_ID"
             android:value="Q7meZNZjY08OT3kGCHfiidn8BId6waKdBN3SV6mB" />
         <meta-data
             android:name="com.parse.CLIENT_KEY"
             android:value="l6iEzpMG3S83z8tShz3FKPlIqV9YibEFh6bHolZu" />
 
-
-
-
-
-
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
         <activity
             android:name=".LoginActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".SignUpActivity"
+            android:parentActivityName=".LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".Splash_Sceen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
-
-        <activity android:name=".SignUpActivity"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".LoginActivity"/>
-
     </application>
 
 </manifest>
