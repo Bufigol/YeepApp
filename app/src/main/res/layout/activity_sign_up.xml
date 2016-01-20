@@ -72,7 +72,8 @@
         android:textColorHint="@android:color/white"
         android:layout_below="@+id/emailField"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:onClick="check" />
 
 
 </LinearLayout>
@@ -84,7 +85,8 @@
         android:id="@+id/signBtn"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:textSize="25sp" />
+        android:textSize="25sp"
+        android:onClick="check" />
 
 
 </RelativeLayout>
