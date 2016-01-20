@@ -33,7 +33,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void check(View view){
-
+        //Checks if itś empty or not.
         if(user.getText().toString().matches("")){
             Log.i("LoginActivity", "USER EMPTY.");
         }else{
