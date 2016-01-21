@@ -5,7 +5,7 @@
     <string name="username_hint">Username</string>
     <string name="passwordField_hint">Password</string>
     <string name="loginBtn_label">Login</string>
-    <string name="signUpText">Sing Up</string>
+    <string name="signUpText">Sign Up</string>
     <string name="emailField_hint">Email</string>
     <string name="signBtn_label">Sign Up</string>
     <string name="password_sing">Password</string>

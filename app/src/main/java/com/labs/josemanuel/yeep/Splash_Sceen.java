@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+
 public class Splash_Sceen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +34,5 @@ public class Splash_Sceen extends AppCompatActivity {
                 }
             }, 2000);
         }
-
-    public void irAlRepo(View view){
-        Intent browser = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/Bufigol/YeepApp"));
-        startActivity(browser);
-    }
 }
+

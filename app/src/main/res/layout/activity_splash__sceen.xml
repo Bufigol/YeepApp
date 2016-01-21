@@ -28,17 +28,13 @@
         android:text="@string/subTitle_text"
         android:textColor="@color/posible_color"
         android:textSize="20sp" />
-    <ImageButton
+
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageButton"
-        android:src="@drawable/wick_logo_v3"
+        android:id="@+id/logoImgV"
+        android:src="@drawable/wick_logo_v1"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:onClick="irAlRepo"
-        android:background="@drawable/abc_action_bar_item_background_material"
-        android:layout_below="@+id/Title" />
+        android:layout_alignParentStart="true" />
 </RelativeLayout>
