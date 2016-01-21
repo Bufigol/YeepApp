@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -15,13 +16,16 @@ import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
 public class SignUpActivity extends AppCompatActivity {
-
+    private EditText user, pass, email;
     final static String TAG = SignUpActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+        this.user = (EditText) findViewById(R.id.userFieldSign);
+        this.pass = (EditText) findViewById(R.id.password_sing);
+        this.email = (EditText) findViewById(R.id.emailFieldSign);
 
         // elimina la barra superior
     //    getSupportActionBar().hide();
@@ -33,7 +37,6 @@ public class SignUpActivity extends AppCompatActivity {
                 comprobarDatos(v);
             }
         });
-
 
     }
     public void comprobarDatos(View view){
@@ -62,24 +65,7 @@ public class SignUpActivity extends AppCompatActivity {
                     finish(); // cerramos registro al salir del layout
                     // Hooray! Let them use the app now.
                 } else {
-                    Log.d(TAG,e.toString());
-                    final AlertDialog.Builder alertaSimple = new AlertDialog.Builder(SignUpActivity.this);
-                    Log.d(TAG, " -*- El popup Dialog se ha creado -*-");
-                    alertaSimple.setTitle("Sign Up Error");
-                    alertaSimple.setMessage("Hay algún error en el registro.? \n " +
-                            "Verifíque los campos e intentelo de nuevo");
-
-                    alertaSimple.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            setContentView(R.layout.activity_sign_up);
-
-                        }
-                    });
-
-                    alertaSimple.setIcon(R.mipmap.ic_launcher);
-                    alertaSimple.create();
-                    alertaSimple.show();
+                    mensajeAlerta(e);
                 }
 
                 // Sign up didn't succeed. Look at the ParseException
@@ -89,7 +75,55 @@ public class SignUpActivity extends AppCompatActivity {
         });
     }
 
+    private void mensajeAlerta(ParseException exeption) {
+        Log.d(TAG, exeption.toString());
+        final AlertDialog.Builder alertaSimple = new AlertDialog.Builder(SignUpActivity.this);
+        Log.d(TAG, " -*- El popup Dialog se ha creado -*-");
+        alertaSimple.setTitle("Sign Up Error");
+        alertaSimple.setMessage("Hay algún error en el registro.? \n " +
+                "Verifíque los campos e intentelo de nuevo");
 
+        alertaSimple.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                setContentView(R.layout.activity_sign_up);
+
+            }
+        });
+
+        alertaSimple.setIcon(R.mipmap.ic_launcher);
+        alertaSimple.create();
+        alertaSimple.show();
+    }
+
+    private boolean checkInputInformation(){
+        boolean output = false;
+        if(this.user.getText().toString().matches("")){
+            Log.i("SignUpActivity","USER EMPTY.");
+        }else{
+            Log.i("SignUpActivity","USER NOT EMPTY.");
+        }
+        if(this.pass.getText().toString().matches("")){
+            Log.i("SignUpActivity","PASS EMPTY.");
+        }else{
+            Log.i("SignUpActivity","PASS NOT EMPTY.");
+        }
+        if(this.email.getText().toString().matches("")){
+            Log.i("SignUpActivity","EMAIL EMPTY.");
+        }else{
+            if(!isValidEmail(this.email.getText().toString())){
+                Log.i("SignUpActivity","WRONG EMAIL.");
+            }
+        }
+        return output;
+    }
+    private boolean isValidEmail(CharSequence target) {
+        if (TextUtils.isEmpty(target)) {
+            return false;
+        } else {
+            return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
+        }
+    }
 
 
 
