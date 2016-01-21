@@ -56,23 +56,24 @@ public class SignUpActivity extends AppCompatActivity {
 
         // other fields can be set just like with ParseObject
         // user.put("phone", "650-253-0000");
+        if(checkInputInformation()) {
+            user.signUpInBackground(new SignUpCallback() {
+                public void done(ParseException e) {
+                    if (e == null) {
+                        Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        finish(); // cerramos registro al salir del layout
+                        // Hooray! Let them use the app now.
+                    } else {
+                        mensajeAlerta(e);
+                    }
 
-        user.signUpInBackground(new SignUpCallback() {
-            public void done(ParseException e) {
-                if (e == null) {
-                    Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
-                    startActivity(intent);
-                    finish(); // cerramos registro al salir del layout
-                    // Hooray! Let them use the app now.
-                } else {
-                    mensajeAlerta(e);
+                    // Sign up didn't succeed. Look at the ParseException
+                    // to figure out what went wrong
+
                 }
-
-                // Sign up didn't succeed. Look at the ParseException
-                // to figure out what went wrong
-
-            }
-        });
+            });
+        }
     }
 
     private void mensajeAlerta(ParseException exeption) {
@@ -97,25 +98,31 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private boolean checkInputInformation(){
-        boolean output = false;
         if(this.user.getText().toString().matches("")){
             Log.i("SignUpActivity","USER EMPTY.");
+            return false;
         }else{
             Log.i("SignUpActivity","USER NOT EMPTY.");
-        }
-        if(this.pass.getText().toString().matches("")){
-            Log.i("SignUpActivity","PASS EMPTY.");
-        }else{
-            Log.i("SignUpActivity","PASS NOT EMPTY.");
-        }
-        if(this.email.getText().toString().matches("")){
-            Log.i("SignUpActivity","EMAIL EMPTY.");
-        }else{
-            if(!isValidEmail(this.email.getText().toString())){
-                Log.i("SignUpActivity","WRONG EMAIL.");
+            if(this.pass.getText().toString().matches("")){
+                Log.i("SignUpActivity","PASS EMPTY.");
+                return false;
+            }else{
+                Log.i("SignUpActivity","PASS NOT EMPTY.");
+                if(this.email.getText().toString().matches("")){
+                    Log.i("SignUpActivity","EMAIL EMPTY.");
+                    return false;
+                }else{
+                    if(!isValidEmail(this.email.getText().toString())){
+                        Log.i("SignUpActivity","WRONG EMAIL.");
+                        return false;
+                    }else{
+                        Log.i("SignUpActivity","EMAIL OK.");
+                        Log.i("SignUpActivity","EVERYTHING OK.");
+                        return true;
+                    }
+                }
             }
         }
-        return output;
     }
     private boolean isValidEmail(CharSequence target) {
         if (TextUtils.isEmpty(target)) {
