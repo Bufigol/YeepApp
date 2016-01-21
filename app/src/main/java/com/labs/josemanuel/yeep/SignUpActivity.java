@@ -23,7 +23,7 @@ public class SignUpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-        this.user = (EditText) findViewById(R.id.userFieldSign);
+        this.user = (EditText) findViewById(R.id.usernameField);
         this.pass = (EditText) findViewById(R.id.password_sing);
         this.email = (EditText) findViewById(R.id.emailFieldSign);
 
@@ -34,26 +34,20 @@ public class SignUpActivity extends AppCompatActivity {
         mSingUpTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                comprobarDatos(v);
+                makeSignUp(v);
             }
         });
 
     }
-    public void comprobarDatos(View view){
-        EditText usuario = (EditText) findViewById(R.id.userFieldSign);
-        String usernameSign = usuario.getText().toString();
-
-        EditText password=(EditText) findViewById(R.id.password_sing);
-        String passwordSign = password.getText().toString();
-
-        EditText mail = (EditText) findViewById(R.id.emailFieldSign);
-        String emailSign = mail.getText().toString();
+    public void makeSignUp(View view){
+        String usernameSign = this.user.getText().toString();
+        String passwordSign = this.pass.getText().toString();
+        String emailSign = this.email.getText().toString();
 
         ParseUser user = new ParseUser();
-        user.setUsername(usernameSign.toString());
-        user.setPassword(passwordSign.toString());
-        user.setEmail(emailSign.toString());
-
+        user.setUsername(usernameSign);
+        user.setPassword(passwordSign);
+        user.setEmail(emailSign);
         // other fields can be set just like with ParseObject
         // user.put("phone", "650-253-0000");
         if(checkInputInformation()) {
@@ -65,7 +59,7 @@ public class SignUpActivity extends AppCompatActivity {
                         finish(); // cerramos registro al salir del layout
                         // Hooray! Let them use the app now.
                     } else {
-                        mensajeAlerta(e);
+                        mensajeAlerta(e.toString());
                     }
 
                     // Sign up didn't succeed. Look at the ParseException
@@ -73,11 +67,13 @@ public class SignUpActivity extends AppCompatActivity {
 
                 }
             });
+        }else{
+            mensajeAlerta("checkInputInformation() returned false");
         }
     }
 
-    private void mensajeAlerta(ParseException exeption) {
-        Log.d(TAG, exeption.toString());
+    private void mensajeAlerta(String log_message) {
+        Log.d(TAG, log_message);
         final AlertDialog.Builder alertaSimple = new AlertDialog.Builder(SignUpActivity.this);
         Log.d(TAG, " -*- El popup Dialog se ha creado -*-");
         alertaSimple.setTitle("Sign Up Error");

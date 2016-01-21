@@ -57,7 +57,7 @@
         android:id="@+id/linearLayout">
 
         <EditText
-            android:id="@+id/userFieldSign"
+            android:id="@+id/usernameField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@+id/loginBtn"
