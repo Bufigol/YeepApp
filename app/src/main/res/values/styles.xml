@@ -1,12 +1,17 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="android:Theme.Holo.Light">
         <!-- Customize your theme here. -->
+       <!-- <item name="android:editTextBackground">@drawable/apptheme_edit_text_holo_light</item>-->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+
+   <!-- <style name="AuthBackground">
+        <item name="android:background">@drawable/background_fill</item>
+    </style>-->
 
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
@@ -16,5 +21,20 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="AuthLinearLayout_Sign">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_below">@id/subTitle</item>
+        <item name="android:background">@color/posible_color</item>
+        <item name="android:layout_marginTop">@dimen/sing_vertical_margin</item>
+        <item name="android:layout_marginLeft">@dimen/activity_horizontal_margin</item>
+        <item name="android:layout_marginRight">@dimen/activity_horizontal_margin</item>
+        <item name="android:paddingLeft">@dimen/login_horizontal_margin</item>
+        <item name="android:paddingRight">@dimen/login_horizontal_margin</item>
+        <item name="android:paddingTop">@dimen/login_horizontal_margin</item>
+        <item name="android:paddingBottom">@dimen/login_horizontal_margin</item>
+        <item name="android:orientation">vertical</item>
+    </style>
 
 </resources>

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     tools:context="com.labs.josemanuel.yeep.SignUpActivity"
     android:background="@drawable/background_fill1">
-
+    <!--android:background="@style/background_fill1"-->
 
       <ImageView
         android:layout_width="match_parent"
@@ -23,20 +23,8 @@
 
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/subTitle"
-        android:background="@color/posible_color"
-
-        android:layout_marginTop="@dimen/sing_vertical_margin"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:paddingLeft="@dimen/login_horizontal_margin"
-        android:paddingRight="@dimen/login_horizontal_margin"
-        android:paddingTop="@dimen/login_horizontal_margin"
-        android:paddingBottom="@dimen/login_horizontal_margin"
-        android:orientation="vertical"
-        android:id="@+id/linearLayout">
+        android:id="@+id/linearLayout"
+        style="@style/AuthLinearLayout_Sign">
 
     <EditText
         android:layout_width="match_parent"

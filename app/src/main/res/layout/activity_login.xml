@@ -90,7 +90,8 @@
         android:layout_alignLeft="@+id/linearLayout"
         android:layout_alignStart="@+id/linearLayout"
         android:layout_alignRight="@+id/linearLayout"
-        android:layout_alignEnd="@+id/linearLayout" />
+        android:layout_alignEnd="@+id/linearLayout"
+        android:onClick="loginUsuario" />
 
 
 </LinearLayout>
