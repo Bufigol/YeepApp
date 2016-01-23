@@ -3,6 +3,7 @@ package com.labs.josemanuel.yeep;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,7 +19,6 @@ import com.parse.ParseUser;
 
 public class LoginActivity extends AppCompatActivity {
 
-    protected TextView mSingUpTextView;
     final static String TAG = SignUpActivity.class.getSimpleName();
 
     @Override
@@ -26,21 +26,29 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         // elimina la barra superior
-        // getSupportActionBar().hide();
+        //getSupportActionBar().hide();
 
         Button loginbutton = (Button) findViewById(R.id.loginBtn);
         loginbutton.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View arg0) {
-                if(checkInputInformation()){
-                    makeLogin();
-                }else{
+                if (getUsernameString().matches("")) {
+                    Log.i("LoginActivity", "USER EMPTY.");
                     mensajeAlerta("Error al intentar iniciar sesion");
+                } else {
+                    Log.i("LoginActivity", "USER NOT EMPTY.");
+                    if (getPasswordString().matches("")) {
+                        Log.i("LoginActivity", "PASS EMPTY.");
+                        mensajeAlerta("Error al intentar iniciar sesion");
+                    } else {
+                        Log.i("LoginActivity", "PASS NOT EMPTY.");
+                        makeLogin();
+                    }
                 }
 
             }
         });
-        mSingUpTextView = (TextView) findViewById(R.id.signBtn);
+        TextView mSingUpTextView = (TextView) findViewById(R.id.signBtn);
         mSingUpTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,14 +60,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void makeLogin() {
-        EditText username = (EditText) findViewById(R.id.usernameField);
-        String usernametxt = username.getText().toString();
-        EditText password = (EditText) findViewById(R.id.passwordField);
-
-        String passwordtxt = password.getText().toString();
-
         // Send data to Parse.com for verification
-        ParseUser.logInInBackground(usernametxt, passwordtxt,
+        ParseUser.logInInBackground(getUsernameString(), getPasswordString(),
                 new LogInCallback() {
                     public void done(ParseUser user, ParseException e) {
                         if (user != null) {
@@ -84,29 +86,17 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
-    private boolean checkInputInformation() {
-        EditText username = (EditText) findViewById(R.id.usernameField);
+    @NonNull
+    private String getPasswordString() {
         EditText password = (EditText) findViewById(R.id.passwordField);
-        // Retrieve the text entered from the EditText
-        String user = username.getText().toString();
-        String pass = password.getText().toString();
-        //Checks if itś empty or not.
-        if (user.matches("")) {
-            Log.i("LoginActivity", "USER EMPTY.");
-            return false;
-        } else {
-            Log.i("LoginActivity", "USER NOT EMPTY.");
-            if (pass.matches("")) {
-                Log.i("LoginActivity", "PASS EMPTY.");
-                return false;
-            } else {
-                Log.i("LoginActivity", "PASS NOT EMPTY.");
-                return true;
-            }
-        }
-
+        return password.getText().toString();
     }
 
+    @NonNull
+    private String getUsernameString() {
+        EditText username = (EditText) findViewById(R.id.usernameField);
+        return username.getText().toString();
+    }
     private void mensajeAlerta(String log_message) {
         Log.d(TAG, log_message);
         final AlertDialog.Builder alertaSimple = new AlertDialog.Builder(LoginActivity.this);
@@ -121,7 +111,6 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
-
         alertaSimple.setIcon(R.mipmap.ic_launcher);
         alertaSimple.create();
         alertaSimple.show();
