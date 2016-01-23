@@ -86,12 +86,21 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
+    /**
+     * Metodo privado para obtener la información albergada en el espacio para el ingreso de la
+     * contraseña.
+     * @return string ingresado por el usuario.
+     */
     @NonNull
     private String getPasswordString() {
         EditText password = (EditText) findViewById(R.id.passwordField);
         return password.getText().toString();
     }
-
+    /**
+     * Metodo privado para obtener la información albergada en el espacio para el ingreso del nombre
+     * de usuario.
+     * @return string ingresado por el usuario.
+     */
     @NonNull
     private String getUsernameString() {
         EditText username = (EditText) findViewById(R.id.usernameField);
