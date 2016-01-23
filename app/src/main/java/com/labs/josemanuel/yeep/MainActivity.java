@@ -52,11 +52,11 @@ public class MainActivity extends AppCompatActivity {
 
 
         // Lanza al cargar la activity Login
-        Intent intent = new Intent(this,LoginActivity.class);
+       /* Intent intent = new Intent(this,LoginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
-
+*/
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         // Create the adapter that will return a fragment for each of the three

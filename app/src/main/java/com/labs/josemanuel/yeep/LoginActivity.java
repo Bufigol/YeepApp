@@ -19,31 +19,26 @@ import com.parse.ParseUser;
 public class LoginActivity extends AppCompatActivity {
 
     protected TextView mSingUpTextView;
-    private EditText user;
-    private EditText pass;
     final static String TAG = SignUpActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        this.user = (EditText) findViewById(R.id.usernameField);
-        this.pass = (EditText) findViewById(R.id.passwordField);
         // elimina la barra superior
         // getSupportActionBar().hide();
 
-        Button buttonSend = (Button)findViewById(R.id.loginBtn);
-        buttonSend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        Button loginbutton = (Button) findViewById(R.id.loginBtn);
+        loginbutton.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View arg0) {
                 if(checkInputInformation()){
-                    makeLogIn(v);
+                    makeLogin();
+                }else{
+                    mensajeAlerta("Error al intentar iniciar sesion");
                 }
+
             }
-
-
-
-
         });
         mSingUpTextView = (TextView) findViewById(R.id.signBtn);
         mSingUpTextView.setOnClickListener(new View.OnClickListener() {
@@ -55,39 +50,63 @@ public class LoginActivity extends AppCompatActivity {
         });
 
     }
-    private boolean checkInputInformation(){
+
+    private void makeLogin() {
+        EditText username = (EditText) findViewById(R.id.usernameField);
+        String usernametxt = username.getText().toString();
+        EditText password = (EditText) findViewById(R.id.passwordField);
+
+        String passwordtxt = password.getText().toString();
+
+        // Send data to Parse.com for verification
+        ParseUser.logInInBackground(usernametxt, passwordtxt,
+                new LogInCallback() {
+                    public void done(ParseUser user, ParseException e) {
+                        if (user != null) {
+                            // If user exist and authenticated, send user to Welcome.class
+                            Intent intent = new Intent(
+                                    LoginActivity.this,
+                                    MainActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
+                            Toast.makeText(getApplicationContext(),
+                                    "Successfully Logged in",
+                                    Toast.LENGTH_LONG).show();
+                            LoginActivity.this.finish();
+                        } else {
+                            Toast.makeText(
+                                    getApplicationContext(),
+                                    "No such user exist, please signup",
+                                    Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+    }
+
+    private boolean checkInputInformation() {
+        EditText username = (EditText) findViewById(R.id.usernameField);
+        EditText password = (EditText) findViewById(R.id.passwordField);
+        // Retrieve the text entered from the EditText
+        String user = username.getText().toString();
+        String pass = password.getText().toString();
         //Checks if itś empty or not.
-        if(user.getText().toString().matches("")){
+        if (user.matches("")) {
             Log.i("LoginActivity", "USER EMPTY.");
             return false;
-        }else{
-            Log.i("LoginActivity","USER NOT EMPTY.");
-            if(pass.getText().toString().matches("")){
-                Log.i("LoginActivity","PASS EMPTY.");
+        } else {
+            Log.i("LoginActivity", "USER NOT EMPTY.");
+            if (pass.matches("")) {
+                Log.i("LoginActivity", "PASS EMPTY.");
                 return false;
-            }else{
-                Log.i("LoginActivity","PASS NOT EMPTY.");
+            } else {
+                Log.i("LoginActivity", "PASS NOT EMPTY.");
                 return true;
             }
         }
 
     }
-    private void makeLogIn(View v){
-        ParseUser.logInInBackground(this.user.getText().toString(), this.pass.getText().toString(), new LogInCallback() {
-            public void done(ParseUser user, ParseException e) {
-                if (user != null) {
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(intent);
-                    finish(); // cerramos login al salir del layout
-                    // Hooray! The user is logged in.
-                } else {
-                    // Signup failed. Look at the ParseException to see what happened.
-                    Toast toast = Toast.makeText(getApplicationContext(),"Error, ingrese de nuevo sus datos",Toast.LENGTH_SHORT);
-                }
-            }
-        });
 
-    }
     private void mensajeAlerta(String log_message) {
         Log.d(TAG, log_message);
         final AlertDialog.Builder alertaSimple = new AlertDialog.Builder(LoginActivity.this);
@@ -109,12 +128,3 @@ public class LoginActivity extends AppCompatActivity {
     }
 }
 
-/*
-ParseUser.logInInBackground("Jerry", "showmethemoney", new LogInCallback() {
-public void done(ParseUser user, ParseException e) {
-        if (user != null) {
-        // Hooray! The user is logged in.
-        } else {
-        // Signup failed. Look at the ParseException to see what happened.
-        }
-        }*/
