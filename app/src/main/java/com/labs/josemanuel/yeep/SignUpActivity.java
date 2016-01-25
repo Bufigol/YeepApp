@@ -1,5 +1,7 @@
 package com.labs.josemanuel.yeep;
 
+import android.app.ActionBar;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -31,6 +33,8 @@ public class SignUpActivity extends AppCompatActivity {
 
 
         // elimina la barra superior
+     //   ActionBar actionBar =getActionBar();
+     //   actionBar.hide();
     //    getSupportActionBar().hide();
 
         TextView mSingUpTextView = (TextView) findViewById(R.id.signBtn);
@@ -40,6 +44,15 @@ public class SignUpActivity extends AppCompatActivity {
                 makeSignUp(v);
             }
         });
+        Button cancelButton = (Button)findViewById(R.id.cancelBtn);
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+
         Button cancelButton = (Button)findViewById(R.id.cancelBtn);
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,6 +100,7 @@ public class SignUpActivity extends AppCompatActivity {
             mensajeAlerta("checkInputInformation() returned false");
         }
     }
+<<<<<<< HEAD
     /**
      * Método utilizado para mostrar un cuadro de dialogo con un mensaje en caso de no se pueda
      * realizar un correcto inicio de sesión.
@@ -95,6 +109,39 @@ public class SignUpActivity extends AppCompatActivity {
     private void mensajeAlerta(String log_message) {
         Log.d(TAG, log_message);
         final AlertDialog.Builder alertaSimple = new AlertDialog.Builder(SignUpActivity.this);
+=======
+
+
+
+}
+
+
+
+/*
+
+String usernameSign = findViewById(R.id.usernameField).toString();
+String passwordSign = findViewById(R.id.passwordField).toString();
+String emailSign = findViewById(R.id.emailField).toString();
+
+
+ParseUser user = new ParseUser();
+user.setUsername(usernameSign);
+        user.setPassword(passwordSign);
+        user.setEmail(emailSign);
+
+        // other fields can be set just like with ParseObject
+        // user.put("phone", "650-253-0000");
+
+        user.signUpInBackground(new SignUpCallback() {
+public void done(ParseException e) {
+        if (e == null) {
+        Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
+        startActivity(intent);
+        // Hooray! Let them use the app now.
+        } else {
+
+final AlertDialog.Builder alertaSimple = new AlertDialog.Builder(SignUpActivity.this);
+>>>>>>> interface
         Log.d(TAG, " -*- El popup Dialog se ha creado -*-");
         alertaSimple.setTitle("Sign Up Error");
         alertaSimple.setMessage("Hay algún error en el registro.? \n " +
