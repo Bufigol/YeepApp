@@ -21,6 +21,11 @@ public class LoginActivity extends AppCompatActivity {
 
     final static String TAG = SignUpActivity.class.getSimpleName();
 
+    /**
+     * Método que inicializa la actividad y que la la funcionalidad a los botones.
+     * @param savedInstanceState
+     * @see #makeLogin()
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

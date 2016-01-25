@@ -19,6 +19,11 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText user, pass, email;
     final static String TAG = SignUpActivity.class.getSimpleName();
 
+    /**
+     * Metodo que inicializa la actividad y que le da la funcionalidad al boton de registro.
+     * @param savedInstanceState
+     * @see #makeSignUp(View)
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +44,13 @@ public class SignUpActivity extends AppCompatActivity {
         });
 
     }
+
+    /**
+     * Método que realiza las comprobaciones y realiza el registro de un nuevo usuario. Este
+     * método es el cual le da la funcionalidad al boton correspondiente.
+     * @param view
+     * @see #checkInputInformation()
+     */
     public void makeSignUp(View view){
         String usernameSign = this.user.getText().toString();
         String passwordSign = this.pass.getText().toString();
@@ -71,7 +83,11 @@ public class SignUpActivity extends AppCompatActivity {
             mensajeAlerta("checkInputInformation() returned false");
         }
     }
-
+    /**
+     * Método utilizado para mostrar un cuadro de dialogo con un mensaje en caso de no se pueda
+     * realizar un correcto inicio de sesión.
+     * @param log_message String utilizado con fines de depuración segun su utilización en el codigo.
+     */
     private void mensajeAlerta(String log_message) {
         Log.d(TAG, log_message);
         final AlertDialog.Builder alertaSimple = new AlertDialog.Builder(SignUpActivity.this);
@@ -93,6 +109,13 @@ public class SignUpActivity extends AppCompatActivity {
         alertaSimple.show();
     }
 
+    /**
+     * Metodo que comprueba cada campo del registro. Se busca que se ha ingresado informacion en todos
+     * los campos y que se ha ingresado un correo electronico valido.
+     * @return Verdadero si hay información en todos los campos y se ingreso un correo electronico
+     * valido. Falso en cualquier otro caso.
+     * @see #isValidEmail(CharSequence)
+     */
     private boolean checkInputInformation(){
         if(this.user.getText().toString().matches("")){
             Log.i("SignUpActivity","USER EMPTY.");
@@ -120,6 +143,12 @@ public class SignUpActivity extends AppCompatActivity {
             }
         }
     }
+
+    /**
+     * Metodo para la comprobación de que se esta ingresando un correo electronico valido.
+     * @param target texto a comprobar
+     * @return Verdadero si es un correo electronico valido y false en caso contrario
+     */
     private boolean isValidEmail(CharSequence target) {
         if (TextUtils.isEmpty(target)) {
             return false;
@@ -127,8 +156,6 @@ public class SignUpActivity extends AppCompatActivity {
             return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
         }
     }
-
-
 
 }
 
