@@ -1,14 +1,16 @@
 <resources>
     <string name="app_name">Wick</string>
     <string name="action_settings">Settings</string>
+    <string name="action_logout">Logout</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="username_hint">Username</string>
     <string name="passwordField_hint">Password</string>
-    <string name="loginBtn_label">Login</string>
-    <string name="signUpText">Sign Up</string>
+    <string name="loginBtn_label">LOGIN</string>
+    <string name="signUpText">SIGN UP</string>
     <string name="emailField_hint">Email</string>
-    <string name="signBtn_label">Sign Up</string>
+    <string name="signBtn_label">SIGN UP</string>
     <string name="password_sing">Password</string>
     <string name="subTitle_text">App Message</string>
     <string name="TitleApp_name">Wick!</string>
+    <string name="cancelBttn">CANCEL</string>
 </resources>

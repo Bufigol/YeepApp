@@ -1,5 +1,7 @@
 package com.labs.josemanuel.yeep;
 
+import android.app.ActionBar;
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,6 +25,8 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         // elimina la barra superior
+     //   ActionBar actionBar =getActionBar();
+      //  actionBar.hide();
         // getSupportActionBar().hide();
 
         Button buttonSend = (Button) findViewById(R.id.loginBtn);
@@ -54,11 +58,13 @@ public class LoginActivity extends AppCompatActivity {
         EditText passField = (EditText) findViewById(R.id.passwordField);
         final String passLogin = passField.getText().toString();
 
-        if (usernameLogin == null) {
+        if (usernameLogin.isEmpty()) {
             Toast toast = Toast.makeText(getApplicationContext(), "Debe introducir un nombre de usuario", Toast.LENGTH_SHORT);
+            toast.show();
         }
-        if (passLogin == null) {
+        if (passLogin.isEmpty()) {
             Toast toast = Toast.makeText(getApplicationContext(), "Debe introducir su contraseña", Toast.LENGTH_SHORT);
+            toast.show();
         } else {
 
             ParseUser.logInInBackground(usernameLogin, passLogin, new LogInCallback() {
@@ -67,12 +73,14 @@ public class LoginActivity extends AppCompatActivity {
                     if (user != null) {
 
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
                         finish(); // cerramos login al salir del layout
                         // Hooray! The user is logged in.
                     } else {
                         // Signup failed. Look at the ParseException to see what happened.
                         Toast toast = Toast.makeText(getApplicationContext(), "Error, ingrese de nuevo sus datos", Toast.LENGTH_SHORT);
+                        toast.show();
                     }
 
                 }

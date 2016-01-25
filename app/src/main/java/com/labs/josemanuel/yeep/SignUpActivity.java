@@ -1,5 +1,7 @@
 package com.labs.josemanuel.yeep;
 
+import android.app.ActionBar;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -7,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -24,6 +27,8 @@ public class SignUpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
 
         // elimina la barra superior
+     //   ActionBar actionBar =getActionBar();
+     //   actionBar.hide();
     //    getSupportActionBar().hide();
 
         TextView mSingUpTextView = (TextView) findViewById(R.id.signBtn);
@@ -31,6 +36,15 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 comprobarDatos(v);
+            }
+        });
+
+
+        Button cancelButton = (Button)findViewById(R.id.cancelBtn);
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
 
@@ -88,8 +102,6 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
     }
-
-
 
 
 
