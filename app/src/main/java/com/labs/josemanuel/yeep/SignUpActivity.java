@@ -123,17 +123,17 @@ public class SignUpActivity extends AppCompatActivity {
      */
     private boolean checkInputInformation(){
         String[] info = getInputInfo();
-        if(info[0].matches("")){
+        if(info[0].equals(null) || info[0].equals("")){
             Log.i("SignUpActivity","USER EMPTY.");
             return false;
         }else{
             Log.i("SignUpActivity","USER NOT EMPTY.");
-            if(info[1].matches("")){
+            if(info[1].equals(null) || info[1].equals("")){
                 Log.i("SignUpActivity","PASS EMPTY.");
                 return false;
             }else{
                 Log.i("SignUpActivity","PASS NOT EMPTY.");
-                if(info[2].matches("")){
+                if(info[2].equals(null) || info[2].equals("")){
                     Log.i("SignUpActivity","EMAIL EMPTY.");
                     return false;
                 }else{
