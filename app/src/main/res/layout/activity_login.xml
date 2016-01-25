@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_fill1"
+    android:background="@drawable/background1"
     tools:context="com.labs.josemanuel.yeep.LoginActivity">
 
 
@@ -13,8 +13,10 @@
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:scaleType="fitStart"
-        android:src="@drawable/background2" />
+        android:scaleType="fitXY"
+        android:src="@drawable/background1"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 
     <TextView
@@ -38,14 +40,14 @@
         android:layout_centerHorizontal="true"
         android:text="@string/subTitle_text"
         android:textColor="@color/posible_color"
-        android:textSize="20sp" />
+        android:textSize="30sp" />
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/subTitle"
-        android:background="@android:color/white"
+        android:background="#28ffffff"
         android:layout_marginTop="@dimen/login_vertical_margin"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
@@ -57,27 +59,34 @@
         android:id="@+id/linearLayout">
 
         <EditText
-            android:id="@+id/usernameField"
+            android:id="@+id/userFieldSign"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@+id/loginBtn"
             android:layout_alignLeft="@+id/imageView"
-            android:textColorHint="@color/posible_color"
+            android:textColorHint="@color/light_gray"
             android:layout_alignStart="@+id/imageView"
             android:focusable="true"
-            android:hint="@string/username_hint" />
+            android:hint="@string/username_hint"
+            android:theme="@style/AppTheme"
+            style="@style/AppTheme"
+            android:textSize="20sp" />
 
         <EditText
             android:id="@+id/passwordField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@+id/loginBtn"
-            android:textColorHint="@color/posible_color"
+            android:textColorHint="@color/light_gray"
             android:layout_alignLeft="@+id/imageView"
             android:layout_alignStart="@+id/imageView"
             android:hint="@string/passwordField_hint"
             android:inputType="textPassword"
-            android:password="false" />
+            android:password="false"
+            android:theme="@style/AppTheme"
+            style="@style/AppTheme"
+            android:textSize="20sp"
+            android:layout_marginTop="10dp" />
 
 
 
@@ -86,11 +95,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/loginBtn_label"
+        android:background="@drawable/button_custom"
+        android:textColor="@color/text_color"
         android:layout_below="@+id/linearLayout"
         android:layout_alignLeft="@+id/linearLayout"
         android:layout_alignStart="@+id/linearLayout"
         android:layout_alignRight="@+id/linearLayout"
-        android:layout_alignEnd="@+id/linearLayout" />
+        android:layout_alignEnd="@+id/linearLayout"
+        android:onClick="loginUsuario"
+        style="@style/AppTheme"
+        android:layout_marginTop="10dp" />
 
 
 </LinearLayout>

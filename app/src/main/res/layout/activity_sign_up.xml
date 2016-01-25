@@ -4,88 +4,108 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.labs.josemanuel.yeep.SignUpActivity"
-    android:background="@drawable/background_fill1">
-
-
-      <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/imageView2"
-          android:src="@drawable/background3"
-        android:scaleType="fitStart"
-          android:layout_alignParentTop="true"
-          android:layout_alignLeft="@+id/linearLayout"
-          android:layout_alignStart="@+id/linearLayout"
-          android:layout_marginLeft="79dp"
-          android:layout_marginStart="79dp"
-          android:layout_alignParentRight="true" />
-
+    android:background="@drawable/background1">
+    <!--android:background="@style/background_fill1"-->
 
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/subTitle"
-        android:background="@color/posible_color"
-
-        android:layout_marginTop="@dimen/sing_vertical_margin"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:paddingLeft="@dimen/login_horizontal_margin"
-        android:paddingRight="@dimen/login_horizontal_margin"
-        android:paddingTop="@dimen/login_horizontal_margin"
-        android:paddingBottom="@dimen/login_horizontal_margin"
-        android:orientation="vertical"
-        android:id="@+id/linearLayout">
+        android:id="@+id/linearLayout"
+        style="@style/AuthLinearLayout_Sign"
+        android:background="#28ffffff">
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/usernameField"
+        android:id="@+id/userFieldSign"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:textColor="@android:color/white"
         android:hint="@string/username_hint"
-        android:textColorHint="@android:color/white">
+        android:textColorHint="@color/light_gray"
+        android:theme="@style/AppTheme"
+        style="@style/AppTheme"
+        android:textSize="20sp">
         <requestFocus />
         </EditText>
 
     <EditText
+        android:layout_below="@+id/userFieldSign"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/emailFieldSign"
         android:textColor="@android:color/white"
         android:hint="@string/emailField_hint"
-        android:textColorHint="@android:color/white"
-        android:layout_below="@+id/usernameField"
+        android:textColorHint="@color/light_gray"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:theme="@style/AppTheme"
+        style="@style/AppTheme"
+        android:textSize="20sp"
+        android:layout_marginTop="10dp" />
 
 
     <EditText
+        android:id="@+id/password_sing"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/password_sing"
         android:textColor="@android:color/white"
         android:hint="@string/password_sing"
-        android:textColorHint="@android:color/white"
+        android:textColorHint="@color/light_gray"
         android:layout_below="@+id/emailFieldSign"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:theme="@style/AppTheme"
+        style="@style/AppTheme"
+        android:textSize="20sp"
+        android:layout_marginTop="10dp" />
+
+
+
 
 
 </LinearLayout>
 
-    <TextView
+    <Button
+        android:id="@+id/signBtn"
+        android:onClick="comrobarDatos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_custom"
+        android:text="@string/signBtn_label"
+        android:textSize="13sp"
+        android:layout_below="@+id/linearLayout"
+        android:layout_alignLeft="@+id/linearLayout"
+        android:layout_alignStart="@+id/linearLayout"
+        android:layout_alignRight="@+id/buttondivider"
+        android:layout_alignEnd="@+id/buttondivider"
+        style="@style/AppTheme"
+        android:layout_marginTop="10dp" />
+
+    <ImageView
+        android:id="@+id/buttondivider"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/signBtn_label"
-        android:id="@+id/signBtn"
-        android:layout_centerVertical="true"
+        android:src="@drawable/button_divider"
+        android:layout_below="@+id/linearLayout"
         android:layout_centerHorizontal="true"
-        android:textSize="25sp"
-        android:onClick="makeSignUp" />
+        android:layout_alignBottom="@+id/signBtn" />
+
+
+    <Button
+        android:id="@+id/cancelBtn"
+        android:text="@string/cancelBttn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_custom"
+        android:nestedScrollingEnabled="true"
+        android:textSize="13sp"
+        android:layout_below="@+id/linearLayout"
+        android:layout_toRightOf="@+id/buttondivider"
+        android:layout_alignRight="@+id/linearLayout"
+        android:layout_alignEnd="@+id/linearLayout"
+        style="@style/AppTheme"
+        android:layout_marginTop="10dp" />
 
 
 </RelativeLayout>

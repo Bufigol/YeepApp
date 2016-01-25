@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#F44336</color>
-    <color name="colorPrimaryDark">#D32F2F</color>
-    <color name="colorAccent">#FF5722</color>
+    <color name="colorPrimary">#D97171</color>D97171
+    <color name="colorPrimaryDark">#C45C5C</color>
+    <color name="colorAccent">#FF5252</color>
+    <color name="light_gray">#bbbbbb</color>
+    <color name="apptheme_color">#f44336</color>
     <color name="posible_color">#FFFC4F4F</color>
+    <color name="light_purple_button">#F3D3D8</color>
+    <color name="pressed_purple_button">#DA9796</color>
+    <color name="focused_purple_button">#EDC6CF</color>
+    <color name="text_color">#FC6C6C</color>
+    <color name="text_color_input">#DCDCDC</color>
 </resources>
+
+    <!-- colorPrimary #F44336 -->
+    <!-- colorPrimary #D32F2F -->
+    <!-- colorPrimary #FF5722 -->

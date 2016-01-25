@@ -21,6 +21,11 @@ public class LoginActivity extends AppCompatActivity {
 
     final static String TAG = SignUpActivity.class.getSimpleName();
 
+    /**
+     * Método que inicializa la actividad y que la la funcionalidad a los botones.
+     * @param savedInstanceState
+     * @see #makeLogin()
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,19 +37,7 @@ public class LoginActivity extends AppCompatActivity {
         loginbutton.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View arg0) {
-                if (getUsernameString().matches("")) {
-                    Log.i("LoginActivity", "USER EMPTY.");
-                    mensajeAlerta("Error al intentar iniciar sesion");
-                } else {
-                    Log.i("LoginActivity", "USER NOT EMPTY.");
-                    if (getPasswordString().matches("")) {
-                        Log.i("LoginActivity", "PASS EMPTY.");
-                        mensajeAlerta("Error al intentar iniciar sesion");
-                    } else {
-                        Log.i("LoginActivity", "PASS NOT EMPTY.");
-                        makeLogin();
-                    }
-                }
+                makeLogin();
 
             }
         });
@@ -59,8 +52,44 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Metodo utilizado para comprobar en primer lugar que el campo correspondiente al usuario y luego
+     * el correspondiente a la contraseña no esten vacios. En caso de que alguno de los campos esten
+     * vacios se mostrara un cuadro de dialogo informativo, en caso contrarario se intentara iniciar
+     * sesión.
+     *
+     * @see #parseLogin()
+     * @see #getUsernameString()
+     * @see #getPasswordString()
+     *
+     */
     private void makeLogin() {
-        // Send data to Parse.com for verification
+        if (getUsernameString().equals(null) || getUsernameString().equals("")) {
+            Log.i("LoginActivity", "USER EMPTY.");
+            mensajeAlerta("Error al intentar iniciar sesion");
+        } else {
+            Log.i("LoginActivity", "USER NOT EMPTY.");
+            if (getPasswordString().equals(null) || getPasswordString().equals("")) {
+                Log.i("LoginActivity", "PASS EMPTY.");
+                mensajeAlerta("Error al intentar iniciar sesion");
+            } else {
+                Log.i("LoginActivity", "PASS NOT EMPTY.");
+                parseLogin();
+            }
+        }
+    }
+
+    /**
+     * Método que realiza el inicio de sesión y realiza un intent en caso que los campos esten correctos.
+     * Este metodo es invocado exclusivamente cuando se ha comprobado de que los campos no estan vacios.
+     * Una vez realizada dicha comprobación se llama ha este metodo para comparar la información
+     * ingresada por el usuario con la base de datos albergada en el backend alojado en parse.
+     * En caso de que este completamente correcto se realiza el intetn, en caso contrario se mostrara
+     * un cuadro de dialogo informando del error.
+     * @see #makeLogin()
+     * @see #mensajeAlerta(String)
+     */
+    private void parseLogin() {
         ParseUser.logInInBackground(getUsernameString(), getPasswordString(),
                 new LogInCallback() {
                     public void done(ParseUser user, ParseException e) {
@@ -77,26 +106,38 @@ public class LoginActivity extends AppCompatActivity {
                                     Toast.LENGTH_LONG).show();
                             LoginActivity.this.finish();
                         } else {
-                            Toast.makeText(
-                                    getApplicationContext(),
-                                    "No such user exist, please signup",
-                                    Toast.LENGTH_LONG).show();
+                            mensajeAlerta("No such user exist, please signup");
                         }
                     }
                 });
     }
 
+    /**
+     * Metodo privado para obtener la información albergada en el espacio para el ingreso de la
+     * contraseña.
+     * @return string ingresado por el usuario.
+     */
     @NonNull
     private String getPasswordString() {
         EditText password = (EditText) findViewById(R.id.passwordField);
         return password.getText().toString();
     }
-
+    /**
+     * Metodo privado para obtener la información albergada en el espacio para el ingreso del nombre
+     * de usuario.
+     * @return string ingresado por el usuario.
+     */
     @NonNull
     private String getUsernameString() {
-        EditText username = (EditText) findViewById(R.id.usernameField);
+        EditText username = (EditText) findViewById(R.id.userFieldSign);
         return username.getText().toString();
     }
+
+    /**
+     * Método utilizado para mostrar un cuadro de dialogo con un mensaje en caso de no se pueda
+     * realizar un correcto inicio de sesión.
+     * @param log_message String utilizado con fines de depuración segun su utilización en el codigo.
+     */
     private void mensajeAlerta(String log_message) {
         Log.d(TAG, log_message);
         final AlertDialog.Builder alertaSimple = new AlertDialog.Builder(LoginActivity.this);
