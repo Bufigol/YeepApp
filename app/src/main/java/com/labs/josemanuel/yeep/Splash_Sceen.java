@@ -35,10 +35,5 @@ public class Splash_Sceen extends Activity {
                 }
             }, 2000);
         }
-
-    public void irAlRepo(View view){
-        Intent browser = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/Bufigol/YeepApp"));
-        startActivity(browser);
-    }
 }
 

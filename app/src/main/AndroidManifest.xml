@@ -35,10 +35,7 @@
         <activity
             android:name=".LoginActivity"
             android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
 
         <activity
@@ -50,7 +47,10 @@
         <activity android:name=".Splash_Sceen"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait">
-
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
 
