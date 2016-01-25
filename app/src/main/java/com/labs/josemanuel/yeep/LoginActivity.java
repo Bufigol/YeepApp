@@ -1,6 +1,7 @@
 package com.labs.josemanuel.yeep;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -37,8 +38,13 @@ public class LoginActivity extends AppCompatActivity {
         loginbutton.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View arg0) {
+                ProgressDialog dialog = new ProgressDialog(LoginActivity.this);
+                dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                dialog.setMessage("Loading. Please wait...");
+                dialog.setIndeterminate(true);
+                dialog.setCanceledOnTouchOutside(false);
+                dialog.show();
                 makeLogin();
-
             }
         });
         TextView mSingUpTextView = (TextView) findViewById(R.id.signBtn);
@@ -101,9 +107,6 @@ public class LoginActivity extends AppCompatActivity {
                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);
-                            Toast.makeText(getApplicationContext(),
-                                    "Successfully Logged in",
-                                    Toast.LENGTH_LONG).show();
                             LoginActivity.this.finish();
                         } else {
                             mensajeAlerta("No such user exist, please signup");
