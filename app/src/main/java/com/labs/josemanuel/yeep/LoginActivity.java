@@ -129,7 +129,7 @@ public class LoginActivity extends AppCompatActivity {
      */
     @NonNull
     private String getUsernameString() {
-        EditText username = (EditText) findViewById(R.id.usernameField);
+        EditText username = (EditText) findViewById(R.id.userFieldSign);
         return username.getText().toString();
     }
 
