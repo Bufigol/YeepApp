@@ -1,12 +1,7 @@
 package com.labs.josemanuel.yeep;
 
-<<<<<<< HEAD
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-=======
-import android.app.ActionBar;
-import android.app.Activity;
->>>>>>> interface
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -36,7 +31,6 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         // elimina la barra superior
-<<<<<<< HEAD
         //getSupportActionBar().hide();
 
         Button loginbutton = (Button) findViewById(R.id.loginBtn);
@@ -49,14 +43,6 @@ public class LoginActivity extends AppCompatActivity {
         });
         TextView mSingUpTextView = (TextView) findViewById(R.id.signBtn);
         mSingUpTextView.setOnClickListener(new View.OnClickListener() {
-=======
-     //   ActionBar actionBar =getActionBar();
-      //  actionBar.hide();
-        // getSupportActionBar().hide();
-
-        Button buttonSend = (Button) findViewById(R.id.loginBtn);
-        buttonSend.setOnClickListener(new View.OnClickListener() {
->>>>>>> interface
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
@@ -64,7 +50,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-<<<<<<< HEAD
     }
 
     /**
@@ -161,16 +146,6 @@ public class LoginActivity extends AppCompatActivity {
         alertaSimple.setMessage("Verifíque los campos e intentelo de nuevo");
 
         alertaSimple.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
-=======
-                loginUsuario(v);
-
-            }
-        });
-
-
-        mSingUpTextView = (TextView) findViewById(R.id.signBtn);
-        mSingUpTextView.setOnClickListener(new View.OnClickListener() {
->>>>>>> interface
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 setContentView(R.layout.activity_sign_up);
@@ -181,45 +156,4 @@ public class LoginActivity extends AppCompatActivity {
         alertaSimple.create();
         alertaSimple.show();
     }
-
-<<<<<<< HEAD
-=======
-    public void loginUsuario(View view) {
-
-        EditText userField = (EditText) findViewById(R.id.userFieldSign);
-        final String usernameLogin = userField.getText().toString();
-        EditText passField = (EditText) findViewById(R.id.passwordField);
-        final String passLogin = passField.getText().toString();
-
-        if (usernameLogin.isEmpty()) {
-            Toast toast = Toast.makeText(getApplicationContext(), "Debe introducir un nombre de usuario", Toast.LENGTH_SHORT);
-            toast.show();
-        }
-        if (passLogin.isEmpty()) {
-            Toast toast = Toast.makeText(getApplicationContext(), "Debe introducir su contraseña", Toast.LENGTH_SHORT);
-            toast.show();
-        } else {
-
-            ParseUser.logInInBackground(usernameLogin, passLogin, new LogInCallback() {
-                public void done(ParseUser user, ParseException e) {
-
-                    if (user != null) {
-
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(intent);
-                        finish(); // cerramos login al salir del layout
-                        // Hooray! The user is logged in.
-                    } else {
-                        // Signup failed. Look at the ParseException to see what happened.
-                        Toast toast = Toast.makeText(getApplicationContext(), "Error, ingrese de nuevo sus datos", Toast.LENGTH_SHORT);
-                        toast.show();
-                    }
-
-                }
-            });
-        }
-    }
-
 }
->>>>>>> interface

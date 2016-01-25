@@ -113,17 +113,26 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         if (id == R.id.action_logout) {
-            ParseUser.logOut();
-            Intent intent = new Intent(MainActivity.this,LoginActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-            return true;
+            return makeLogOut();
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-     /**
+    /**
+     * Método que realiza el cierre de sesión en parse y devuelve al usuario a la pantalla de
+     * Inicio de Sesión.
+     * @return
+     */
+    private boolean makeLogOut() {
+        ParseUser.logOut();
+        Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        return true;
+    }
+
+    /**
      * A placeholder fragment containing a simple view.
      */
     public static class PlaceholderFragment extends Fragment {
