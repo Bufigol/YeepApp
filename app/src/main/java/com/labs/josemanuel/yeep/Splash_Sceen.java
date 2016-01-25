@@ -20,9 +20,12 @@ public class Splash_Sceen extends AppCompatActivity {
         openApp(true);
     }
 
-
+    /**
+     * Metodo que tiene como finalidad de realizar el intent al layout para el inicio de sesión luego
+     * de 2 segundos.
+     * @param locationPermission
+     */
     private void openApp(boolean locationPermission) {
-
         Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 @Override
