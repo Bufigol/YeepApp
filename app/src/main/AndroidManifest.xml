@@ -39,10 +39,15 @@
         </activity>
 
         <activity
+            android:name=".UserListActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
+
+        <activity
             android:name=".SignUpActivity"
             android:parentActivityName=".LoginActivity"
             android:screenOrientation="portrait" />
-
 
         <activity android:name=".Splash_Sceen"
             android:theme="@style/AppTheme.NoActionBar"
