@@ -13,4 +13,5 @@
     <string name="subTitle_text">App Message</string>
     <string name="TitleApp_name">Wick!</string>
     <string name="cancelBttn">CANCEL</string>
+    <string name="loging_message">Loading...</string>
 </resources>

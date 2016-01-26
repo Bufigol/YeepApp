@@ -63,6 +63,11 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
+
+
+
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -73,7 +78,15 @@ public class MainActivity extends AppCompatActivity {
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL); // lo centra en landscape
+        tabLayout.getTabAt(0).setIcon(R.drawable.ic_archive_24dp);
+        tabLayout.getTabAt(1).setIcon(R.drawable.ic_people_24dp);
 
+
+
+
+
+        // Sobre de enviar mail situado en esquina inferior derecha de Main
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -185,9 +198,9 @@ public class MainActivity extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "BANDEJA DE ENTRADA";
+                   // return "BANDEJA DE ENTRADA";
                 case 1:
-                    return "AMIGOS";
+                   // return "AMIGOS";
             }
             return null;
         }

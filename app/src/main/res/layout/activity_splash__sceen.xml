@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_fill1"
+    android:background="@android:color/black"
     tools:context="com.labs.josemanuel.yeep.Splash_Sceen"
     android:clickable="false">
     <TextView

@@ -12,4 +12,11 @@
         android:orderInCategory="200"
         android:title="@string/action_logout"
         app:showAsAction="never" />
+
+    <item android:id="@+id/action_camera"
+        android:icon="@drawable/ic_menu_camera"
+        android:title="action bar camera"
+        app:showAsAction = "ifRoom|withText"
+        />
+
 </menu>

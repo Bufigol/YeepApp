@@ -2,12 +2,18 @@ package com.labs.josemanuel.yeep;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.Build;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,16 +24,49 @@ import com.parse.ParseUser;
 public class LoginActivity extends AppCompatActivity {
 
     protected TextView mSingUpTextView;
+    MenuItem miActionProgressItem;
+
+
+        @Override
+        public boolean onCreateOptionsMenu (Menu menu){
+// Inflate the menu; this adds items to the action bar if it is present.
+            getMenuInflater().inflate(R.menu.menu_login, menu);
+            return true;
+        }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+// Store instance of the menu item containing progress
+        miActionProgressItem = menu.findItem(R.id.miActionProgress);
+// Extract the action-view from the menu item
+        ProgressBar v = (ProgressBar) MenuItemCompat.getActionView(miActionProgressItem);
+// Return to finish
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+
+    public void showProgressBar() {
+        miActionProgressItem.setVisible(true);
+    }
+    public void hideProgressBar() {
+        miActionProgressItem.setVisible(false);
+    }
+
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+      //  hideProgressBar();
+
         // elimina la barra superior
      //   ActionBar actionBar =getActionBar();
       //  actionBar.hide();
-        // getSupportActionBar().hide();
+         getSupportActionBar().hide();
 
         Button buttonSend = (Button) findViewById(R.id.loginBtn);
         buttonSend.setOnClickListener(new View.OnClickListener() {
@@ -53,20 +92,38 @@ public class LoginActivity extends AppCompatActivity {
 
     public void loginUsuario(View view) {
 
+        // ProgressDialog centrado
+        final ProgressDialog dialog = new ProgressDialog(LoginActivity.this);
+        dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        dialog.setMessage("Loading. Please wait...");
+        dialog.setIndeterminate(true);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+
+        // instanciación de los componentes y almacenamiento del ingreso
         EditText userField = (EditText) findViewById(R.id.userFieldSign);
         final String usernameLogin = userField.getText().toString();
         EditText passField = (EditText) findViewById(R.id.passwordField);
         final String passLogin = passField.getText().toString();
 
+
+            // Toast No username
         if (usernameLogin.isEmpty()) {
+            getSupportActionBar().hide();
+            hideProgressBar();
             Toast toast = Toast.makeText(getApplicationContext(), "Debe introducir un nombre de usuario", Toast.LENGTH_SHORT);
             toast.show();
-        }
+            dialog.hide();
+        }   // Toast No passLogin
         if (passLogin.isEmpty()) {
+            getSupportActionBar().hide();
+            hideProgressBar();
             Toast toast = Toast.makeText(getApplicationContext(), "Debe introducir su contraseña", Toast.LENGTH_SHORT);
             toast.show();
+            dialog.hide();
         } else {
-
+            getSupportActionBar().show();
+            showProgressBar();
             ParseUser.logInInBackground(usernameLogin, passLogin, new LogInCallback() {
                 public void done(ParseUser user, ParseException e) {
 
@@ -81,11 +138,13 @@ public class LoginActivity extends AppCompatActivity {
                         // Signup failed. Look at the ParseException to see what happened.
                         Toast toast = Toast.makeText(getApplicationContext(), "Error, ingrese de nuevo sus datos", Toast.LENGTH_SHORT);
                         toast.show();
+                        dialog.hide();
                     }
 
                 }
             });
         }
+
     }
 
 }
