@@ -62,7 +62,6 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
       //  hideProgressBar();
-
         // elimina la barra superior
      //   ActionBar actionBar =getActionBar();
       //  actionBar.hide();
@@ -92,13 +91,13 @@ public class LoginActivity extends AppCompatActivity {
 
     public void loginUsuario(View view) {
 
-        // ProgressDialog centrado
+        /* ProgressDialog centrado
         final ProgressDialog dialog = new ProgressDialog(LoginActivity.this);
         dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         dialog.setMessage("Loading. Please wait...");
         dialog.setIndeterminate(true);
         dialog.setCanceledOnTouchOutside(false);
-        dialog.show();
+        dialog.show();*/
 
         // instanciación de los componentes y almacenamiento del ingreso
         EditText userField = (EditText) findViewById(R.id.userFieldSign);
@@ -113,14 +112,14 @@ public class LoginActivity extends AppCompatActivity {
             hideProgressBar();
             Toast toast = Toast.makeText(getApplicationContext(), "Debe introducir un nombre de usuario", Toast.LENGTH_SHORT);
             toast.show();
-            dialog.hide();
+            //dialog.hide();
         }   // Toast No passLogin
         if (passLogin.isEmpty()) {
             getSupportActionBar().hide();
             hideProgressBar();
             Toast toast = Toast.makeText(getApplicationContext(), "Debe introducir su contraseña", Toast.LENGTH_SHORT);
             toast.show();
-            dialog.hide();
+            //dialog.hide();
         } else {
             getSupportActionBar().show();
             showProgressBar();
@@ -138,7 +137,7 @@ public class LoginActivity extends AppCompatActivity {
                         // Signup failed. Look at the ParseException to see what happened.
                         Toast toast = Toast.makeText(getApplicationContext(), "Error, ingrese de nuevo sus datos", Toast.LENGTH_SHORT);
                         toast.show();
-                        dialog.hide();
+                        //dialog.hide();
                     }
 
                 }

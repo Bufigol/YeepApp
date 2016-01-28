@@ -14,4 +14,8 @@
     <string name="TitleApp_name">Wick!</string>
     <string name="cancelBttn">CANCEL</string>
     <string name="loging_message">Loading...</string>
+    <string name="empty_inbox_label">No hay mensajes que mostrar</string>
+    <string name="empty_friends_label">añade amigos para empezar</string>
+
+
 </resources>
