@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            return modifyFriend();
         }
         if (id == R.id.action_logout) {
             return makeLogOut();
@@ -127,6 +127,16 @@ public class MainActivity extends AppCompatActivity {
      * Inicio de Sesión.
      * @return
      */
+
+    private boolean modifyFriend() {
+        Intent intent = new Intent(MainActivity.this, FriendsModifyActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        return true;
+    }
+
+
+
     private boolean makeLogOut() {
         ParseUser.logOut();
         Intent intent = new Intent(MainActivity.this,LoginActivity.class);
@@ -223,10 +233,18 @@ public class MainActivity extends AppCompatActivity {
     public static class FriendsFragment extends ListFragment {
         @Override
         public View onCreateView(LayoutInflater inflater,ViewGroup container,
-                                 Bundle savedInstanceState){
+                               Bundle savedInstanceState){
+
             View rootView=inflater.inflate(R.layout.activity_userlist,container,
                     false);
             return rootView;
+
+
+            //ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+             //       this, R.layout.activity_userlist,
+            //        R.id.list,itemname);
+           // setListAdapter(adapter);
+          //  return rootView;
         }
     }
 
