@@ -130,7 +130,6 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean modifyFriend() {
         Intent intent = new Intent(MainActivity.this, FriendsModifyActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         return true;
     }

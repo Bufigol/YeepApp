@@ -5,12 +5,10 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
-import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
@@ -40,7 +38,7 @@ public class FriendsModifyActivity extends AppCompatActivity {
     protected void  onResume() {
         super.onResume();
 
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("GameScore");
+        ParseQuery<ParseUser> query = ParseQuery.getQuery("GameScore");
         query.orderByAscending("username");
         query.setLimit(200);
         query.findInBackground(new FindCallback<ParseUser>(){
@@ -51,7 +49,7 @@ public class FriendsModifyActivity extends AppCompatActivity {
 //sucess
                 }
                 else{
-                    Log.e(TAG, "ParseExceptioncaught:");
+
 
                 }
             }
