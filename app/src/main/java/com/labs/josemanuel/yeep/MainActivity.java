@@ -216,38 +216,7 @@ public class MainActivity extends AppCompatActivity {
             }
             return null;
         }
-    }
-
-    public static class InboxFragment extends ListFragment {
-
-        @Override
-        public View onCreateView(LayoutInflater inflater,ViewGroup container,
-                                 Bundle savedInstanceState){
-            View rootView=inflater.inflate(R.layout.activity_inboxlist,container,
-                    false);
-            return rootView;
-        }
-    }
-
-    public static class FriendsFragment extends ListFragment {
-        @Override
-        public View onCreateView(LayoutInflater inflater,ViewGroup container,
-                               Bundle savedInstanceState){
-
-            View rootView=inflater.inflate(R.layout.activity_userlist,container,
-                    false);
-            return rootView;
-
-
-            //ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-             //       this, R.layout.activity_userlist,
-            //        R.id.list,itemname);
-           // setListAdapter(adapter);
-          //  return rootView;
-        }
-    }
-
-    }
+    }}
 
 
 

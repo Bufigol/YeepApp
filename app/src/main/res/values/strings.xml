@@ -15,4 +15,5 @@
     <string name="cancelBttn">CANCEL</string>
     <string name="title_activity_friends_edit">FriendsEditActivity</string>
     <string name="title_activity_friends_modify">FriendsModifyActivity</string>
+    <string-array name="dummy">"item 1","item2"</string-array>
 </resources>
