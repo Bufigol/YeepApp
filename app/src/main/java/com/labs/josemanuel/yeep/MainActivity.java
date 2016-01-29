@@ -132,6 +132,11 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
             return true;
         }
+        if(id == R.id.action_edit_Friends){
+            Intent intent = new Intent(MainActivity.this,EditFriendsActivity.class);
+            startActivity(intent);
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
     }

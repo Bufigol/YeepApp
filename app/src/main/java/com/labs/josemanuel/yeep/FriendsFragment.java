@@ -13,7 +13,7 @@ import android.widget.ProgressBar;
  */
 public class FriendsFragment extends ListFragment {
 
-    // Carga por primera vez y fragmenter y lo infla
+    // Carga por primera vez e inflater infla el fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
