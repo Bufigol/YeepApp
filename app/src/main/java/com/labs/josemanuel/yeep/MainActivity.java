@@ -8,6 +8,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.ListFragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -17,6 +18,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.parse.ParseAnalytics;
@@ -110,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            return modifyFriend();
         }
         if (id == R.id.action_logout) {
             return makeLogOut();
@@ -124,6 +127,15 @@ public class MainActivity extends AppCompatActivity {
      * Inicio de Sesión.
      * @return
      */
+
+    private boolean modifyFriend() {
+        Intent intent = new Intent(MainActivity.this, FriendsModifyActivity.class);
+        startActivity(intent);
+        return true;
+    }
+
+
+
     private boolean makeLogOut() {
         ParseUser.logOut();
         Intent intent = new Intent(MainActivity.this,LoginActivity.class);
@@ -181,7 +193,11 @@ public class MainActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
+            if(position==1) {
+                return new FriendsFragment();
+            }else{
+                return new InboxFragment();
+            }
         }
 
         @Override
@@ -194,11 +210,14 @@ public class MainActivity extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "BANDEJA DE ENTRADA";
+                    return "INBOX:";
                 case 1:
-                    return "AMIGOS";
+                    return "CONTACTS:";
             }
             return null;
         }
-    }
-}
+    }}
+
+
+
+
