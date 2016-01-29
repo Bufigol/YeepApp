@@ -146,7 +146,7 @@ public class EditFriendsActivity extends ListActivity {
         dialog.show();
     }
 
-    // metodo de error al salvar relaciones
+    // metodo de error al salvar relaciones en Parse.com
     private void errorSavingRelation(String string) {
         AlertDialog.Builder builder = new AlertDialog.Builder(EditFriendsActivity.this);
         String message = string;
