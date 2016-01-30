@@ -1,15 +1,20 @@
 package com.labs.josemanuel.yeep;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
+import android.app.ActionBar;
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
-import android.support.annotation.NonNull;
+import android.graphics.Typeface;
+import android.os.Build;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,29 +24,66 @@ import com.parse.ParseUser;
 
 public class LoginActivity extends AppCompatActivity {
 
-    final static String TAG = SignUpActivity.class.getSimpleName();
+    protected TextView mSingUpTextView;
+    MenuItem miActionProgressItem;
 
-    /**
-     * Método que inicializa la actividad y que la la funcionalidad a los botones.
-     * @param savedInstanceState
-     * @see #makeLogin()
-     */
+
+        @Override
+        public boolean onCreateOptionsMenu (Menu menu){
+// Inflate the menu; this adds items to the action bar if it is present.
+            getMenuInflater().inflate(R.menu.menu_login, menu);
+            return true;
+        }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+// Store instance of the menu item containing progress
+        miActionProgressItem = menu.findItem(R.id.miActionProgress);
+// Extract the action-view from the menu item
+        ProgressBar v = (ProgressBar) MenuItemCompat.getActionView(miActionProgressItem);
+// Return to finish
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+
+    public void showProgressBar() {
+        miActionProgressItem.setVisible(true);
+    }
+    public void hideProgressBar() {
+        miActionProgressItem.setVisible(false);
+    }
+
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        TextView myTitle = (TextView)findViewById(R.id.Title);
+        TextView mySubtitle = (TextView)findViewById(R.id.subTitle);
+        Typeface myFont = Typeface.createFromAsset(getAssets(), "fonts/Gagalin-Regular.otf");
+        myTitle.setTypeface(myFont);
+        mySubtitle.setTypeface(myFont);
+      //  hideProgressBar();
         // elimina la barra superior
-        //getSupportActionBar().hide();
+     //   ActionBar actionBar =getActionBar();
+      //  actionBar.hide();
+         getSupportActionBar().hide();
 
-        Button loginbutton = (Button) findViewById(R.id.loginBtn);
-        loginbutton.setOnClickListener(new View.OnClickListener() {
+        Button buttonSend = (Button) findViewById(R.id.loginBtn);
+        buttonSend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-            public void onClick(View arg0) {
-                makeLogin();
+                loginUsuario(v);
 
             }
         });
-        TextView mSingUpTextView = (TextView) findViewById(R.id.signBtn);
+
+
+        mSingUpTextView = (TextView) findViewById(R.id.signBtn);
         mSingUpTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,109 +94,61 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    /**
-     * Metodo utilizado para comprobar en primer lugar que el campo correspondiente al usuario y luego
-     * el correspondiente a la contraseña no esten vacios. En caso de que alguno de los campos esten
-     * vacios se mostrara un cuadro de dialogo informativo, en caso contrarario se intentara iniciar
-     * sesión.
-     *
-     * @see #parseLogin()
-     * @see #getUsernameString()
-     * @see #getPasswordString()
-     *
-     */
-    private void makeLogin() {
-        if (getUsernameString().equals(null) || getUsernameString().equals("")) {
-            Log.i("LoginActivity", "USER EMPTY.");
-            mensajeAlerta("Error al intentar iniciar sesion");
+    public void loginUsuario(View view) {
+
+        /* ProgressDialog centrado
+        final ProgressDialog dialog = new ProgressDialog(LoginActivity.this);
+        dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        dialog.setMessage("Loading. Please wait...");
+        dialog.setIndeterminate(true);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();*/
+
+        // instanciación de los componentes y almacenamiento del ingreso
+        EditText userField = (EditText) findViewById(R.id.userFieldSign);
+        final String usernameLogin = userField.getText().toString();
+        EditText passField = (EditText) findViewById(R.id.passwordField);
+        final String passLogin = passField.getText().toString();
+
+
+            // Toast No username
+        if (usernameLogin.isEmpty()) {
+            getSupportActionBar().hide();
+            hideProgressBar();
+            Toast toast = Toast.makeText(getApplicationContext(), "Debe introducir un nombre de usuario", Toast.LENGTH_SHORT);
+            toast.show();
+            //dialog.hide();
+        }   // Toast No passLogin
+        if (passLogin.isEmpty()) {
+            getSupportActionBar().hide();
+            hideProgressBar();
+            Toast toast = Toast.makeText(getApplicationContext(), "Debe introducir su contraseña", Toast.LENGTH_SHORT);
+            toast.show();
+            //dialog.hide();
         } else {
-            Log.i("LoginActivity", "USER NOT EMPTY.");
-            if (getPasswordString().equals(null) || getPasswordString().equals("")) {
-                Log.i("LoginActivity", "PASS EMPTY.");
-                mensajeAlerta("Error al intentar iniciar sesion");
-            } else {
-                Log.i("LoginActivity", "PASS NOT EMPTY.");
-                parseLogin();
-            }
-        }
-    }
+            getSupportActionBar().show();
+            showProgressBar();
+            ParseUser.logInInBackground(usernameLogin, passLogin, new LogInCallback() {
+                public void done(ParseUser user, ParseException e) {
 
-    /**
-     * Método que realiza el inicio de sesión y realiza un intent en caso que los campos esten correctos.
-     * Este metodo es invocado exclusivamente cuando se ha comprobado de que los campos no estan vacios.
-     * Una vez realizada dicha comprobación se llama ha este metodo para comparar la información
-     * ingresada por el usuario con la base de datos albergada en el backend alojado en parse.
-     * En caso de que este completamente correcto se realiza el intetn, en caso contrario se mostrara
-     * un cuadro de dialogo informando del error.
-     * @see #makeLogin()
-     * @see #mensajeAlerta(String)
-     */
-    private void parseLogin() {
-        ParseUser.logInInBackground(getUsernameString(), getPasswordString(),
-                new LogInCallback() {
-                    public void done(ParseUser user, ParseException e) {
-                        if (user != null) {
-                            // If user exist and authenticated, send user to Welcome.class
-                            Intent intent = new Intent(
-                                    LoginActivity.this,
-                                    MainActivity.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            startActivity(intent);
-                            Toast.makeText(getApplicationContext(),
-                                    "Successfully Logged in",
-                                    Toast.LENGTH_LONG).show();
-                            LoginActivity.this.finish();
-                        } else {
-                            mensajeAlerta("No such user exist, please signup");
-                        }
+                    if (user != null) {
+
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                        finish(); // cerramos login al salir del layout
+                        // Hooray! The user is logged in.
+                    } else {
+                        // Signup failed. Look at the ParseException to see what happened.
+                        Toast toast = Toast.makeText(getApplicationContext(), "Error, ingrese de nuevo sus datos", Toast.LENGTH_SHORT);
+                        toast.show();
+                        //dialog.hide();
                     }
-                });
+
+                }
+            });
+        }
+
     }
 
-    /**
-     * Metodo privado para obtener la información albergada en el espacio para el ingreso de la
-     * contraseña.
-     * @return string ingresado por el usuario.
-     */
-    @NonNull
-    private String getPasswordString() {
-        EditText password = (EditText) findViewById(R.id.passwordField);
-        return password.getText().toString();
-    }
-    /**
-     * Metodo privado para obtener la información albergada en el espacio para el ingreso del nombre
-     * de usuario.
-     * @return string ingresado por el usuario.
-     */
-    @NonNull
-    private String getUsernameString() {
-        EditText username = (EditText) findViewById(R.id.userFieldSign);
-        return username.getText().toString();
-    }
-
-    /**
-     * Método utilizado para mostrar un cuadro de dialogo con un mensaje en caso de no se pueda
-     * realizar un correcto inicio de sesión.
-     * @param log_message String utilizado con fines de depuración segun su utilización en el codigo.
-     */
-    private void mensajeAlerta(String log_message) {
-        Log.d(TAG, log_message);
-        final AlertDialog.Builder alertaSimple = new AlertDialog.Builder(LoginActivity.this);
-        Log.d(TAG, " -*- El popup Dialog se ha creado -*-");
-        alertaSimple.setTitle("Sign Up Error");
-        alertaSimple.setMessage("Verifíque los campos e intentelo de nuevo");
-
-        alertaSimple.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                setContentView(R.layout.activity_sign_up);
-
-            }
-        });
-        alertaSimple.setIcon(R.mipmap.ic_launcher);
-        alertaSimple.create();
-        alertaSimple.show();
-    }
 }
-

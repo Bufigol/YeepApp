@@ -1,6 +1,9 @@
 package com.labs.josemanuel.yeep;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -63,6 +66,8 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -73,7 +78,12 @@ public class MainActivity extends AppCompatActivity {
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL); // lo centra en landscape
+        tabLayout.getTabAt(0).setIcon(R.drawable.ic_archive_24dp);
+        tabLayout.getTabAt(1).setIcon(R.drawable.ic_people_24dp);
 
+
+        // Sobre de enviar mail situado en esquina inferior derecha de Main
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,8 +129,35 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
             return true;
         }
+        if(id == R.id.action_edit_Friends){
+            Intent intent = new Intent(MainActivity.this,EditFriendsActivity.class);
+            startActivity(intent);
+            return true;
+        }
+        if(id == R.id.action_repositorio){
+            irAlRepo();
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void irAlRepo() {
+        final AlertDialog.Builder alertaSimple = new AlertDialog.Builder(MainActivity.this);
+        Log.d(TAG, " -*- El popup Dialog se ha creado -*-");
+        alertaSimple.setTitle("Wick app");
+        alertaSimple.setMessage(R.string.mensaje_repo);
+        alertaSimple.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // codigo
+                Intent browser = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/Bufigol/YeepApp"));
+                startActivity(browser);
+            }
+        });
+        alertaSimple.setIcon(R.mipmap.github);
+        alertaSimple.create();
+        alertaSimple.show();
     }
 
     /**
@@ -148,14 +185,14 @@ public class MainActivity extends AppCompatActivity {
             return fragment;
         }
 
-        @Override
+/*        @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
             TextView textView = (TextView) rootView.findViewById(R.id.section_label);
             textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
             return rootView;
-        }
+        }*/
     }
 
     /**
@@ -172,7 +209,19 @@ public class MainActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
+           // return PlaceholderFragment.newInstance(position + 1);
+
+
+            switch (position) {
+                case 0:
+                    return new InboxFragment();
+                case 1:
+                    return  new  FriendsFragment();
+            }
+            return null;
+
+
+
         }
 
         @Override
@@ -185,9 +234,9 @@ public class MainActivity extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "BANDEJA DE ENTRADA";
+                  //   return
                 case 1:
-                    return "AMIGOS";
+                   // return "AMIGOS";
             }
             return null;
         }

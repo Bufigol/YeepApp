@@ -1,4 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -6,34 +8,26 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.labs.josemanuel.yeep.MainActivity$PlaceholderFragment">
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.labs.josemanuel.yeep.FriendsModifyActivity"
+    tools:showIn="@layout/activity_friends_modify">
+
 
     <ListView
-        android:id="@android:id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:id="@+id/listView"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        />
-
-    <ProgressBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/progressBar"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        />
+        android:layout_alignParentStart="true" />
 
     <TextView
-        android:id="@android:id/empty"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/empty_inbox_label"
-        />
-
-
-
-
-
-
+        android:text="No friends added yet."
+        android:id="@+id/textView2"
+        android:layout_alignTop="@+id/listView"
+        android:layout_alignLeft="@+id/listView"
+        android:layout_alignStart="@+id/listView"
+        android:textSize="20dp" />
 </RelativeLayout>

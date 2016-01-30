@@ -25,9 +25,7 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 
-
-
-<!--    &lt;!&ndash; Aplicaction Theme &ndash;&gt;
+    <!--    &lt;!&ndash; Aplicaction Theme &ndash;&gt;
     &lt;!&ndash; Base application theme. &ndash;&gt;
     <style name="AppTheme" parent="Theme.AppCompat.Light">
         &lt;!&ndash; Customize your theme here. &ndash;&gt;
@@ -64,9 +62,6 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />-->
 
 
-
-
-
     <!-- Extracción de propiedades de estilo de los componentes de los layout-->
     <!-- ////////////////////////////////////////////////////////////////////-->
 
@@ -84,15 +79,6 @@
         <item name="android:paddingBottom">@dimen/login_horizontal_margin</item>
         <item name="android:orientation">vertical</item>
     </style>
-
-
-
-
-
-
-
-
-
 
 
 </resources>

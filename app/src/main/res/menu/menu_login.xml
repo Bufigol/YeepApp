@@ -1,0 +1,14 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.labs.josemanuel.yeep.LoginActivity">
+
+    <item
+        android:id="@+id/miActionProgress"
+        android:orderInCategory="100"
+        android:title="@string/loging_message"
+        android:visible="false"
+        app:actionLayout="@layout/action_view_progress"
+        app:showAsAction="ifRoom" />
+
+</menu>

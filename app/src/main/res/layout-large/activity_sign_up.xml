@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.labs.josemanuel.yeep.SignUpActivity"
+    android:background="@drawable/background_fill1">
+    <!--android:background="@style/background_fill1"-->
+
+      <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/imageView2"
+          android:src="@drawable/background1"
+        android:scaleType="fitStart"
+          android:layout_alignParentTop="true"
+          android:layout_alignLeft="@+id/linearLayout"
+          android:layout_alignStart="@+id/linearLayout"
+          android:layout_alignRight="@+id/linearLayout"
+          android:layout_alignEnd="@+id/linearLayout" />
+
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        style="@style/AuthLinearLayout_Sign">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/userFieldSign"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textColor="@android:color/white"
+        android:hint="@string/username_hint"
+        android:textColorHint="@android:color/white">
+        <requestFocus />
+        </EditText>
+
+    <EditText
+        android:layout_below="@+id/userFieldSign"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/emailFieldSign"
+        android:textColor="@android:color/white"
+        android:hint="@string/emailField_hint"
+        android:textColorHint="@android:color/white"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+
+    <EditText
+        android:id="@+id/password_sing"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:hint="@string/password_sing"
+        android:textColorHint="@android:color/white"
+        android:layout_below="@+id/emailFieldSign"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+        <Button
+            android:id="@+id/signBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/signBtn_label"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:textSize="25sp"
+            android:onClick="comrobarDatos" />
+
+        <ImageView
+            android:id="@+id/buttonDivider"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/password_sing"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/button_divider" />
+
+
+        <Button
+            android:id="@+id/cancelBtn"
+            android:text="@string/cancelBttn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_below="@id/password_sing"
+            android:layout_toLeftOf="@id/buttonDivider"/>
+
+
+
+</LinearLayout>
+
+
+
+
+</RelativeLayout>
+
+
+
