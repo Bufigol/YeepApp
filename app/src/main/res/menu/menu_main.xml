@@ -19,6 +19,11 @@
         android:orderInCategory="300"
         android:title="@string/action_logout"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/action_repositorio"
+        android:orderInCategory="400"
+        android:title="@string/repositorio"
+        app:showAsAction="never" />
 
     <item android:id="@+id/action_camera"
         android:icon="@drawable/ic_menu_camera"

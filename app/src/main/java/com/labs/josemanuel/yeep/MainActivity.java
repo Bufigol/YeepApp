@@ -1,6 +1,9 @@
 package com.labs.josemanuel.yeep;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -65,9 +68,6 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
 
-
-
-
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -81,9 +81,6 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL); // lo centra en landscape
         tabLayout.getTabAt(0).setIcon(R.drawable.ic_archive_24dp);
         tabLayout.getTabAt(1).setIcon(R.drawable.ic_people_24dp);
-
-
-
 
 
         // Sobre de enviar mail situado en esquina inferior derecha de Main
@@ -137,11 +134,33 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
             return true;
         }
+        if(id == R.id.action_repositorio){
+            irAlRepo();
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
     }
 
-     /**
+    private void irAlRepo() {
+        final AlertDialog.Builder alertaSimple = new AlertDialog.Builder(MainActivity.this);
+        Log.d(TAG, " -*- El popup Dialog se ha creado -*-");
+        alertaSimple.setTitle("Wick app");
+        alertaSimple.setMessage(R.string.mensaje_repo);
+        alertaSimple.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // codigo
+                Intent browser = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/Bufigol/YeepApp"));
+                startActivity(browser);
+            }
+        });
+        alertaSimple.setIcon(R.mipmap.github);
+        alertaSimple.create();
+        alertaSimple.show();
+    }
+
+    /**
      * A placeholder fragment containing a simple view.
      */
     public static class PlaceholderFragment extends Fragment {

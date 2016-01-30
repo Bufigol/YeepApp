@@ -19,6 +19,6 @@
     <string name="empty_friends_label">añade amigos para empezar</string>
     <string name="title_activity_edit_friends">EditFriendsActivity</string>
     <string name="error_message">Error al cargar los usuarios...</string>
-
-
+    <string name="repositorio">Ir al repositorio</string>
+    <string name="mensaje_repo">¿Quieres visitar el repositorio en GitHub?</string>
 </resources>
