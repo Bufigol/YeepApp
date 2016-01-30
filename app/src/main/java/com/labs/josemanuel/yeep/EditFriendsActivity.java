@@ -124,7 +124,7 @@ public class EditFriendsActivity extends ListActivity {
 
                 } else {
                     Log.e(TAG, "Error al realizar la consulta: ", e);
-                    errorEditFriendsdDialog(getString(R.string.error_message));
+                    showErrorMessage("Error loading Friends", getString(R.string.error_message));
                 }
                 // oculta el progressBar al finalizar query
                 pgrsBar.setVisibility(View.INVISIBLE);
@@ -134,23 +134,16 @@ public class EditFriendsActivity extends ListActivity {
 
     }
 
-    // metodo para ParseException capturada en la carga de lista de amigos
-    private void errorEditFriendsdDialog(String string) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(EditFriendsActivity.this);
-        builder.setMessage(string);
-        builder.setTitle("Error loading Friends");
-        builder.setPositiveButton(android.R.string.ok, null);
-        builder.setIcon(android.R.drawable.ic_dialog_alert);
-        AlertDialog dialog = builder.create();
-        dialog.show();
-    }
 
-    // metodo de error al salvar relaciones en Parse.com
-    private void errorSavingRelation(String string) {
+    /**
+     * Metodo utilizado para mostrar un cuadro de dialogo en caso de que sea necesario.
+     * @param title Titulo del cuadro de dialogo, el cual cambia segun el contexto de la llamada
+     * @param Message Mensaje que se le da al usuario con informacion dependiendo del contexto.
+     */
+    private void showErrorMessage(String title,String Message){
         AlertDialog.Builder builder = new AlertDialog.Builder(EditFriendsActivity.this);
-        String message = string;
-        builder.setMessage(message);
-        builder.setTitle("Error saving");
+        builder.setMessage(Message);
+        builder.setTitle(title);
         builder.setPositiveButton(android.R.string.ok, null);
         builder.setIcon(android.R.drawable.ic_dialog_alert);
         AlertDialog dialog = builder.create();

@@ -96,14 +96,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-     /*  private void navigateToLogin() {
-        Intent intent = new Intent(this, LoginActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
-    }*/
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -123,11 +115,7 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         if (id == R.id.action_logout) {
-            ParseUser.logOut();
-            Intent intent = new Intent(MainActivity.this,LoginActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-            return true;
+            return makeLogOut();
         }
         if(id == R.id.action_edit_Friends){
             Intent intent = new Intent(MainActivity.this,EditFriendsActivity.class);
@@ -135,14 +123,26 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         if(id == R.id.action_repositorio){
-            irAlRepo();
-            return true;
+            return irAlRepo();
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    private void irAlRepo() {
+    private boolean makeLogOut() {
+        ParseUser.logOut();
+        Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        return true;
+    }
+
+    /**
+     * Metodo que le muestra un cuadro de dialogo al usuario con la opcion de visitar el repositorio
+     * donde se encuentra albergado el proyecto
+     * @return
+     */
+    private boolean irAlRepo() {
         final AlertDialog.Builder alertaSimple = new AlertDialog.Builder(MainActivity.this);
         Log.d(TAG, " -*- El popup Dialog se ha creado -*-");
         alertaSimple.setTitle("Wick app");
@@ -158,87 +158,6 @@ public class MainActivity extends AppCompatActivity {
         alertaSimple.setIcon(R.mipmap.github);
         alertaSimple.create();
         alertaSimple.show();
-    }
-
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private static final String ARG_SECTION_NUMBER = "section_number";
-
-        public PlaceholderFragment() {
-        }
-
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
-        }
-
-/*        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
-            return rootView;
-        }*/
-    }
-
-    /**
-     * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
-     * one of the sections/tabs/pages.
-     */
-    public class SectionsPagerAdapter extends FragmentPagerAdapter {
-
-        public SectionsPagerAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            // getItem is called to instantiate the fragment for the given page.
-            // Return a PlaceholderFragment (defined as a static inner class below).
-           // return PlaceholderFragment.newInstance(position + 1);
-
-
-            switch (position) {
-                case 0:
-                    return new InboxFragment();
-                case 1:
-                    return  new  FriendsFragment();
-            }
-            return null;
-
-
-
-        }
-
-        @Override
-        public int getCount() {
-            // Show 3 total pages.
-            return 2;
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            switch (position) {
-                case 0:
-                  //   return
-                case 1:
-                   // return "AMIGOS";
-            }
-            return null;
-        }
+        return true;
     }
 }
