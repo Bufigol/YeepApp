@@ -137,8 +137,7 @@ public class EditFriendsActivity extends ListActivity {
     // metodo para ParseException capturada en la carga de lista de amigos
     private void errorEditFriendsdDialog(String string) {
         AlertDialog.Builder builder = new AlertDialog.Builder(EditFriendsActivity.this);
-        String message = string;
-        builder.setMessage(message);
+        builder.setMessage(string);
         builder.setTitle("Error loading Friends");
         builder.setPositiveButton(android.R.string.ok, null);
         builder.setIcon(android.R.drawable.ic_dialog_alert);
