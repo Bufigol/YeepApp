@@ -129,13 +129,19 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Metodo que realiza el cierre de sesion y hace el cambio de actividad a la correspondiente
+     * con la de inicio de sesion.
+     * @return
+     */
     private boolean makeLogOut() {
         ParseUser.logOut();
         Intent intent = new Intent(MainActivity.this,LoginActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         return true;
     }
+
 
     /**
      * Metodo que le muestra un cuadro de dialogo al usuario con la opcion de visitar el repositorio
@@ -144,7 +150,6 @@ public class MainActivity extends AppCompatActivity {
      */
     private boolean irAlRepo() {
         final AlertDialog.Builder alertaSimple = new AlertDialog.Builder(MainActivity.this);
-        Log.d(TAG, " -*- El popup Dialog se ha creado -*-");
         alertaSimple.setTitle("Wick app");
         alertaSimple.setMessage(R.string.mensaje_repo);
         alertaSimple.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
@@ -160,4 +165,5 @@ public class MainActivity extends AppCompatActivity {
         alertaSimple.show();
         return true;
     }
+
 }

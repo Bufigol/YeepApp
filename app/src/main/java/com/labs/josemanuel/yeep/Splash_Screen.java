@@ -7,6 +7,9 @@ import android.os.Handler;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.parse.Parse;
+import com.parse.ParseUser;
+
 
 public class Splash_Screen extends Activity {
     @Override
@@ -15,6 +18,7 @@ public class Splash_Screen extends Activity {
         setContentView(R.layout.activity_splash_screen);
         cambiarFont();
         openApp(true);
+
     }
 
     /**
@@ -35,9 +39,8 @@ public class Splash_Screen extends Activity {
      * @param locationPermission
     */
     private void openApp(boolean locationPermission) {
-
         Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
+        handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     Intent intent = new Intent(Splash_Screen
@@ -47,5 +50,6 @@ public class Splash_Screen extends Activity {
                 }
             }, 2000);
     }
+
 }
 
