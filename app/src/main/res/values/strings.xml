@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Wick</string>
-    <string name="action_settings">Modify Friends</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_edit_Friends">Edit Friends</string>
     <string name="action_logout">Logout</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="username_hint">Username</string>
@@ -13,7 +14,11 @@
     <string name="subTitle_text">App Message</string>
     <string name="TitleApp_name">Wick!</string>
     <string name="cancelBttn">CANCEL</string>
-    <string name="title_activity_friends_edit">FriendsEditActivity</string>
-    <string name="title_activity_friends_modify">FriendsModifyActivity</string>
-    <string-array name="dummy">"item 1","item2"</string-array>
+    <string name="loging_message">Loading...</string>
+    <string name="empty_inbox_label">No hay mensajes que mostrar</string>
+    <string name="empty_friends_label">añade amigos para empezar</string>
+    <string name="title_activity_edit_friends">EditFriendsActivity</string>
+    <string name="error_message">Error al cargar los usuarios...</string>
+
+
 </resources>

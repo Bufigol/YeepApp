@@ -5,26 +5,29 @@ import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-
+import android.widget.ProgressBar;
 
 
 /**
- * Created by bufigol on 28/01/16.
+ * Created by JoseManuel on 28/01/2016.
  */
 public class FriendsFragment extends ListFragment {
-    @Override
-    public View onCreateView(LayoutInflater inflater,ViewGroup container,
-                             Bundle savedInstanceState){
 
-        View rootView=inflater.inflate(R.layout.activity_userlist,container,
+    // Carga por primera vez e inflater infla el fragment
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // infla la vista con el fragment_inbox
+        View rootView = inflater.inflate(R.layout.fragment_friends, container,
                 false);
 
+        // oculta el progressBar
+        ProgressBar spinner = (ProgressBar)
+                rootView.findViewById(R.id.progressBar);
+        spinner.setVisibility(View.GONE);
 
-        /*ArrayAdapter<String> adapter;
-        adapter = new ArrayAdapter<String>(
-               this.getContext(), R.layout.activity_userlist, R.id.list);
-        setListAdapter(adapter);*/
         return rootView;
     }
+
+
 }

@@ -21,12 +21,9 @@ public class Splash_Sceen extends Activity {
         openApp(true);
     }
 
-    /**
-     * Metodo que tiene como finalidad de realizar el intent al layout para el inicio de sesión luego
-     * de 2 segundos.
-     * @param locationPermission
-     */
+
     private void openApp(boolean locationPermission) {
+
         Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 @Override
@@ -38,5 +35,10 @@ public class Splash_Sceen extends Activity {
                 }
             }, 2000);
         }
+
+    public void irAlRepo(View view){
+        Intent browser = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/Bufigol/YeepApp"));
+        startActivity(browser);
+    }
 }
 
