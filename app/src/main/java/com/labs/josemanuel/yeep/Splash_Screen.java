@@ -1,23 +1,23 @@
 package com.labs.josemanuel.yeep;
 
-import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.net.Uri;
-import android.os.Build;
+import android.graphics.Typeface;
 import android.os.Handler;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
+import android.widget.TextView;
 
 
-public class Splash_Sceen extends Activity {
+public class Splash_Screen extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash__sceen);
+        setContentView(R.layout.activity_splash_screen);
+        TextView myTitle = (TextView)findViewById(R.id.Title);
+        TextView mySubtitle = (TextView)findViewById(R.id.subTitle);
+        Typeface myFont = Typeface.createFromAsset(getAssets(), "fonts/Gagalin-Regular.otf");
+        myTitle.setTypeface(myFont);
+        mySubtitle.setTypeface(myFont);
         openApp(true);
     }
 
@@ -28,17 +28,12 @@ public class Splash_Sceen extends Activity {
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    Intent intent = new Intent(Splash_Sceen
+                    Intent intent = new Intent(Splash_Screen
                             .this, LoginActivity.class);
                     startActivity(intent);
                     finish();
                 }
             }, 2000);
         }
-
-    public void irAlRepo(View view){
-        Intent browser = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/Bufigol/YeepApp"));
-        startActivity(browser);
-    }
 }
 

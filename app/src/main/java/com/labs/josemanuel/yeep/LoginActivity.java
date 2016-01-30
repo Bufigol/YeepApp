@@ -4,6 +4,7 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -60,7 +61,11 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        TextView myTitle = (TextView)findViewById(R.id.Title);
+        TextView mySubtitle = (TextView)findViewById(R.id.subTitle);
+        Typeface myFont = Typeface.createFromAsset(getAssets(), "fonts/Gagalin-Regular.otf");
+        myTitle.setTypeface(myFont);
+        mySubtitle.setTypeface(myFont);
       //  hideProgressBar();
         // elimina la barra superior
      //   ActionBar actionBar =getActionBar();
