@@ -11,6 +11,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -105,6 +107,9 @@ public class LoginActivity extends AppCompatActivity {
         EditText passField = (EditText) findViewById(R.id.passwordField);
         final String passLogin = passField.getText().toString();
 
+
+        Animation shake = AnimationUtils.loadAnimation(this, R.anim.shake);
+        view.startAnimation(shake);
 
             // Toast No username
         if (usernameLogin.isEmpty()) {
