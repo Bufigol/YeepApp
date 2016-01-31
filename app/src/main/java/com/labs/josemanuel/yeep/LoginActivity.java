@@ -3,6 +3,7 @@ package com.labs.josemanuel.yeep;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -28,16 +29,20 @@ public class LoginActivity extends AppCompatActivity {
 
     /**
      * Método que inicializa la actividad y que la la funcionalidad a los botones.
-     * @param savedInstanceState
+     * @param savedInstanceState por definir
      * @see #makeLogin()
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        cambiarFont();
         // elimina la barra superior
         //getSupportActionBar().hide();
-        getSupportActionBar().hide();
+        if(getSupportActionBar()!=null){
+            getSupportActionBar().hide();
+        }
+
         Button loginbutton = (Button) findViewById(R.id.loginBtn);
         loginbutton.setOnClickListener(new View.OnClickListener() {
 
@@ -96,13 +101,13 @@ public class LoginActivity extends AppCompatActivity {
      *
      */
     private void makeLogin() {
-        if (getUsernameString().equals(null) || getUsernameString().equals("")) {
+        if (getUsernameString().isEmpty() || getUsernameString().equals("")) {
             getSupportActionBar().hide();
             hideProgressBar();
             Toast toast = Toast.makeText(getApplicationContext(), "Debe introducir un nombre de usuario", Toast.LENGTH_SHORT);
             toast.show();
         } else {
-            if (getPasswordString().equals(null) || getPasswordString().equals("")) {
+            if (getPasswordString().isEmpty() || getPasswordString().equals("")) {
                 getSupportActionBar().hide();
                 hideProgressBar();
                 Toast toast = Toast.makeText(getApplicationContext(), "Debe introducir su contraseña", Toast.LENGTH_SHORT);
@@ -168,6 +173,16 @@ public class LoginActivity extends AppCompatActivity {
         EditText username = (EditText) findViewById(R.id.userFieldSign);
         return username.getText().toString();
     }
-
+    /**
+     * Metodo Utilizado para establecer un nuevo tipo de letra en el titulo y subtitulo existentes
+     * en el layout del splash screen.
+     */
+    private void cambiarFont() {
+        TextView myTitle = (TextView)findViewById(R.id.Title);
+        TextView mySubtitle = (TextView)findViewById(R.id.subTitle);
+        Typeface myFont = Typeface.createFromAsset(getAssets(), "fonts/Gagalin-Regular.otf");
+        myTitle.setTypeface(myFont);
+        mySubtitle.setTypeface(myFont);
+    }
 
 }

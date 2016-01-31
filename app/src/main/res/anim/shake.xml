@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<translate xmlns:android="http://schemas.android.com/apk/res/android"
+    android:duration="100"
+    android:fromDegrees="-5"
+    android:pivotX="50%"
+    android:pivotY="50%"
+    android:repeatCount="10"
+    android:repeatMode="reverse"
+    android:toDegrees="5"/>
+
+
+    <!-- how long the animation lasts -->
+    <!-- how far to swing left -->
+    <!-- pivot from horizontal center -->
+    <!-- pivot from vertical center -->
+    <!-- how many times to swing back and forth -->
+    <!-- to make the animation go the other way -->
+    <!-- how far to swing right -->

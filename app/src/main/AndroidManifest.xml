@@ -31,8 +31,6 @@
         <activity
             android:name=".LoginActivity"
             android:screenOrientation="portrait"/>
-
-
         <activity
             android:name=".SignUpActivity"
             android:parentActivityName=".LoginActivity"
@@ -43,6 +41,7 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
