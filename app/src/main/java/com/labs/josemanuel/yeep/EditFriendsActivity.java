@@ -32,6 +32,7 @@ public class EditFriendsActivity extends ListActivity {
     ProgressBar pgrsBar;
     ParseRelation<ParseUser> mFriendsRelation; // Objeto ParseRelation asociado con objeto Usuario Logueado
     ParseUser mCurrentUser; // usuario actual
+    ArrayList<String> objectIds;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,8 +59,12 @@ public class EditFriendsActivity extends ListActivity {
         // añade una relación con un usuario seleccionado
         /*recibirá un usuario que obtendremos del array de ParseUser mUsers con la variable position,
         que es la posición del elemento pulsado*/
-        mFriendsRelation.add(mUsers.get(position));
 
+        if(getListView().isItemChecked(position)){
+            mFriendsRelation.add(mUsers.get(position));
+        }else{
+            mFriendsRelation.remove(mUsers.get(position));
+        }
         // en segundo plano añade el usuario en Parse
         mCurrentUser.saveInBackground(new SaveCallback() {
             @Override
@@ -76,10 +81,7 @@ public class EditFriendsActivity extends ListActivity {
 
             }
         });
-
-
     }
-
 
     // onResume es llamado siempre que la actividad es mostrada
 
@@ -90,6 +92,7 @@ public class EditFriendsActivity extends ListActivity {
         // Inicializamos el ArrayList, el adaptador y lo fijamos el adaptador al listView
 
         usernames = new ArrayList<String>();
+        objectIds = new ArrayList<String>();
         adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_checked, usernames);
         setListAdapter(adapter);
@@ -118,10 +121,9 @@ public class EditFriendsActivity extends ListActivity {
                     for (ParseUser user : mUsers) {
                         // añade el usuario de forma local
                         adapter.add(user.getUsername());
-
-
+                        objectIds.add(user.getObjectId());
                     }
-
+                    addFriendCheckmarks();
                 } else {
                     Log.e(TAG, "Error al realizar la consulta: ", e);
                     showErrorMessage("Error loading Friends", getString(R.string.error_message));
@@ -134,6 +136,40 @@ public class EditFriendsActivity extends ListActivity {
 
     }
 
+    public void addFriendCheckmarks(){
+        mFriendsRelation.getQuery().findInBackground(new FindCallback<ParseUser>() {
+            @Override
+            public void done(List<ParseUser> parseUsers, ParseException e) {
+                if (e == null) {
+
+
+                    for (ParseUser user : parseUsers) {
+
+                        if (objectIds.contains(user.getObjectId())) {
+                            getListView().setItemChecked(objectIds.indexOf(user.getObjectId()), true);
+                        }
+                    }
+                    pgrsBar.setVisibility(View.INVISIBLE);
+
+                } else {
+                    Log.e(TAG, "Error al realizar la consulta: ", e);
+                    showErrorMessage("Error loading Friends", getString(R.string.error_message));
+                }
+                // oculta el progressBar al finalizar query
+                pgrsBar.setVisibility(View.INVISIBLE);
+
+            }
+        });
+    }
+
+
+    public ArrayList<String> returnObject(){
+        if(objectIds!=null){
+            return objectIds;
+        }else
+            return usernames;
+
+    }
 
     /**
      * Metodo utilizado para mostrar un cuadro de dialogo en caso de que sea necesario.
