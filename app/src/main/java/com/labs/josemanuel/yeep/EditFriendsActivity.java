@@ -78,11 +78,8 @@ public class EditFriendsActivity extends ListActivity {
                     // Recorre lista mUsers y añadimos a listView mediante el adaptador
                     for (ParseUser user : parseUsers) {
                         // guardará el id de cada usuario y su nombre
-                        if (!(user.getObjectId().matches(mCurrentUser.getObjectId()))) {
-                            objectIds.add(user.getObjectId());
-                            adapter.add(user.getUsername());
-                        }
-
+                        objectIds.add(user.getObjectId());
+                        adapter.add(user.getUsername());
                     }
                     ArrayAdapter<String> adapter = new ArrayAdapter<>(
                             EditFriendsActivity.this,

@@ -21,7 +21,6 @@ import java.util.List;
 
 
 /**
- * Por definir
  * Created by JoseManuel on 28/01/2016.
  */
 public class FriendsFragment extends ListFragment {
@@ -35,6 +34,7 @@ public class FriendsFragment extends ListFragment {
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_friends, container,
                 false);
+
     }
 
     @Override
