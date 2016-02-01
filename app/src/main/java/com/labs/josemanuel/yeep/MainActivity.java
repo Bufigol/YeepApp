@@ -121,7 +121,9 @@ public class MainActivity extends AppCompatActivity {
             return goEditFriends();
         }
         if(id == R.id.action_repositorio){
-            return irAlRepo();
+            Intent intent = new Intent(MainActivity.this,WebviewActivity.class);
+            startActivity(intent);
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
