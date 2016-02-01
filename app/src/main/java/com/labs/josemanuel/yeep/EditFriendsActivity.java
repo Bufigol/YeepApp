@@ -134,7 +134,10 @@ public class EditFriendsActivity extends ListActivity {
         });
     }
 
-    // Obtener las relaciones del usuario actual y añadir los checks
+    /**
+     * Obtener las relaciones del usuario actual y añadir los checks
+     *
+     */
     private void addFriendCheckmarks() {
 
         mFriendsRelation.getQuery().findInBackground(new FindCallback<ParseUser>() {
@@ -159,6 +162,13 @@ public class EditFriendsActivity extends ListActivity {
     }
 
     // metodo para ParseException capturada en la carga de lista de amigos
+
+    /**
+     * Método generico utilizado para mostrar un mensaje de alerta en caso de que se haya experimentado
+     * algun error de funcionamiento dentro de esta clase.
+     * @param title String utilizado para definir el titulo del mensaje de alerta
+     * @param message String que contiene el mensaje que se le va mostrar al usuario.
+     */
     private void showErrorMsg(String title, String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(EditFriendsActivity.this);
         builder.setMessage(message);
