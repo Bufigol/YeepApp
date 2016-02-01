@@ -144,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
      * con la de inicio de sesion.
      * @return verdadero en cualquier caso
      */
-    private boolean makeLogOut() {
+    private  boolean makeLogOut() {
         ParseUser.logOut();
         Intent intent = new Intent(MainActivity.this,LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
