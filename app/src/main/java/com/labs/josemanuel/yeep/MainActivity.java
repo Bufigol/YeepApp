@@ -118,9 +118,7 @@ public class MainActivity extends AppCompatActivity {
             return makeLogOut();
         }
         if(id == R.id.action_edit_Friends){
-            Intent intent = new Intent(MainActivity.this,EditFriendsActivity.class);
-            startActivity(intent);
-            return true;
+            return goEditFriends();
         }
         if(id == R.id.action_repositorio){
             return irAlRepo();
@@ -130,9 +128,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
+     * Método que realiza el intent correspondiente para ir a la actividad EditFriendsActivity.
+     * @return verdadero en cualquier caso
+     */
+    private boolean goEditFriends() {
+        Intent intent = new Intent(MainActivity.this,EditFriendsActivity.class);
+        startActivity(intent);
+        return true;
+    }
+
+    /**
      * Metodo que realiza el cierre de sesion y hace el cambio de actividad a la correspondiente
      * con la de inicio de sesion.
-     * @return
+     * @return verdadero en cualquier caso
      */
     private boolean makeLogOut() {
         ParseUser.logOut();
@@ -146,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Metodo que le muestra un cuadro de dialogo al usuario con la opcion de visitar el repositorio
      * donde se encuentra albergado el proyecto
-     * @return
+     * @return verdadero en cualquier caso
      */
     private boolean irAlRepo() {
         final AlertDialog.Builder alertaSimple = new AlertDialog.Builder(MainActivity.this);
