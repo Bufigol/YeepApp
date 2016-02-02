@@ -32,11 +32,13 @@ public class FriendsFragment extends Fragment {
     public static final String TAG = FriendsFragment.class.getSimpleName();
     protected List<ParseUser> mFriends;
     protected ParseRelation<ParseUser> mFriendsRelation;
-    protected ParseUser mCurrentUser;
+    public ParseUser mCurrentUser;
     protected GridView grid;
     protected TextView empty;
     protected String[] usernames;
     protected int[] images;
+    public String [] emails;
+    public String email;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -46,6 +48,12 @@ public class FriendsFragment extends Fragment {
         empty = (TextView)rootView.findViewById(R.id.empty);
         return rootView;
     }
+
+    public String[] returnmEmails()
+    {
+        return emails;
+    }
+
 
     @Override
     public void onResume() {
@@ -69,8 +77,10 @@ public class FriendsFragment extends Fragment {
 
                     for (ParseUser user : mFriends) {
                         usernames[i] = user.getUsername();
+                        //emails[i] = user.getEmail();
                         i++;
                     }
+
 
 
                     CustomGrid adapter = new CustomGrid(getActivity(), usernames, images);

@@ -15,7 +15,9 @@ public class CustomGrid extends BaseAdapter{
     private Context mContext;
     private final String[] web;
     private final int[] Imageid;
-
+    private String gravatarURL ="http://www.gravatar.com/avatar/HASH";
+    FriendsFragment friends = new FriendsFragment();
+   // public String[] emails = friends.returnmEmails();
     public CustomGrid(Context c,String[] web,int[] Imageid ) {
         mContext = c;
         this.Imageid = Imageid;
@@ -54,11 +56,11 @@ public class CustomGrid extends BaseAdapter{
             TextView textView = (TextView) grid.findViewById(R.id.grid_text);
             ImageView imageView = (ImageView)grid.findViewById(R.id.grid_image);
             textView.setText(web[position]);
-            imageView.setImageResource(Imageid[position]);
+            imageView.setImageResource(R.drawable.avatar_empty);
+
         } else {
             grid = (View) convertView;
         }
-
         return grid;
     }
 }
