@@ -37,7 +37,7 @@ public class FriendsFragment extends Fragment {
     protected TextView empty;
     protected String[] usernames;
     protected int[] images;
-    public String [] emails;
+    public String[] emails;
     public String email;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -48,12 +48,6 @@ public class FriendsFragment extends Fragment {
         empty = (TextView)rootView.findViewById(R.id.empty);
         return rootView;
     }
-
-    public String[] returnmEmails()
-    {
-        return emails;
-    }
-
 
     @Override
     public void onResume() {
@@ -73,17 +67,18 @@ public class FriendsFragment extends Fragment {
                 if (e == null) {
                     mFriends = friends;
                     usernames = new String[mFriends.size()];
+                    emails = new String[usernames.length];
+                    Log.i("FriendsFragment.","Just finishing to set the size of the email array, which it will be: "+emails.length);
                     int i = 0;
 
                     for (ParseUser user : mFriends) {
                         usernames[i] = user.getUsername();
-                        //emails[i] = user.getEmail();
+                        emails[i] = user.getEmail().toLowerCase();
                         i++;
                     }
 
 
-
-                    CustomGrid adapter = new CustomGrid(getActivity(), usernames, images);
+                    CustomGrid adapter = new CustomGrid(getActivity(), usernames , emails, images);
                     grid.setAdapter(adapter);
                     getActivity().setProgressBarIndeterminateVisibility(false);
                     if(mFriends.size()>0){
