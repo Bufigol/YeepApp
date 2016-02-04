@@ -108,8 +108,8 @@ public class LoginActivity extends AppCompatActivity {
         final String passLogin = passField.getText().toString();
 
 
-        Animation shake = AnimationUtils.loadAnimation(this, R.anim.shake);
-        view.startAnimation(shake);
+        //Animation shake = AnimationUtils.loadAnimation(this, R.anim.shake);
+        //view.startAnimation(shake);
 
             // Toast No username
         if (usernameLogin.isEmpty()) {

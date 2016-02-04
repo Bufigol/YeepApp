@@ -6,6 +6,8 @@ package com.labs.josemanuel.yeep;
 import java.util.*;
 import java.io.*;
 import java.security.*;
+
+//Clase hash requerida para poder usar Gravatar en nuestra aplicación.
 public class Hash {
     public static String hex(byte[] array) {
         StringBuffer sb = new StringBuffer();

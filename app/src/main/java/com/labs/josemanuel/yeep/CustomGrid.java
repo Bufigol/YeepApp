@@ -14,6 +14,8 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 
+// Clase usada para generar el adaptador del fragment en el que pondremos los usuarios seleccionados y sus fotos.
+
 public class CustomGrid extends BaseAdapter{
     private Context mContext;
     private final String[] names;
@@ -71,6 +73,7 @@ public class CustomGrid extends BaseAdapter{
         } else {
             grid = (View) convertView;
         }
+
         return grid;
     }
 }

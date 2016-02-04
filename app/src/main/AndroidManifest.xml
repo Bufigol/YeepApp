@@ -31,20 +31,22 @@
         <activity
             android:name=".LoginActivity"
             android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".SignUpActivity"
+            android:parentActivityName=".LoginActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".Splash_Sceen"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".SignUpActivity"
-            android:parentActivityName=".LoginActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".Splash_Sceen"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".EditFriendsActivity"
             android:label="@string/title_activity_edit_friends"
