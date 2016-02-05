@@ -51,15 +51,21 @@ public class EditFriendsActivity extends ListActivity {
     protected void onResume() {
         super.onResume();
         // Inicializamos el ArrayList, el adaptador y lo fijamos el adaptador al listView
-        objectIds = new ArrayList<>();
-        usernames = new ArrayList<>();
-        adapter = new ArrayAdapter<>(this,
+        objectIds = new ArrayList<String>();
+        usernames = new ArrayList<String>();
+        adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_checked, usernames);
         setListAdapter(adapter);
+
+        // objeto query va a guardar una lista de objetos ParseUser
+        ParseQuery query = ParseUser.getQuery();
+        //orden result ascendent  // campo por el que vamos a ordenarlo (Extract to ParseConnstant)
+        query.orderByAscending(ParseConstants.KEY_USERNAME);
+        query.setLimit(ParseConstants.MAX_USERS); // limite de consulta
         mCurrentUser = ParseUser.getCurrentUser(); // obtener el usuario actual
         // instanciar la relación // recibe el nombre de la relación con una constante
         mFriendsRelation = mCurrentUser.getRelation(ParseConstants.KEY_FRIENDS_RELATION);
-        // objeto query va a guardar una lista de objetos ParseUser
+
         realizarConsulta();
 
     }

@@ -16,13 +16,8 @@
 
     <item
         android:id="@+id/action_logout"
-        android:orderInCategory="400"
-        android:title="@string/action_logout"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/action_repositorio"
         android:orderInCategory="300"
-        android:title="@string/repositorio"
+        android:title="@string/action_logout"
         app:showAsAction="never" />
 
     <item android:id="@+id/action_camera"
@@ -30,8 +25,10 @@
         android:title="action bar camera"
         app:showAsAction = "ifRoom|withText"
         />
-
-
-
+    <item
+        android:id="@+id/action_repositorio"
+        android:orderInCategory="300"
+        android:title="@string/repositorio"
+        app:showAsAction="never" />
 
 </menu>
