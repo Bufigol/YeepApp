@@ -22,7 +22,7 @@ public class CustomGrid extends BaseAdapter{
     private final int[] Imageid;
     private String gravatarURL ="http://www.gravatar.com/avatar/HASH";
     FriendsFragment friends = new FriendsFragment();
-   public String[] emails;
+    public String[] emails;
     public CustomGrid(Context c,String[] web,String[] emails, int[] Imageid ) {
         mContext = c;
         this.names = web;

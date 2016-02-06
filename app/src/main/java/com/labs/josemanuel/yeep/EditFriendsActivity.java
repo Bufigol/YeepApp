@@ -66,7 +66,20 @@ public class EditFriendsActivity extends ListActivity {
         // instanciar la relación // recibe el nombre de la relación con una constante
         mFriendsRelation = mCurrentUser.getRelation(ParseConstants.KEY_FRIENDS_RELATION);
 
+        realizarConsulta();
 
+    }
+
+    /**
+     * Método con el cual se realiza la consulta con el backend para obtener las relaciones que tiene
+     * el usuario actual. Una vez obtenidas las relaciones, se le muestran al usuario en forma
+     * de lista.
+     */
+    private void realizarConsulta() {
+        ParseQuery query = ParseUser.getQuery();
+        //orden result ascendent  // campo por el que vamos a ordenarlo (Extract to ParseConnstant)
+        query.orderByAscending(ParseConstants.KEY_USERNAME);
+        query.setLimit(ParseConstants.MAX_USERS); // limite de consulta
         // ejecutar la consulta en segundo plano
         query.findInBackground(new FindCallback<ParseUser>() {
 
@@ -81,7 +94,7 @@ public class EditFriendsActivity extends ListActivity {
                         objectIds.add(user.getObjectId());
                         adapter.add(user.getUsername());
                     }
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                    ArrayAdapter<String> adapter = new ArrayAdapter<>(
                             EditFriendsActivity.this,
                             android.R.layout.simple_list_item_checked,
                             usernames);
@@ -89,14 +102,13 @@ public class EditFriendsActivity extends ListActivity {
                     addFriendCheckmarks();
                 } else {
                     Log.e(TAG, "Error al realizar la consulta: ", e);
-                    errorEditFriendsdDialog(getString(R.string.error_message));
+                    showErrorMsg("Error interno", getString(R.string.error_message));
                 }
                 // oculta el progressBar al finalizar query
                 pgrsBar.setVisibility(View.INVISIBLE);
 
             }
         });
-
     }
 
     // Se ejecuta cada vez que pulsemos en algún elemento de la lista
@@ -128,7 +140,10 @@ public class EditFriendsActivity extends ListActivity {
         });
     }
 
-    // Obtener las relaciones del usuario actual y añadir los checks
+    /**
+     * Obtener las relaciones del usuario actual y añadir los checks
+     *
+     */
     private void addFriendCheckmarks() {
 
         mFriendsRelation.getQuery().findInBackground(new FindCallback<ParseUser>() {
@@ -145,7 +160,7 @@ public class EditFriendsActivity extends ListActivity {
                     pgrsBar.setVisibility(View.INVISIBLE);
                 } else {
                     Log.e(TAG, "ParseException caught", e);
-                    errorEditFriendsdDialog(getString(R.string.error_message));
+                    showErrorMsg("Error loading Friends", getString(R.string.error_message));
                 }
             }
         });
@@ -153,28 +168,23 @@ public class EditFriendsActivity extends ListActivity {
     }
 
     // metodo para ParseException capturada en la carga de lista de amigos
-    private void errorEditFriendsdDialog(String string) {
+
+    /**
+     * Método generico utilizado para mostrar un mensaje de alerta en caso de que se haya experimentado
+     * algun error de funcionamiento dentro de esta clase.
+     * @param title String utilizado para definir el titulo del mensaje de alerta
+     * @param message String que contiene el mensaje que se le va mostrar al usuario.
+     */
+    private void showErrorMsg(String title, String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(EditFriendsActivity.this);
-        String message = string;
         builder.setMessage(message);
-        builder.setTitle("Error loading Friends");
+        builder.setTitle(title);
         builder.setPositiveButton(android.R.string.ok, null);
         builder.setIcon(android.R.drawable.ic_dialog_alert);
         AlertDialog dialog = builder.create();
         dialog.show();
     }
 
-    // metodo de error al salvar relaciones en Parse.com
-    private void errorSavingRelation(String string) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(EditFriendsActivity.this);
-        String message = string;
-        builder.setMessage(message);
-        builder.setTitle("Error saving");
-        builder.setPositiveButton(android.R.string.ok, null);
-        builder.setIcon(android.R.drawable.ic_dialog_alert);
-        AlertDialog dialog = builder.create();
-        dialog.show();
-    }
 
 
 }
