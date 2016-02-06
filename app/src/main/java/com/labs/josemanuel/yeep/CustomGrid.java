@@ -66,7 +66,7 @@ public class CustomGrid extends BaseAdapter{
                 imageView.setImageResource(R.drawable.avatar_empty);
             }else{
                 String hash = Hash.md5Hex(emails[position]);
-                String gravatarurl ="http://gravatar.com/avatar/"+hash+"?s=100&d=wavatar";
+                String gravatarurl ="http://gravatar.com/avatar/"+hash+"?s=100&d=mm";
                 Picasso.with(mContext).load(gravatarurl).into(imageView);
             }
 
