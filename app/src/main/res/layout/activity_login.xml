@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background1"
     tools:context="com.labs.josemanuel.yeep.LoginActivity">
-
 
     <ImageView
         android:id="@+id/imageView"
@@ -68,8 +68,6 @@
             android:layout_alignStart="@+id/imageView"
             android:focusable="true"
             android:hint="@string/username_hint"
-            android:theme="@style/AppTheme"
-            style="@style/AppTheme"
             android:textSize="20sp" />
 
         <EditText
@@ -84,7 +82,6 @@
             android:inputType="textPassword"
             android:password="false"
             android:theme="@style/AppTheme"
-            style="@style/AppTheme"
             android:textSize="20sp"
             android:layout_marginTop="10dp" />
 
@@ -103,7 +100,7 @@
         android:layout_alignRight="@+id/linearLayout"
         android:layout_alignEnd="@+id/linearLayout"
         android:onClick="loginUsuario"
-        style="@style/AppTheme"
+        style="@style/ImageButtonAppTheme"
         android:layout_marginTop="10dp" />
 
 
@@ -120,7 +117,6 @@
         android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/linearLayout"
         android:layout_alignEnd="@+id/linearLayout" />
-
 
 
 </RelativeLayout>

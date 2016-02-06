@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_fill1"
-    tools:context="com.labs.josemanuel.yeep.Splash_Sceen"
+    android:background="@android:color/black"
+    tools:context=".Splash_Screen"
     android:clickable="false">
     <TextView
         android:id="@+id/Title"
@@ -31,7 +31,7 @@
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/iconoApp"
+        android:id="@+id/imageButton"
         android:src="@drawable/wick_logo_v3"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
