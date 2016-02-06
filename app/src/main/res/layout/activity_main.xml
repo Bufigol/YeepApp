@@ -24,13 +24,13 @@
             app:popupTheme="@style/AppTheme.PopupOverlay">
 
             <!-- Color is Brown 500 -->
-          <!--  <ProgressBar
-                android:id="@+id/toolbar_progress_bar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:indeterminateTint="#795548"
-                android:indeterminateTintMode="src_in"
-                android:layout_gravity="right"/>-->
+            <!--  <ProgressBar
+                  android:id="@+id/toolbar_progress_bar"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:indeterminateTint="#795548"
+                  android:indeterminateTintMode="src_in"
+                  android:layout_gravity="right"/>-->
 
 
 

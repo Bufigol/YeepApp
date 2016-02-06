@@ -21,6 +21,7 @@
     <string name="error_message">Error al cargar los usuarios...</string>
     <string name="user_added_toast">User added to the list successfully</string>
     <string name="user_deleted_toast">User removed from the list successfully</string>
-
+    <string name="repositorio">Ir al repositorio</string>
+    <string name="mensaje_repo">¿Quieres visitar el repositorio en GitHub?</string>
 
 </resources>
