@@ -44,10 +44,10 @@ public class ApplicationTest extends ActivityInstrumentationTestCase2<LoginActiv
     public void testValues() {
         //on value 1 entry
         TouchUtils.tapView(this, user);
-        sendKeys(USER);
+        getInstrumentation().sendStringSync(USER);
         // now on value2 entry
         TouchUtils.tapView(this, pass);
-        sendKeys(PASS);
+        getInstrumentation().sendStringSync(PASS);
         // now on Multiply button
         TouchUtils.clickView(this, login);
 

@@ -8,13 +8,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
+import com.parse.Parse;
+import com.parse.ParseObject;
+
+import java.util.List;
+
 /**
  * Created by JoseManuel on 27/01/2016.
  */
 public class InboxFragment extends ListFragment {
 
+    protected List<ParseObject> mMessages;
 
-    // Carga por primera vez y fragmenter y lo infla
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -29,6 +34,10 @@ public class InboxFragment extends ListFragment {
 
         return rootView;
     }
+
+
+    MessageAdapter adapter = new MessageAdapter(getListView().getContext(),mMessages);
+    setListAdapter(adapter);
 
 
 }
