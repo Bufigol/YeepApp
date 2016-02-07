@@ -30,7 +30,7 @@ import com.parse.ParseUser;
 public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = MainActivity.class.getSimpleName();
-    // constantes para cada una de las acciones, número que lo identifica (requestCode)
+    // constantes para cada una de las acciones, numero que lo identifica (requestCode)
     public static final int TAKE_PHOTO_REQUEST = 0;
     public static final int TAKE_VIDEO_REQUEST = 1;
     public static final int PICK_PHOTO_REQUEST = 2;
@@ -120,8 +120,8 @@ public class MainActivity extends AppCompatActivity {
 
     // creado un array de strings llamado camera_choices en el archivo strings
 
-    // creando metod dialogCameraChoices para la declaracion del dialogo de la opción camara
-    // se encargará de mostrar el dialogo con las opciones
+    // creando metod dialogCameraChoices para la declaracion del dialogo de la opcion camara
+    // se encargara de mostrar el dialogo con las opciones
     public void dialogCameraChoices() {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -132,10 +132,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    // Creado método mDialogListener que implementa variable dialogListener
+    // Creado metodo mDialogListener que implementa variable dialogListener
     // de tipo DialogInterface.OnClickListener que sobreescribe el método onClick.
     // onClick implementa un switch-case que se encaragará de realizar los distintos
-    // Intents correspondientes a las opciones de la cámara
+    // Intents correspondientes a las opciones de la camara
     private DialogInterface.OnClickListener mDialogListener() {
 
         DialogInterface.OnClickListener dialogListener = new DialogInterface.OnClickListener() {
@@ -152,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
                            // Toast.makeText(MainActivity.this, R.string.error_external_storage, Toast.LENGTH_LONG).show();
                             Log.i(TAG, "Error en el almacenamiento externo");
                         } else {
-                            // añadiremos información extra al intent
+                            // añadiremos informacion extra al intent
                             takePhotoIntent.putExtra(MediaStore.EXTRA_OUTPUT, mMediaUri);
                             startActivityForResult(takePhotoIntent, TAKE_PHOTO_REQUEST);
                             Log.i(TAG, "Take Photo Option is selected");
@@ -220,7 +220,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
+    // metodo para el mensaje de Alerta
     private void mensajeAlerta() {
 
         final AlertDialog.Builder alertaSimple = new AlertDialog.Builder(MainActivity.this);
