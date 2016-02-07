@@ -40,17 +40,18 @@ public class LoginTestCase extends ActivityInstrumentationTestCase2<LoginActivit
         loginBtn = (Button) actividad.findViewById(R.id.loginBtn);
     }
     
-    // Pre-condición de campos no vacios
+  /*  // Pre-condición de campos no vacios
     public void testPreconditions() {
         assertNotNull(usuario);
         assertNotNull(password);
-    }
+    }*/
 
     //  Ejecuta después de ejecutar cada test
     protected void tearDown() throws Exception {
         super.tearDown();
         if (ParseUser.getCurrentUser() != null)
             ParseUser.logOut();
+
     }
 
     // métodos de prueba
