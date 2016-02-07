@@ -24,4 +24,13 @@
     <string name="repositorio">Ir al repositorio</string>
     <string name="mensaje_repo">¿Quieres visitar el repositorio en GitHub?</string>
 
+
+<!-- camera_choices -->
+    <string-array name="camera_choices">
+        <item>Take Picture</item>
+        <item>Take Video</item>
+        <item>Choice Picture</item>
+        <item>Choice Video </item>
+    </string-array>
+
 </resources>
