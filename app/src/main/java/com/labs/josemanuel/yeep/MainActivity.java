@@ -3,7 +3,9 @@ package com.labs.josemanuel.yeep;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
@@ -20,6 +22,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.parse.ParseAnalytics;
 import com.parse.ParseUser;
@@ -27,6 +30,12 @@ import com.parse.ParseUser;
 public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = MainActivity.class.getSimpleName();
+    // constantes para cada una de las acciones, número que lo identifica (requestCode)
+    public static final int TAKE_PHOTO_REQUEST = 0;
+    public static final int TAKE_VIDEO_REQUEST = 1;
+    public static final int PICK_PHOTO_REQUEST = 2;
+    public static final int PICK_VIDEO_REQUEST = 3;
+    protected Uri mMediaUri; // permite identificar ficheros
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -111,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
 
     // creado un array de strings llamado camera_choices en el archivo strings
 
-    // creando metod dialogCameraChoices para la declaración del dialogo de la opción camara
+    // creando metod dialogCameraChoices para la declaracion del dialogo de la opción camara
     // se encargará de mostrar el dialogo con las opciones
     public void dialogCameraChoices() {
 
@@ -134,7 +143,20 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 switch (which) {
                     case 0:
-                        Log.i(TAG, "Take Picture Option is selected");
+                        Intent takePhotoIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                        //
+                        mMediaUri = FileUtilities.getOutputMediaFileUri(FileUtilities.MEDIA_TYPE_IMAGE);
+                        // Si no existe identificador
+                        if (mMediaUri == null) {
+                            mensajeAlerta();
+                           // Toast.makeText(MainActivity.this, R.string.error_external_storage, Toast.LENGTH_LONG).show();
+                            Log.i(TAG, "Error en el almacenamiento externo");
+                        } else {
+                            // añadiremos información extra al intent
+                            takePhotoIntent.putExtra(MediaStore.EXTRA_OUTPUT, mMediaUri);
+                            startActivityForResult(takePhotoIntent, TAKE_PHOTO_REQUEST);
+                            Log.i(TAG, "Take Photo Option is selected");
+                        }
                         break;
 
                     case 1:
@@ -142,7 +164,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case 2:
-                        Log.i(TAG, "Choice Picture Option is selected");
+                        Log.i(TAG, "Choice Photo Option is selected");
                         break;
 
                     case 3:
@@ -194,6 +216,28 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
 
+    }
+
+
+
+
+    private void mensajeAlerta() {
+
+        final AlertDialog.Builder alertaSimple = new AlertDialog.Builder(MainActivity.this);
+        Log.d(TAG, " -*- El popup Dialog se ha creado -*-");
+        alertaSimple.setTitle("Error Storage");
+        alertaSimple.setMessage("Error con el almacenamiento externo");
+        alertaSimple.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                setContentView(R.layout.activity_main);
+
+            }
+        });
+
+        alertaSimple.setIcon(R.mipmap.ic_launcher);
+        alertaSimple.create();
+        alertaSimple.show();
     }
 
 
