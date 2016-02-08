@@ -133,8 +133,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     // Creado metodo mDialogListener que implementa variable dialogListener
-    // de tipo DialogInterface.OnClickListener que sobreescribe el método onClick.
-    // onClick implementa un switch-case que se encaragará de realizar los distintos
+    // de tipo DialogInterface.OnClickListener que sobreescribe el metodo onClick.
+    // onClick implementa un switch-case que se encaragara de realizar los distintos
     // Intents correspondientes a las opciones de la camara
     private DialogInterface.OnClickListener mDialogListener() {
 
@@ -149,10 +149,10 @@ public class MainActivity extends AppCompatActivity {
                         // Si no existe identificador
                         if (mMediaUri == null) {
                             mensajeAlerta();
-                           // Toast.makeText(MainActivity.this, R.string.error_external_storage, Toast.LENGTH_LONG).show();
+                            // Toast.makeText(MainActivity.this, R.string.error_external_storage, Toast.LENGTH_LONG).show();
                             Log.i(TAG, "Error en el almacenamiento externo");
                         } else {
-                            // añadiremos informacion extra al intent
+                            // anadiremos informacion extra al intent
                             takePhotoIntent.putExtra(MediaStore.EXTRA_OUTPUT, mMediaUri);
                             startActivityForResult(takePhotoIntent, TAKE_PHOTO_REQUEST);
                             Log.i(TAG, "Take Photo Option is selected");
@@ -177,6 +177,7 @@ public class MainActivity extends AppCompatActivity {
         };
         return dialogListener;
     }
+
 
     // modificado el metodo por un bloque switch-case en lugar de bloque if
 
@@ -218,6 +219,36 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
+    // resultado devuelto
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // bloque if en que comprobaremos que resultCode
+        if (resultCode == RESULT_OK) {
+            if (requestCode == PICK_PHOTO_REQUEST || requestCode == PICK_VIDEO_REQUEST) {
+                if (data == null) {
+                    mensajeAlerta();
+                    Toast.makeText(this, getString(R.string.general_error), Toast.LENGTH_LONG).show();
+                } else {
+                    mMediaUri = data.getData();
+
+                }
+            }
+
+            // nuevo intent mediaScanIntent iniciado con constante por el constructor
+            Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+            mediaScanIntent.setData(mMediaUri); // Anadiremos al intent la uri de la imagen
+            sendBroadcast(mediaScanIntent); // pasaremos por parametro el intent creado
+
+        }// FIn RESULT_OK
+        else if (resultCode != RESULT_CANCELED) {
+            Toast.makeText(this, getString(R.string.general_error), Toast.LENGTH_LONG).show();
+            mensajeAlerta();
+        }
+
+    } // FIn onActivityResult
 
 
     // metodo para el mensaje de Alerta
