@@ -1,17 +1,16 @@
 package com.labs.josemanuel.yeep;
 
+
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.TouchUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import com.parse.ParseUser;
 
-/**
- * Created by bufigol on 1/02/16.
- */
+
 public class MyTestCase extends ActivityInstrumentationTestCase2<LoginActivity> {
-    private static final String USER = "aladeen";
-    private static final String PASS = "1";
+    private static final String USER = "c";
+    private static final String PASS = "c";
 
     private LoginActivity activity;
     private EditText user;
@@ -35,13 +34,12 @@ public class MyTestCase extends ActivityInstrumentationTestCase2<LoginActivity> 
 
     protected void tearDown() throws Exception {
         super.tearDown();
-        if (ParseUser.getCurrentUser() != null) {
-            ParseUser.logOut();
-        }
     }
 
-    public void test() {
-
+    public void testPrueba() {
+        if(ParseUser.getCurrentUser()!=null){
+            ParseUser.logOut();
+        }
         TouchUtils.tapView(this, user);
         getInstrumentation().sendStringSync(USER);
 
@@ -52,10 +50,6 @@ public class MyTestCase extends ActivityInstrumentationTestCase2<LoginActivity> 
 
         String user = ParseUser.getCurrentUser().getUsername();
         assertTrue("The real result is: ", user.equals(USER));
-
-        if(ParseUser.getCurrentUser()!=null){
-            ParseUser.logOut();
-        }
 
     }
 }
