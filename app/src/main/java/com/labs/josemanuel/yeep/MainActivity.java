@@ -1,9 +1,6 @@
 package com.labs.josemanuel.yeep;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -68,6 +65,9 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
 
+
+
+
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -83,6 +83,9 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.getTabAt(1).setIcon(R.drawable.ic_people_24dp);
 
 
+
+
+
         // Sobre de enviar mail situado en esquina inferior derecha de Main
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -94,6 +97,14 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
+
+     /*  private void navigateToLogin() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+    }*/
 
 
     @Override
@@ -115,65 +126,24 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         if (id == R.id.action_logout) {
-            return makeLogOut();
+            ParseUser.logOut();
+            Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            return true;
         }
         if(id == R.id.action_edit_Friends){
-            return goEditFriends();
+            Intent intent = new Intent(MainActivity.this,EditFriendsActivity.class);
+            startActivity(intent);
+            return true;
         }
         if(id == R.id.action_repositorio){
             Intent intent = new Intent(MainActivity.this,WebviewActivity.class);
             startActivity(intent);
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * Método que realiza el intent correspondiente para ir a la actividad EditFriendsActivity.
-     * @return verdadero en cualquier caso
-     */
-    private boolean goEditFriends() {
-        Intent intent = new Intent(MainActivity.this,EditFriendsActivity.class);
-        startActivity(intent);
-        return true;
-    }
-
-    /**
-     * Metodo que realiza el cierre de sesion y hace el cambio de actividad a la correspondiente
-     * con la de inicio de sesion.
-     * @return verdadero en cualquier caso
-     */
-    private  boolean makeLogOut() {
-        ParseUser.logOut();
-        Intent intent = new Intent(MainActivity.this,LoginActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
-        return true;
-    }
-
-
-    /**
-     * Metodo que le muestra un cuadro de dialogo al usuario con la opcion de visitar el repositorio
-     * donde se encuentra albergado el proyecto
-     * @return verdadero en cualquier caso
-     */
-    private boolean irAlRepo() {
-        final AlertDialog.Builder alertaSimple = new AlertDialog.Builder(MainActivity.this);
-        alertaSimple.setTitle("Wick app");
-        alertaSimple.setMessage(R.string.mensaje_repo);
-        alertaSimple.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                // codigo
-                Intent browser = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/Bufigol/YeepApp"));
-                startActivity(browser);
-            }
-        });
-        alertaSimple.setIcon(R.mipmap.github);
-        alertaSimple.create();
-        alertaSimple.show();
-        return true;
-    }
 
 }
