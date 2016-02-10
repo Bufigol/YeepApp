@@ -15,7 +15,7 @@ public class FileUtilities {
 
     public static final int MEDIA_TYPE_IMAGE = 1;
     public static final int MEDIA_TYPE_VIDEO = 2;
-
+    private static final String APP_NAME = "Wick";
 
     /**
      * comprobamos mediante la constante  MEDIA_MOUNTED
@@ -37,15 +37,27 @@ public class FileUtilities {
     // indicaremos a la cámara donde poner la imagen.
     // lo primero comprobamos que exista lugar para almacenamiento externo.
     public static Uri getOutputMediaFileUri(int mediaType) {
-
         if (isExternalStorageAvailable()) {
-
-
+            File mediaStorageDir = null;
+            switch (mediaType){
+                case MEDIA_TYPE_IMAGE:
+                    mediaStorageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+                    break;
+                case MEDIA_TYPE_VIDEO:
+                    mediaStorageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES);
+                    break;
+            }
+            if(!mediaStorageDir.exists()){
+                Log.d(TAG,mediaStorageDir.getAbsolutePath() +" not exists");
+                if(!mediaStorageDir.mkdirs()){
+                    Log.d(TAG,"Directory " +mediaStorageDir.getAbsolutePath()+ " not created");
+                    return null;
+                }
+            }
         }
         return null;
 
 
     }
-
 
 }

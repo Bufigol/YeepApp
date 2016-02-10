@@ -142,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
                 switch (which) {
                     case 0:
                         Intent takePhotoIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                        //
+                        startActivityForResult(takePhotoIntent, TAKE_PHOTO_REQUEST);
                         mMediaUri = FileUtilities.getOutputMediaFileUri(FileUtilities.MEDIA_TYPE_IMAGE);
                         // Si no existe identificador
                         if (mMediaUri == null) {
@@ -152,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
                         } else {
                             // a�adiremos informacion extra al intent
                             takePhotoIntent.putExtra(MediaStore.EXTRA_OUTPUT, mMediaUri);
-                            startActivityForResult(takePhotoIntent, TAKE_PHOTO_REQUEST);
+
                             Log.i(TAG, "Take Photo Option is selected");
                         }
                         break;
