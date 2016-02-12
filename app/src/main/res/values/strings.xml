@@ -25,7 +25,7 @@
     <string name="mensaje_repo">¿Quieres visitar el repositorio en GitHub?</string>
 
 
-<!-- camera_choices -->
+    <!-- camera_choices -->
     <string-array name="camera_choices">
         <item>Take Picture</item>
         <item>Take Video</item>

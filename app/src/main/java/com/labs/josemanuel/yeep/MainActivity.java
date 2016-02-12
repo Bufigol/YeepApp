@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListView;
 
 import com.parse.ParseAnalytics;
 import com.parse.ParseUser;
@@ -110,13 +111,15 @@ public class MainActivity extends AppCompatActivity {
     }*/
 
 
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
-
+    
     // creado un array de strings llamado camera_choices en el archivo strings
 
     // creando metod dialogCameraChoices para la declaracion del dialogo de la opcion camara
@@ -199,10 +202,17 @@ public class MainActivity extends AppCompatActivity {
             }else{
                 mensajeAlerta();
             }
+
+            Intent intent = new Intent(MainActivity.this, Recipients.class);
+            intent.setData(mMediaUri);
+            startActivity(intent);
         }
         if(requestCode == RESULT_OK && requestCode == PICK_PHOTO_REQUEST){
             if(data != null){
                 mMediaUri = data.getData();
+                Intent intent = new Intent(MainActivity.this,Recipients.class);
+                intent.setData(mMediaUri);
+                startActivity(intent);
             }else{
                 mensajeAlerta();
             }
@@ -241,12 +251,17 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_camera:
                 dialogCameraChoices();
                 break;
+
+            case R.id.action_send:
+                dialogCameraChoices();
+                break;
+
+
         }
 
         return super.onOptionsItemSelected(item);
 
     }
-
 
 
     // metodo para el mensaje de Alerta

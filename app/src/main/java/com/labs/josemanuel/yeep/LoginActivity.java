@@ -34,7 +34,9 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu (Menu menu){
 // Inflate the menu; this adds items to the action bar if it is present.
+        MenuItem menuitem;
         getMenuInflater().inflate(R.menu.menu_login, menu);
+        menuitem = menu.getItem(0);
         return true;
     }
 
