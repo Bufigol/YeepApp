@@ -24,6 +24,8 @@
     <string name="repositorio">Ir al repositorio</string>
     <string name="mensaje_repo">¿Quieres visitar el repositorio en GitHub?</string>
     <string name="general_error">Ocurrió algún error</string>
+    <string name="dialog_sizeVideo_Notice">El video debe ser inferior a 10Mb</string>
+    <string name="video_size_warning">El video seleccionado es muy grande. Seleccione otro video </string>
 
 
     <!-- camera_choices -->
