@@ -56,7 +56,7 @@ public class EditFriendsActivity extends ListActivity {
         adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_checked, usernames);
         setListAdapter(adapter);
-
+        getListView().setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         // objeto query va a guardar una lista de objetos ParseUser
         ParseQuery query = ParseUser.getQuery();
         //orden result ascendent  // campo por el que vamos a ordenarlo (Extract to ParseConnstant)

@@ -37,7 +37,8 @@ public class Recipients extends ListActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_friends);
+        Log.e("Recipients","OnCreate Recipients.");
+        setContentView(R.layout.activity_recipients);
         // iniciamos el progressBar Spinner
         pgrsBar = (ProgressBar) findViewById(R.id.progressBar2);
         // activar los checks Y permitir la selección múltiple de registros

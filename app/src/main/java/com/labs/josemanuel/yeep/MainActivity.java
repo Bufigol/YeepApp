@@ -186,6 +186,7 @@ public class MainActivity extends AppCompatActivity {
     }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data){
+        Log.i("MainActivity", "Using onActivityResult.");
         if(requestCode == RESULT_OK && requestCode == PICK_VIDEO_REQUEST){
             if(data != null){
                 try {
@@ -198,14 +199,14 @@ public class MainActivity extends AppCompatActivity {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
+                Intent intent = new Intent(MainActivity.this, Recipients.class);
+                intent.setData(mMediaUri);
+                startActivity(intent);
             }else{
                 mensajeAlerta();
             }
 
-            Intent intent = new Intent(MainActivity.this, Recipients.class);
-            intent.setData(mMediaUri);
-            startActivity(intent);
+
         }
         if(requestCode == RESULT_OK && requestCode == PICK_PHOTO_REQUEST){
             if(data != null){
@@ -245,7 +246,6 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_repositorio:
                 Intent intentRepo = new Intent(MainActivity.this, WebviewActivity.class);
                 startActivity(intentRepo);
-
                 break;
 
             case R.id.action_camera:
@@ -253,7 +253,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case R.id.action_send:
-                dialogCameraChoices();
+                Intent intent = new Intent(MainActivity.this, Recipients.class);
+                intent.setData(mMediaUri);
+                startActivity(intent);
                 break;
 
 
