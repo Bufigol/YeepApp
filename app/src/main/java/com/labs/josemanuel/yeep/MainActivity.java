@@ -20,6 +20,7 @@ import android.view.View;
 import android.widget.ListView;
 
 import com.parse.ParseAnalytics;
+import com.parse.ParseObject;
 import com.parse.ParseUser;
 
 import java.io.FileNotFoundException;
@@ -36,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     public static final int PICK_VIDEO_REQUEST = 3;
     static final int FILE_SIZE_LIMIT = 10485760;
     protected Uri mMediaUri; // permite identificar ficheros
-
+    protected ParseObject message;
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
      * fragments for each of the sections. We use a
@@ -199,10 +200,12 @@ public class MainActivity extends AppCompatActivity {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+                Log.i(TAG,"Launching Recipient class.");
                 Intent intent = new Intent(MainActivity.this, Recipients.class);
                 intent.setData(mMediaUri);
                 startActivity(intent);
             }else{
+                Log.i(TAG,"Error message");
                 mensajeAlerta();
             }
 
@@ -253,6 +256,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case R.id.action_send:
+
                 Intent intent = new Intent(MainActivity.this, Recipients.class);
                 intent.setData(mMediaUri);
                 startActivity(intent);
@@ -265,6 +269,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void createMessage(){
+        ParseObject Messages = new ParseObject(ParseConstants.CLASS_MESSAGES);
+
+    }
 
     // metodo para el mensaje de Alerta
     private void mensajeAlerta() {
