@@ -30,7 +30,6 @@ public class LoginActivity extends AppCompatActivity {
     protected TextView mSingUpTextView;
     MenuItem miActionProgressItem;
 
-
     @Override
     public boolean onCreateOptionsMenu (Menu menu){
 // Inflate the menu; this adds items to the action bar if it is present.

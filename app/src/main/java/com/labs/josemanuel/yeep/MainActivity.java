@@ -19,7 +19,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.parse.Parse;
 import com.parse.ParseAnalytics;
+import com.parse.ParseObject;
 import com.parse.ParseUser;
 
 import java.io.FileNotFoundException;
@@ -153,6 +155,13 @@ public class MainActivity extends AppCompatActivity {
                 dialogCameraChoices();
 
                 break;
+
+            case R.id.action_send:
+                ParseObject message = new ParseObject(ParseConstants.CLASS_MESSAGES);
+
+
+                break;
+
         }
 
         return super.onOptionsItemSelected(item);
@@ -308,7 +317,11 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             }
-        }// FIn RESULT_OK
+            Intent intent = new Intent(MainActivity.this,Recipients.class);
+            intent.setData(mMediaUri);
+            startActivity(intent);
+        }
+        // FIn RESULT_OK
         else if (resultCode != RESULT_CANCELED) { // si no se devolvió nada y tampoco pulso cancelar
             Toast.makeText(this, getString(R.string.general_error), Toast.LENGTH_LONG).show();
             AlertMssgStorage();
@@ -379,6 +392,8 @@ public class MainActivity extends AppCompatActivity {
         alertaSimple.create();
         alertaSimple.show();
     }
+
+
 
 
 }
