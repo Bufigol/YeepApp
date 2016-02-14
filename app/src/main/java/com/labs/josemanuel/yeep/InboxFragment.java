@@ -8,11 +8,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
+import com.parse.ParseObject;
+
+import java.util.List;
+
 /**
  * Created by JoseManuel on 27/01/2016.
  */
 public class InboxFragment extends ListFragment {
 
+    protected List<ParseObject> mMessages;
 
     // Carga por primera vez y fragmenter y lo infla
     @Override
@@ -29,6 +34,7 @@ public class InboxFragment extends ListFragment {
 
         return rootView;
     }
+
 
 
 }
