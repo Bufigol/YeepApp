@@ -1,5 +1,7 @@
 package com.labs.josemanuel.yeep;
 import android.app.ListActivity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
@@ -11,11 +13,18 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseFile;
+import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseRelation;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
+
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -30,6 +39,8 @@ public class Recipients extends ListActivity {
     public String[] emails;
     public String email;
     public ImageButton btnsend;
+    private Uri mMediaUri;
+    private String mFileType;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +51,9 @@ public class Recipients extends ListActivity {
         //pgrsBar = (ProgressBar) findViewById(R.id.progressBar2);
         // activar los checks Y permitir la selección múltiple de registros
         getListView().setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+        Intent intent = getIntent();
+        mMediaUri = intent.getData();
+        mFileType = intent.getStringExtra(ParseConstants.KEY_FILE_TYPE);
     }
     @Override
     public void onResume() {
@@ -94,7 +108,27 @@ public class Recipients extends ListActivity {
         return true;
     }
     public void showAction(View view){
-        Log.i(TAG,"Pushing send friends.");
+        Log.i(TAG, "Pushing send friends.");
+        ParseObject message = createMessage();
+        if(message == null){
+            //mensaje de error
+        }else{
+            send(message);
+            finish();
+        }
+    }
+    private void send(ParseObject message){
+        message.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if(e == null){
+                    Toast.makeText(Recipients.this,"¡Mensaje enviado",Toast.LENGTH_SHORT).show();
+                }else{
+                    //mensaje de error
+                    Toast.makeText(Recipients.this,"¡Error al enviar el mensaje",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
@@ -104,5 +138,36 @@ public class Recipients extends ListActivity {
         }else{
             btnsend.setVisibility(View.INVISIBLE);
         }
+    }
+
+
+    private ArrayList<String> getRecipientsIds(){
+        ArrayList<String> recipientList = new ArrayList<>();
+        for(int i = 0; i < getListView().getCount();i++){
+            if(getListView().isItemChecked(i)){
+                recipientList.add(mFriends.get(i).getObjectId());
+            }
+        }
+        return recipientList;
+    }
+    private ParseObject createMessage(){
+        ParseObject message = new ParseObject(ParseConstants.CLASS_MESSAGES);
+        message.put(ParseConstants.KEY_SENDER_ID,ParseUser.getCurrentUser().getObjectId());
+        message.put(ParseConstants.KEY_SENDER_NAME,ParseUser.getCurrentUser().getUsername());
+        message.put(ParseConstants.KEY_RECIPIENTS_ID,getRecipientsIds());
+        message.put(ParseConstants.KEY_FILE_TYPE,mFileType);
+        byte[] fileBytes = FileHelper.getByteArrayFromFile(this,mMediaUri);
+        if(fileBytes == null){
+            return null;
+        }else{
+            if(mFileType == "imagen"){
+                fileBytes = FileHelper.reduceImageForUpload(fileBytes);
+                String fileName = FileHelper.getFileName(this,mMediaUri,mFileType);
+                ParseFile file = new ParseFile(fileName, fileBytes);
+                message.put(ParseConstants.KEY_FILE, file);
+            }
+        }
+
+        return message;
     }
 }
