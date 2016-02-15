@@ -13,12 +13,16 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseRelation;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -105,7 +109,26 @@ public class Recipients extends ListActivity {
     }
     public void showAction(View view){
         Log.i(TAG, "Pushing send friends.");
-        createMessage();
+        ParseObject message = createMessage();
+        if(message == null){
+            //mensaje de error
+        }else{
+            send(message);
+            finish();
+        }
+    }
+    private void send(ParseObject message){
+        message.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if(e == null){
+                    Toast.makeText(Recipients.this,"¡Mensaje enviado",Toast.LENGTH_SHORT).show();
+                }else{
+                    //mensaje de error
+                    Toast.makeText(Recipients.this,"¡Error al enviar el mensaje",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
@@ -133,6 +156,18 @@ public class Recipients extends ListActivity {
         message.put(ParseConstants.KEY_SENDER_NAME,ParseUser.getCurrentUser().getUsername());
         message.put(ParseConstants.KEY_RECIPIENTS_ID,getRecipientsIds());
         message.put(ParseConstants.KEY_FILE_TYPE,mFileType);
+        byte[] fileBytes = FileHelper.getByteArrayFromFile(this,mMediaUri);
+        if(fileBytes == null){
+            return null;
+        }else{
+            if(mFileType == "imagen"){
+                fileBytes = FileHelper.reduceImageForUpload(fileBytes);
+                String fileName = FileHelper.getFileName(this,mMediaUri,mFileType);
+                ParseFile file = new ParseFile(fileName, fileBytes);
+                message.put(ParseConstants.KEY_FILE, file);
+            }
+        }
+
         return message;
     }
 }
