@@ -317,8 +317,15 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             }
+            String fileType;
+            if (requestCode == PICK_PHOTO_REQUEST || requestCode == TAKE_PHOTO_REQUEST){
+                fileType = "imagen";
+            }else{
+                fileType = "video";
+            }
             Intent intent = new Intent(MainActivity.this,Recipients.class);
             intent.setData(mMediaUri);
+            intent.putExtra(ParseConstants.KEY_FILE_TYPE,fileType);
             startActivity(intent);
         }
         // FIn RESULT_OK

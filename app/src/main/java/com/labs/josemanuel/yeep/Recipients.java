@@ -1,5 +1,7 @@
 package com.labs.josemanuel.yeep;
 import android.app.ListActivity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
@@ -33,6 +35,8 @@ public class Recipients extends ListActivity {
     public String[] emails;
     public String email;
     public ImageButton btnsend;
+    private Uri mMediaUri;
+    private String mFileType;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +47,9 @@ public class Recipients extends ListActivity {
         //pgrsBar = (ProgressBar) findViewById(R.id.progressBar2);
         // activar los checks Y permitir la selección múltiple de registros
         getListView().setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+        Intent intent = getIntent();
+        mMediaUri = intent.getData();
+        mFileType = intent.getStringExtra(ParseConstants.KEY_FILE_TYPE);
     }
     @Override
     public void onResume() {
@@ -98,7 +105,7 @@ public class Recipients extends ListActivity {
     }
     public void showAction(View view){
         Log.i(TAG, "Pushing send friends.");
-        createMessaje();
+        createMessage();
     }
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
@@ -120,11 +127,12 @@ public class Recipients extends ListActivity {
         }
         return recipientList;
     }
-    private ParseObject createMessaje(){
+    private ParseObject createMessage(){
         ParseObject message = new ParseObject(ParseConstants.CLASS_MESSAGES);
         message.put(ParseConstants.KEY_SENDER_ID,ParseUser.getCurrentUser().getObjectId());
         message.put(ParseConstants.KEY_SENDER_NAME,ParseUser.getCurrentUser().getUsername());
         message.put(ParseConstants.KEY_RECIPIENTS_ID,getRecipientsIds());
+        message.put(ParseConstants.KEY_FILE_TYPE,mFileType);
         return message;
     }
 }
