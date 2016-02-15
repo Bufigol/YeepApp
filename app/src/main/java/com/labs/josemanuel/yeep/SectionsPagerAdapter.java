@@ -4,6 +4,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.labs.josemanuel.yeep.FriendsFragment;
+import com.labs.josemanuel.yeep.InboxFragment;
+
 /**
  * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
  * one of the sections/tabs/pages.
@@ -25,7 +28,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
             case 0:
                 return new InboxFragment();
             case 1:
-                return  new  FriendsFragment();
+                return  new FriendsFragment();
         }
         return null;
 
