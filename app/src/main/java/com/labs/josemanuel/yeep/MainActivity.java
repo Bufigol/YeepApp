@@ -60,11 +60,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ParseAnalytics.trackAppOpened(getIntent());
         ParseUser currentUser = ParseUser.getCurrentUser();
-        if (currentUser == null) {
+        if (currentUser != null) {
             // navigateToLogin();
             Log.i(TAG, currentUser.getUsername());
         } else {
-            Log.i(TAG, currentUser.getUsername());
+            Log.i(TAG, "no hay usuario");
         }
 
 /*        Intent intent = new Intent(this, LoginActivity.class);
@@ -193,8 +193,7 @@ public class MainActivity extends AppCompatActivity {
                         mMediaUri = FileUtilities.getOutputMediaFileUri(FileUtilities.MEDIA_TYPE_IMAGE);
                         // Si no existe identificador
                         if (mMediaUri == null) {
-                            AlertMssgStorage();
-                            // Toast.makeText(MainActivity.this, R.string.error_external_storage, Toast.LENGTH_LONG).show();
+                            mensajeError(String.valueOf(R.string.error_storage), String.valueOf(R.string.error_almacenamiento), false);
                             Log.i(TAG, "Error en el almacenamiento externo");
                         } else {
                             // anadiremos informacion extra al intent
@@ -211,7 +210,7 @@ public class MainActivity extends AppCompatActivity {
 
                         // Si no existe identificador
                         if (mMediaUri == null) {
-                            AlertMssgStorage();
+                            mensajeError(String.valueOf(R.string.error_storage), String.valueOf(R.string.error_almacenamiento), false);
                             // Toast.makeText(MainActivity.this, R.string.error_external_storage, Toast.LENGTH_LONG).show();
                             Log.i(TAG, "Error en el almacenamiento externo");
                         } else {
@@ -233,13 +232,8 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case 3: // Choose video
-                        sizeVideoAdvise();  // Aviso al usuario sobre el tamaño del video
+                        mensajeError(String.valueOf(R.string.error_storage),String.valueOf(R.string.aviso_limite_video),true);
                         Log.i(TAG, "Choice Video Option is selected");
-
-                        /*Intent chooseVideoIntent = new Intent(Intent.ACTION_GET_CONTENT);
-                        chooseVideoIntent.setType("video/*");
-                        // Toast.makeText(MainActivity.this, R.string.video_file_size_warning, Toast.LENGTH_LONG).show();
-                        startActivityForResult(chooseVideoIntent, PICK_VIDEO_REQUEST);*/
                         break;
 
                 }
@@ -259,7 +253,7 @@ public class MainActivity extends AppCompatActivity {
         if (resultCode == RESULT_OK) {
             if (requestCode == PICK_PHOTO_REQUEST || requestCode == PICK_VIDEO_REQUEST) {
                 if (data == null) {
-                    AlertMssgStorage();
+                    mensajeError(String.valueOf(R.string.error_storage), String.valueOf(R.string.error_almacenamiento), false);
                     Toast.makeText(this, getString(R.string.general_error), Toast.LENGTH_LONG).show();
                 } else {
                     mMediaUri = data.getData();
@@ -272,7 +266,7 @@ public class MainActivity extends AppCompatActivity {
                 if (requestCode == PICK_VIDEO_REQUEST) {
 
                     int fileSize = 0; // inicializamos variable que almacenará el tamaño del video a 0
-                    InputStream inputStream = null;
+                    InputStream inputStream;
 
                     try {
                         // acceso al vídeo seleccionado de la galería y obtener su tamaño
@@ -296,7 +290,7 @@ public class MainActivity extends AppCompatActivity {
 
                     // Comprobación del tamaño del archivo
                     if (fileSize >= FILE_SIZE_LIMIT) {
-                        sizeVideoWarring();
+                        mensajeError(String.valueOf(R.string.error), String.valueOf(R.string.video_size_warning), false);
                         Toast.makeText(this, R.string.aviso_limite_video, Toast.LENGTH_LONG).show();
                         return;
                     }
@@ -325,76 +319,37 @@ public class MainActivity extends AppCompatActivity {
         // FIn RESULT_OK
         else if (resultCode != RESULT_CANCELED) { // si no se devolvió nada y tampoco pulso cancelar
             Toast.makeText(this, getString(R.string.general_error), Toast.LENGTH_LONG).show();
-            AlertMssgStorage();
+            mensajeError(String.valueOf(R.string.error_storage), String.valueOf(R.string.error_almacenamiento), false);
         }
 
     } // FIn onActivityResult
-
-
-    // Error en el almacenamiento
-    private void AlertMssgStorage() {
-
+    private void mensajeError(String titulo,String mensaje, boolean intent){
         final AlertDialog.Builder alertaSimple = new AlertDialog.Builder(MainActivity.this);
         Log.d(TAG, " -*- El popup Dialog se ha creado -*-");
         alertaSimple.setTitle(R.string.error_storage);
         alertaSimple.setMessage(R.string.error_almacenamiento);
-        alertaSimple.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                //  setContentView(R.layout.activity_main);
-
-            }
-        });
-
+        if(intent) {
+            alertaSimple.setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Intent chooseVideoIntent = new Intent(Intent.ACTION_GET_CONTENT);
+                    chooseVideoIntent.setType("video/*");
+                    // Toast.makeText(MainActivity.this, R.string.video_file_size_warning, Toast.LENGTH_LONG).show();
+                    startActivityForResult(chooseVideoIntent, PICK_VIDEO_REQUEST);
+                }
+            });
+        }else{
+            alertaSimple.setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    //  setContentView(R.layout.activity_main);
+                }
+            });
+        }
         alertaSimple.setIcon(R.mipmap.ic_launcher);
         alertaSimple.create();
         alertaSimple.show();
     }
-
-    // Aviso al usuario del tamaño máximo para videos
-    private void sizeVideoAdvise() {
-        final AlertDialog.Builder alertaSimple = new AlertDialog.Builder(MainActivity.this);
-        Log.d(TAG, " -*- El popup Dialog se ha creado -*-");
-        alertaSimple.setTitle(R.string.error_storage);
-        alertaSimple.setMessage(R.string.aviso_limite_video);
-        alertaSimple.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-                Intent chooseVideoIntent = new Intent(Intent.ACTION_GET_CONTENT);
-                chooseVideoIntent.setType("video/*");
-                // Toast.makeText(MainActivity.this, R.string.video_file_size_warning, Toast.LENGTH_LONG).show();
-                startActivityForResult(chooseVideoIntent, PICK_VIDEO_REQUEST);
-            }
-
-        });
-
-        alertaSimple.setIcon(R.mipmap.ic_launcher);
-        alertaSimple.create();
-        alertaSimple.show();
-    }
-
-    // ALERT Tamaño de video elegido superado
-    private void sizeVideoWarring() {
-        final AlertDialog.Builder alertaSimple = new AlertDialog.Builder(MainActivity.this);
-        Log.d(TAG, " -*- Mensaje: Tamaño de video excedido -*-");
-        alertaSimple.setTitle(R.string.error);
-        alertaSimple.setMessage(R.string.video_size_warning);
-        alertaSimple.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-
-            }
-
-        });
-
-        alertaSimple.setIcon(R.mipmap.ic_launcher);
-        alertaSimple.create();
-        alertaSimple.show();
-    }
-
-
 
 
 }

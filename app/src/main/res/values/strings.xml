@@ -31,6 +31,7 @@
     <string name="error_storage">Error Storage</string>
     <string name="error_almacenamiento">Error con el almacenamiento externo</string>
     <string name="problema_video">Hay algún problema al obtener el video</string>
+    <string name="aceptar">Aceptar</string>
 
     <!-- camera_choices -->
     <string-array name="camera_choices">

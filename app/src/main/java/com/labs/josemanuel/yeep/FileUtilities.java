@@ -32,10 +32,9 @@ public class FileUtilities {
         String state = Environment.getExternalStorageState();
         if (state.equals(Environment.MEDIA_MOUNTED)) {
             return true;
-        }else{
-            return false;
         }
-            }
+        return false;
+    }
 
     // indicaremos a la cámara donde poner la imagen.
     // lo primero comprobamos que exista lugar para almacenamiento externo.
