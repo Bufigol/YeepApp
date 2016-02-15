@@ -2,7 +2,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -10,14 +9,12 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
-
     <ProgressBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/progressBar2"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -26,6 +23,16 @@
         android:layout_alignTop="@android:id/list"
         android:layout_alignLeft="@android:id/list"
         android:layout_alignStart="@android:id/list" />
-
-
+    <ImageButton
+        android:layout_width="100dp"
+        android:layout_height="75dp"
+        android:id="@+id/sendbutton"
+        android:layout_alignParentBottom="true"
+        android:src="@mipmap/send_friends"
+        android:layout_alignRight="@+id/progressBar2"
+        android:layout_alignEnd="@+id/progressBar2"
+        android:layout_alignLeft="@+id/progressBar2"
+        android:layout_alignStart="@+id/progressBar2"
+        android:nestedScrollingEnabled="false"
+        android:onClick="showAction" />
 </RelativeLayout>
