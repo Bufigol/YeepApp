@@ -9,6 +9,7 @@ public class ParseConstants {
     public static final int MAX_USERS = 1000;
     public static final String KEY_FRIENDS_RELATION = "friendsRelation";
     public static final String KEY_SENDER_ID = "senderId";
+    public static final String KEY_RECIPIENTS_ID = "recipientsId";
     public static final String KEY_SENDER_NAME = "senderName";
     public static final String KEY_FILE ="file";
     public static final String KEY_FILE_TYPE = "fileType";

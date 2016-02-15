@@ -13,9 +13,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseRelation;
 import com.parse.ParseUser;
+
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -94,7 +97,8 @@ public class Recipients extends ListActivity {
         return true;
     }
     public void showAction(View view){
-        Log.i(TAG,"Pushing send friends.");
+        Log.i(TAG, "Pushing send friends.");
+        createMessaje();
     }
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
@@ -104,5 +108,23 @@ public class Recipients extends ListActivity {
         }else{
             btnsend.setVisibility(View.INVISIBLE);
         }
+    }
+
+
+    private ArrayList<String> getRecipientsIds(){
+        ArrayList<String> recipientList = new ArrayList<>();
+        for(int i = 0; i < getListView().getCount();i++){
+            if(getListView().isItemChecked(i)){
+                recipientList.add(mFriends.get(i).getObjectId());
+            }
+        }
+        return recipientList;
+    }
+    private ParseObject createMessaje(){
+        ParseObject message = new ParseObject(ParseConstants.CLASS_MESSAGES);
+        message.put(ParseConstants.KEY_SENDER_ID,ParseUser.getCurrentUser().getObjectId());
+        message.put(ParseConstants.KEY_SENDER_NAME,ParseUser.getCurrentUser().getUsername());
+        message.put(ParseConstants.KEY_RECIPIENTS_ID,getRecipientsIds());
+        return message;
     }
 }
