@@ -30,13 +30,13 @@ import java.io.InputStream;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String TAG = MainActivity.class.getSimpleName();
+    private static final String TAG = MainActivity.class.getSimpleName();
     // constantes para cada una de las acciones, numero que lo identifica (requestCode)
-    public static final int TAKE_PHOTO_REQUEST = 0;
-    public static final int TAKE_VIDEO_REQUEST = 1;
-    public static final int PICK_PHOTO_REQUEST = 2;
-    public static final int PICK_VIDEO_REQUEST = 3;
-    static final int FILE_SIZE_LIMIT = 10485760;
+    private static final int TAKE_PHOTO_REQUEST = 0;
+    private static final int TAKE_VIDEO_REQUEST = 1;
+    private static final int PICK_PHOTO_REQUEST = 2;
+    private static final int PICK_VIDEO_REQUEST = 3;
+    private final int FILE_SIZE_LIMIT = 10485760;
     protected Uri mMediaUri; // permite identificar ficheros
 
     /**
@@ -58,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         ParseAnalytics.trackAppOpened(getIntent());
         ParseUser currentUser = ParseUser.getCurrentUser();
         if (currentUser == null) {
@@ -153,17 +152,12 @@ public class MainActivity extends AppCompatActivity {
 
             case R.id.action_camera:
                 dialogCameraChoices();
-
                 break;
 
             case R.id.action_send:
                 ParseObject message = new ParseObject(ParseConstants.CLASS_MESSAGES);
-
-
                 break;
-
         }
-
         return super.onOptionsItemSelected(item);
 
     }
@@ -303,7 +297,7 @@ public class MainActivity extends AppCompatActivity {
                     // Comprobación del tamaño del archivo
                     if (fileSize >= FILE_SIZE_LIMIT) {
                         sizeVideoWarring();
-                        Toast.makeText(this, "El video es superior a 10MB", Toast.LENGTH_LONG).show();
+                        Toast.makeText(this, R.string.aviso_limite_video, Toast.LENGTH_LONG).show();
                         return;
                     }
 
@@ -312,7 +306,7 @@ public class MainActivity extends AppCompatActivity {
 
                     } else {
                         // Hay algún problema al obtener el video
-                        Toast.makeText(this, "Hay algún problema al obtener el video", Toast.LENGTH_LONG).show();
+                        Toast.makeText(this, R.string.problema_video, Toast.LENGTH_LONG).show();
                         return;
                     }
                 }
@@ -342,8 +336,8 @@ public class MainActivity extends AppCompatActivity {
 
         final AlertDialog.Builder alertaSimple = new AlertDialog.Builder(MainActivity.this);
         Log.d(TAG, " -*- El popup Dialog se ha creado -*-");
-        alertaSimple.setTitle("Error Storage");
-        alertaSimple.setMessage("Error con el almacenamiento externo");
+        alertaSimple.setTitle(R.string.error_storage);
+        alertaSimple.setMessage(R.string.error_almacenamiento);
         alertaSimple.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -361,8 +355,8 @@ public class MainActivity extends AppCompatActivity {
     private void sizeVideoAdvise() {
         final AlertDialog.Builder alertaSimple = new AlertDialog.Builder(MainActivity.this);
         Log.d(TAG, " -*- El popup Dialog se ha creado -*-");
-        alertaSimple.setTitle("Error Storage");
-        alertaSimple.setMessage("El video debe ser inferior a 10Mb");
+        alertaSimple.setTitle(R.string.error_storage);
+        alertaSimple.setMessage(R.string.aviso_limite_video);
         alertaSimple.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -384,7 +378,7 @@ public class MainActivity extends AppCompatActivity {
     private void sizeVideoWarring() {
         final AlertDialog.Builder alertaSimple = new AlertDialog.Builder(MainActivity.this);
         Log.d(TAG, " -*- Mensaje: Tamaño de video excedido -*-");
-        alertaSimple.setTitle("Error");
+        alertaSimple.setTitle(R.string.error);
         alertaSimple.setMessage(R.string.video_size_warning);
         alertaSimple.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
             @Override
