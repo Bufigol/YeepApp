@@ -35,5 +35,6 @@
         <item>Choice Picture</item>
         <item>Choice Video </item>
     </string-array>
+    <string name="title_activity_view_image">Wick App</string>
 
 </resources>
