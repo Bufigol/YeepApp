@@ -23,6 +23,7 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -83,16 +84,18 @@ public class InboxFragment extends ListFragment {
         super.onListItemClick(l,v,position,id);
         ParseObject message = mMessages.get(position);
         String messageType = message.getString(ParseConstants.KEY_FILE_TYPE);
-        ParseFile file = message.getParseFile(ParseConstants.KEY_FILE);
+        ParseFile file =  message.getParseFile(ParseConstants.KEY_FILE);
         Uri fileUri = Uri.parse(file.getUrl());
-        if(messageType.equals(ParseConstants.TYPE_IMAGE)){
-            Intent i = new Intent(getActivity(),ViewImageActivity.class);
-            i.setData(fileUri);
-            startActivity(i);
-        }else{
-            Intent i = new Intent(Intent.ACTION_VIEW,fileUri);
-            i.setDataAndType(fileUri,"video/*");
-            startActivity(i);
+        if(fileUri != null){
+            if(messageType.equals(ParseConstants.TYPE_IMAGE)){
+                Intent i = new Intent(getActivity(),ViewImageActivity.class);
+                i.setData(fileUri);
+                startActivity(i);
+            }else{
+                Intent i = new Intent(Intent.ACTION_VIEW,fileUri);
+                i.setDataAndType(fileUri,"video/*");
+                startActivity(i);
+            }
         }
     }
 
