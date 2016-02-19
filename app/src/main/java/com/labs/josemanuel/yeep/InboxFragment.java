@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.parse.FindCallback;
 import com.parse.Parse;
@@ -36,6 +38,7 @@ public class InboxFragment extends ListFragment {
     private ArrayList<String> message;
     private ArrayAdapter adapter;
     private ProgressBar spinner;
+    protected SwipeRefreshLayout mSwipeRefreshLayout;
     public static final String TAG = InboxFragment.class.getSimpleName();
 
     // Carga por primera vez y fragmenter y lo infla
@@ -50,26 +53,35 @@ public class InboxFragment extends ListFragment {
         spinner = (ProgressBar)
                 rootView.findViewById(R.id.progressBar);
         spinner.setVisibility(View.GONE);
-
+        mSwipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.SwipeRefreshLayout);
+        mSwipeRefreshLayout.setOnRefreshListener(mOnRefreshListener);
         return rootView;
     }
     @Override
     public void onResume(){
         super.onResume();
+        reloadMessage();
+    }
+
+    private void reloadMessage() {
         message = new ArrayList<>();
         adapter = new ArrayAdapter<>(getActivity(),android.R.layout.simple_list_item_1);
         setListAdapter(adapter);
         ParseQuery<ParseObject> query = ParseQuery.getQuery(ParseConstants.CLASS_MESSAGES);
-        query.whereEqualTo(ParseConstants.KEY_RECIPIENTS_ID,ParseUser.getCurrentUser().getObjectId());
+        query.whereEqualTo(ParseConstants.KEY_RECIPIENTS_ID, ParseUser.getCurrentUser().getObjectId());
         query.addDescendingOrder(ParseConstants.KEY_CREATED_AT);
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> parseObjects, ParseException e) {
+                if (mSwipeRefreshLayout.isRefreshing()) {
+                    mSwipeRefreshLayout.setRefreshing(false);
+                }
                 if (e == null) {
                     mMessages = parseObjects;
                     for (ParseObject message : mMessages) {
                         adapter.add(message.getString(ParseConstants.KEY_SENDER_ID));
                     }
+
                     spinner.setVisibility(View.INVISIBLE);
                 } else {
                     Log.e(TAG, "ParseExeception caught: ", e);
@@ -79,6 +91,7 @@ public class InboxFragment extends ListFragment {
             }
         });
     }
+
     @Override
     public void onListItemClick(ListView l,View v,int position,long id){
         super.onListItemClick(l,v,position,id);
@@ -117,6 +130,13 @@ public class InboxFragment extends ListFragment {
         alertaSimple.create();
         alertaSimple.show();
     }
+
+    protected SwipeRefreshLayout.OnRefreshListener mOnRefreshListener = new SwipeRefreshLayout.OnRefreshListener(){
+        @Override
+        public void onRefresh(){
+            reloadMessage();
+        }
+    };
 }
 
 
