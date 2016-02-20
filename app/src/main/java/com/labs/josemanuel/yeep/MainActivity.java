@@ -269,6 +269,10 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(this, getString(R.string.general_error), Toast.LENGTH_LONG).show();
                 } else {
                     mMediaUri = data.getData();
+                    Intent intent = new Intent(MainActivity.this, Recipients.class);
+                    intent.setData(mMediaUri);
+                    intent.putExtra(ParseConstants.KEY_FILE_TYPE, fileType);
+                    startActivity(intent);
                 }
             }else if(requestCode == PICK_VIDEO_REQUEST || requestCode == TAKE_VIDEO_REQUEST){
                 String fileType = ParseConstants.TYPE_VIDEO;
