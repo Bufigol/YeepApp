@@ -97,8 +97,8 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)setAction("Action", null).show();
+                dialogCameraChoices();
             }
         });
 
@@ -150,12 +150,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intentRepo);
 
                 break;
-
-            case R.id.action_camera:
-                dialogCameraChoices();
-
-                break;
-
             case R.id.action_send:
                 ParseObject message = new ParseObject(ParseConstants.CLASS_MESSAGES);
 
@@ -174,7 +168,6 @@ public class MainActivity extends AppCompatActivity {
     // creando metod dialogCameraChoices para la declaracion del dialogo de la opcion camara
     // se encargara de mostrar el dialogo con las opciones
     public void dialogCameraChoices() {
-
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setItems(R.array.camera_choices, mDialogListener());
         AlertDialog dialog = builder.create();

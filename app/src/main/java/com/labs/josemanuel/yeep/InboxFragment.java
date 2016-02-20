@@ -83,6 +83,10 @@ public class InboxFragment extends ListFragment {
                     }
 
                     spinner.setVisibility(View.INVISIBLE);
+                    MessageAdapter adapter = new MessageAdapter(
+                            getListView().getContext(),
+                            mMessages);
+                    setListAdapter(adapter);
                 } else {
                     Log.e(TAG, "ParseExeception caught: ", e);
                     errorEditFriendsFragment(getString(R.string.error_message));

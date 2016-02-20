@@ -20,59 +20,52 @@ import java.util.List;
  */
 public class MessageAdapter extends ArrayAdapter<ParseObject> {
 
-
     protected Context mContext;
     protected List<ParseObject> mMessages;
 
-    // constructor
-    public MessageAdapter(Context context, List<ParseObject>messages){
-        super(context, R.layout.message_item, messages); // asignado el layout al padre
+    public MessageAdapter(Context context, List<ParseObject> messages) {
+        super(context, R.layout.message_item, messages);
         mContext = context;
         mMessages = messages;
-
     }
 
-    // el  adaptador llama a un  metodo para incorporar la lista, que es el layout message_item
-    // recicla la vista si ya existe. Primero crea la lista y luego lo infla
     @Override
-    public View getView(int position, View convertView, ViewGroup parent){
+    public View getView(int position, View convertView, ViewGroup parent) {
+        ViewHolder holder;
 
-        ViewHolder holder; // se va inflando la unica vista con las filas y  contenido
-
-        // si no existe la vista, la crea y la infla
-        if(convertView == null) {
+        if (convertView == null) {
             convertView = LayoutInflater.from(mContext).inflate(R.layout.message_item, null);
             holder = new ViewHolder();
-            holder.iconImageView = (ImageView) convertView.findViewById(R.id.messageIcon);
-            holder.nameLabel = (TextView) convertView.findViewById(R.id.senderLabel);
+            holder.iconImageView = (ImageView)convertView.findViewById(R.id.messageIcon);
+            holder.nameLabel = (TextView)convertView.findViewById(R.id.senderLabel);
+            convertView.setTag(holder);
         }
-        else{
-            // si ya esta creado, obtiene la vista de fila que estaba creada
+        else {
             holder = (ViewHolder)convertView.getTag();
         }
 
-        // colocar los datos dentro de la lista
-
         ParseObject message = mMessages.get(position);
-        // pregunta a parse si es imagen o  video
 
-        if(message.getString(ParseConstants.KEY_FILE_TYPE).equals(ParseConstants.TYPE_IMAGE)){
-            holder.iconImageView.setImageResource(R.drawable.ic_picture);
-
-        }else{
-            holder.iconImageView.setImageResource(R.drawable.ic_video);
+        if (message.getString(ParseConstants.KEY_FILE_TYPE).equals(ParseConstants.TYPE_IMAGE)) {
+            holder.iconImageView.setImageResource(R.drawable.ic_action_picture);
         }
-
-        holder.iconImageView.setImageResource(R.drawable.ic_picture); // ic_picture
+        else {
+            holder.iconImageView.setImageResource(R.drawable.ic_action_play_over_video);
+        }
         holder.nameLabel.setText(message.getString(ParseConstants.KEY_SENDER_NAME));
 
         return convertView;
     }
 
-    private static class ViewHolder{
+    private static class ViewHolder {
         ImageView iconImageView;
         TextView nameLabel;
     }
 
-
+    public void refill(List<ParseObject> messages) {
+        mMessages.clear();
+        mMessages.addAll(messages);
+        notifyDataSetChanged();
+    }
 }
+

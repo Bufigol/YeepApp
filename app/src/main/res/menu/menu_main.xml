@@ -20,11 +20,6 @@
         android:title="@string/action_logout"
         app:showAsAction="never" />
 
-    <item android:id="@+id/action_camera"
-        android:icon="@drawable/ic_menu_camera"
-        android:title="action bar camera"
-        app:showAsAction = "always"
-        />
     <item
         android:id="@+id/action_repositorio"
         android:orderInCategory="300"
