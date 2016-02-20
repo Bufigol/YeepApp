@@ -9,8 +9,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
-
 import com.squareup.picasso.Picasso;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class ViewImageActivity extends AppCompatActivity {
 
@@ -24,6 +26,13 @@ public class ViewImageActivity extends AppCompatActivity {
         ImageView imageView = (ImageView) findViewById(R.id.imagen);
         Uri imageUri = getIntent().getData();
         Picasso.with(this).load(imageUri.toString()).into(imageView);
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                finish();
+            }
+        }, 10000);
     }
 
 }
