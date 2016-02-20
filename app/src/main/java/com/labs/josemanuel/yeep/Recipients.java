@@ -24,6 +24,10 @@ import com.parse.ParseRelation;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +37,6 @@ public class Recipients extends ListActivity {
     protected List<ParseUser> mFriends;
     protected ParseRelation<ParseUser> mFriendsRelation;
     public ParseUser mCurrentUser;
-    ;
     protected TextView empty;
     protected String[] usernames;
     protected int[] images;
@@ -164,11 +167,35 @@ public class Recipients extends ListActivity {
         message.put(ParseConstants.KEY_SENDER_NAME, ParseUser.getCurrentUser().getUsername());
         message.put(ParseConstants.KEY_RECIPIENTS_ID, getRecipientsIds());
         message.put(ParseConstants.KEY_FILE_TYPE, mFileType);
-        byte[] fileBytes = FileHelper.getByteArrayFromFile(this, mMediaUri);
-        fileBytes = FileHelper.reduceImageForUpload(fileBytes);
-        String fileName = FileHelper.getFileName(this, mMediaUri, mFileType);
-        ParseFile file = new ParseFile(fileName, fileBytes);
-        message.put(ParseConstants.KEY_FILE, file);
+        if(mFileType.equals(ParseConstants.TYPE_IMAGE)){
+            byte[] fileBytes = FileHelper.getByteArrayFromFile(this, mMediaUri);
+            fileBytes = FileHelper.reduceImageForUpload(fileBytes);
+            String fileName = FileHelper.getFileName(this, mMediaUri, mFileType);
+            ParseFile file = new ParseFile(fileName, fileBytes);
+            message.put(ParseConstants.KEY_FILE, file);
+        }
+        if(mFileType.equals(ParseConstants.TYPE_VIDEO)){
+            try{
+                InputStream inputStream = this.getContentResolver().openInputStream(mMediaUri);
+                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                byte[] bytesFromFile = new byte[1024*1024];
+                int bytesReaded = inputStream.read(bytesFromFile);
+                while(bytesReaded !=-1){
+                    outputStream.write(bytesFromFile,0,bytesReaded);
+                    bytesReaded = inputStream.read(bytesFromFile);
+                }
+                byte[] fileBytes = outputStream.toByteArray();
+                String fileName = FileHelper.getFileName(this, mMediaUri, mFileType);
+                ParseFile file = new ParseFile(fileName, fileBytes);
+                message.put(ParseConstants.KEY_FILE, file);
+                inputStream.close();
+                outputStream.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         return message;
     }
 }
