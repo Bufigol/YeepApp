@@ -36,13 +36,7 @@
         >
         <activity
             android:name=".LoginActivity"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".SignUpActivity"
             android:parentActivityName=".LoginActivity"
@@ -50,7 +44,13 @@
         <activity
             android:name=".Splash_Screen"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".EditFriendsActivity"
             android:label="@string/title_activity_edit_friends"
@@ -63,6 +63,15 @@
         </activity>
         <activity android:name=".WebviewActivity" />
         <activity android:name=".Recipients" />
+        <activity
+            android:name=".ViewImageActivity"
+            android:label="@string/title_activity_view_image"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.labs.josemanuel.yeep.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
