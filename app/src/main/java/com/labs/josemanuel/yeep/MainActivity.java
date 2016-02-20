@@ -30,13 +30,13 @@ import java.io.InputStream;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String TAG = MainActivity.class.getSimpleName();
+    public static final String TAG = MainActivity.class.getSimpleName();
     // constantes para cada una de las acciones, numero que lo identifica (requestCode)
-    private static final int TAKE_PHOTO_REQUEST = 0;
-    private static final int TAKE_VIDEO_REQUEST = 1;
-    private static final int PICK_PHOTO_REQUEST = 2;
-    private static final int PICK_VIDEO_REQUEST = 3;
-    private final int FILE_SIZE_LIMIT = 10485760;
+    public static final int TAKE_PHOTO_REQUEST = 0;
+    public static final int TAKE_VIDEO_REQUEST = 1;
+    public static final int PICK_PHOTO_REQUEST = 2;
+    public static final int PICK_VIDEO_REQUEST = 3;
+    static final int FILE_SIZE_LIMIT = 10485760;
     protected Uri mMediaUri; // permite identificar ficheros
 
     /**
@@ -58,13 +58,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mMediaUri = getIntent().getData();
         ParseAnalytics.trackAppOpened(getIntent());
         ParseUser currentUser = ParseUser.getCurrentUser();
-        if (currentUser != null) {
+        if (currentUser == null) {
             // navigateToLogin();
             Log.i(TAG, currentUser.getUsername());
         } else {
-            Log.i(TAG, "no hay usuario");
+            Log.i(TAG, currentUser.getUsername());
         }
 
 /*        Intent intent = new Intent(this, LoginActivity.class);
@@ -152,12 +153,17 @@ public class MainActivity extends AppCompatActivity {
 
             case R.id.action_camera:
                 dialogCameraChoices();
+
                 break;
 
             case R.id.action_send:
                 ParseObject message = new ParseObject(ParseConstants.CLASS_MESSAGES);
+
+
                 break;
+
         }
+
         return super.onOptionsItemSelected(item);
 
     }
@@ -193,7 +199,8 @@ public class MainActivity extends AppCompatActivity {
                         mMediaUri = FileUtilities.getOutputMediaFileUri(FileUtilities.MEDIA_TYPE_IMAGE);
                         // Si no existe identificador
                         if (mMediaUri == null) {
-                            mensajeError(String.valueOf(R.string.error_storage), String.valueOf(R.string.error_almacenamiento), false);
+                            AlertMssgStorage();
+                            // Toast.makeText(MainActivity.this, R.string.error_external_storage, Toast.LENGTH_LONG).show();
                             Log.i(TAG, "Error en el almacenamiento externo");
                         } else {
                             // anadiremos informacion extra al intent
@@ -210,7 +217,7 @@ public class MainActivity extends AppCompatActivity {
 
                         // Si no existe identificador
                         if (mMediaUri == null) {
-                            mensajeError(String.valueOf(R.string.error_storage), String.valueOf(R.string.error_almacenamiento), false);
+                            AlertMssgStorage();
                             // Toast.makeText(MainActivity.this, R.string.error_external_storage, Toast.LENGTH_LONG).show();
                             Log.i(TAG, "Error en el almacenamiento externo");
                         } else {
@@ -232,8 +239,13 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case 3: // Choose video
-                        mensajeError(String.valueOf(R.string.error_storage),String.valueOf(R.string.aviso_limite_video),true);
+                        sizeVideoAdvise();  // Aviso al usuario sobre el tamaño del video
                         Log.i(TAG, "Choice Video Option is selected");
+
+                        /*Intent chooseVideoIntent = new Intent(Intent.ACTION_GET_CONTENT);
+                        chooseVideoIntent.setType("video/*");
+                        // Toast.makeText(MainActivity.this, R.string.video_file_size_warning, Toast.LENGTH_LONG).show();
+                        startActivityForResult(chooseVideoIntent, PICK_VIDEO_REQUEST);*/
                         break;
 
                 }
@@ -248,108 +260,127 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         // bloque if en que comprobaremos que resultCode
         if (resultCode == RESULT_OK) {
-            if (requestCode == PICK_PHOTO_REQUEST || requestCode == PICK_VIDEO_REQUEST) {
+            if (requestCode == PICK_PHOTO_REQUEST || requestCode == TAKE_PHOTO_REQUEST) {
+                String fileType = ParseConstants.TYPE_IMAGE;
                 if (data == null) {
-                    mensajeError(String.valueOf(R.string.error_storage), String.valueOf(R.string.error_almacenamiento), false);
+                    AlertMssgStorage();
                     Toast.makeText(this, getString(R.string.general_error), Toast.LENGTH_LONG).show();
                 } else {
                     mMediaUri = data.getData();
-
+                    Intent intent = new Intent(MainActivity.this, Recipients.class);
+                    intent.setData(mMediaUri);
+                    intent.putExtra(ParseConstants.KEY_FILE_TYPE, fileType);
+                    startActivity(intent);
                 }
-                // imprimimos por consola la Uri
-                Log.i(TAG, "Media URI: " + mMediaUri);
-
-                // Si se selecciona un video, comprobamos su tamaño  <10Mb
-                if (requestCode == PICK_VIDEO_REQUEST) {
-
-                    int fileSize = 0; // inicializamos variable que almacenará el tamaño del video a 0
-                    InputStream inputStream;
-
-                    try {
-                        // acceso al vídeo seleccionado de la galería y obtener su tamaño
-                        inputStream = getContentResolver().openInputStream(mMediaUri);
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                        return;
-                    }
-                    try {
-                        fileSize = inputStream.available(); // devuelve el tamaño del video
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        return;
-                    } finally {
-                        try {
-                            inputStream.close();
-                        } catch (IOException e) {
-                            e.printStackTrace();
+            }else if(requestCode == PICK_VIDEO_REQUEST || requestCode == TAKE_VIDEO_REQUEST){
+                String fileType = ParseConstants.TYPE_VIDEO;
+                try {
+                    if (data == null) {
+                        AlertMssgStorage();
+                        Toast.makeText(this, getString(R.string.general_error), Toast.LENGTH_LONG).show();
+                    } else {
+                        mMediaUri = data.getData();
+                        if (data != null) {
+                            InputStream inputStream = null;
+                            inputStream = getContentResolver().openInputStream(mMediaUri);
+                            int fileSize = inputStream.available(); // devuelve el tamaño del video
+                            if (fileSize >= FILE_SIZE_LIMIT) {
+                                sizeVideoWarring();
+                                Toast.makeText(this, "El video es superior a 10MB", Toast.LENGTH_LONG).show();
+                                return;
+                            } else {
+                                Intent intent = new Intent(MainActivity.this, Recipients.class);
+                                intent.setData(mMediaUri);
+                                intent.putExtra(ParseConstants.KEY_FILE_TYPE, fileType);
+                                startActivity(intent);
+                            }
+                        } else {
+                            // Hay algún problema al obtener el video
+                            Toast.makeText(this, "Hay algún problema al obtener el video", Toast.LENGTH_LONG).show();
+                            return;
                         }
                     }
-
-                    // Comprobación del tamaño del archivo
-                    if (fileSize >= FILE_SIZE_LIMIT) {
-                        mensajeError(String.valueOf(R.string.error), String.valueOf(R.string.video_size_warning), false);
-                        Toast.makeText(this, R.string.aviso_limite_video, Toast.LENGTH_LONG).show();
-                        return;
-                    }
-
-                    if (data != null) {
-                        mMediaUri = data.getData();
-
-                    } else {
-                        // Hay algún problema al obtener el video
-                        Toast.makeText(this, R.string.problema_video, Toast.LENGTH_LONG).show();
-                        return;
-                    }
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
-            String fileType;
-            if (requestCode == PICK_PHOTO_REQUEST || requestCode == TAKE_PHOTO_REQUEST){
-                fileType = "imagen";
-            }else{
-                fileType = "video";
-            }
-            Intent intent = new Intent(MainActivity.this,Recipients.class);
-            intent.setData(mMediaUri);
-            intent.putExtra(ParseConstants.KEY_FILE_TYPE,fileType);
-            startActivity(intent);
-        }
-        // FIn RESULT_OK
-        else if (resultCode != RESULT_CANCELED) { // si no se devolvió nada y tampoco pulso cancelar
+        }else if (resultCode != RESULT_CANCELED) { // si no se devolvió nada y tampoco pulso cancelar
             Toast.makeText(this, getString(R.string.general_error), Toast.LENGTH_LONG).show();
-            mensajeError(String.valueOf(R.string.error_storage), String.valueOf(R.string.error_almacenamiento), false);
+            AlertMssgStorage();
         }
+
 
     } // FIn onActivityResult
-    private void mensajeError(String titulo,String mensaje, boolean intent){
+
+
+    // Error en el almacenamiento
+    private void AlertMssgStorage() {
+
         final AlertDialog.Builder alertaSimple = new AlertDialog.Builder(MainActivity.this);
         Log.d(TAG, " -*- El popup Dialog se ha creado -*-");
-        alertaSimple.setTitle(R.string.error_storage);
-        alertaSimple.setMessage(R.string.error_almacenamiento);
-        if(intent) {
-            alertaSimple.setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    Intent chooseVideoIntent = new Intent(Intent.ACTION_GET_CONTENT);
-                    chooseVideoIntent.setType("video/*");
-                    // Toast.makeText(MainActivity.this, R.string.video_file_size_warning, Toast.LENGTH_LONG).show();
-                    startActivityForResult(chooseVideoIntent, PICK_VIDEO_REQUEST);
-                }
-            });
-        }else{
-            alertaSimple.setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    //  setContentView(R.layout.activity_main);
-                }
-            });
-        }
+        alertaSimple.setTitle("Error Storage");
+        alertaSimple.setMessage("Error con el almacenamiento externo");
+        alertaSimple.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //  setContentView(R.layout.activity_main);
+
+            }
+        });
+
         alertaSimple.setIcon(R.mipmap.ic_launcher);
         alertaSimple.create();
         alertaSimple.show();
     }
+
+    // Aviso al usuario del tamaño máximo para videos
+    private void sizeVideoAdvise() {
+        final AlertDialog.Builder alertaSimple = new AlertDialog.Builder(MainActivity.this);
+        Log.d(TAG, " -*- El popup Dialog se ha creado -*-");
+        alertaSimple.setTitle("Error Storage");
+        alertaSimple.setMessage("El video debe ser inferior a 10Mb");
+        alertaSimple.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                Intent chooseVideoIntent = new Intent(Intent.ACTION_GET_CONTENT);
+                chooseVideoIntent.setType("video/*");
+                // Toast.makeText(MainActivity.this, R.string.video_file_size_warning, Toast.LENGTH_LONG).show();
+                startActivityForResult(chooseVideoIntent, PICK_VIDEO_REQUEST);
+            }
+
+        });
+
+        alertaSimple.setIcon(R.mipmap.ic_launcher);
+        alertaSimple.create();
+        alertaSimple.show();
+    }
+
+    // ALERT Tamaño de video elegido superado
+    private void sizeVideoWarring() {
+        final AlertDialog.Builder alertaSimple = new AlertDialog.Builder(MainActivity.this);
+        Log.d(TAG, " -*- Mensaje: Tamaño de video excedido -*-");
+        alertaSimple.setTitle("Error");
+        alertaSimple.setMessage(R.string.video_size_warning);
+        alertaSimple.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+
+            }
+
+        });
+
+        alertaSimple.setIcon(R.mipmap.ic_launcher);
+        alertaSimple.create();
+        alertaSimple.show();
+    }
+
+
 
 
 }

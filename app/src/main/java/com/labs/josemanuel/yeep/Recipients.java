@@ -24,6 +24,10 @@ import com.parse.ParseRelation;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +36,7 @@ public class Recipients extends ListActivity {
     public static final String TAG = Recipients.class.getSimpleName();
     protected List<ParseUser> mFriends;
     protected ParseRelation<ParseUser> mFriendsRelation;
-    public ParseUser mCurrentUser;;
+    public ParseUser mCurrentUser;
     protected TextView empty;
     protected String[] usernames;
     protected int[] images;
@@ -41,6 +45,7 @@ public class Recipients extends ListActivity {
     public ImageButton btnsend;
     private Uri mMediaUri;
     private String mFileType;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +60,7 @@ public class Recipients extends ListActivity {
         mMediaUri = intent.getData();
         mFileType = intent.getStringExtra(ParseConstants.KEY_FILE_TYPE);
     }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -101,73 +107,95 @@ public class Recipients extends ListActivity {
             }
         });
     }
-    public boolean onCreateOptionsMenu (Menu menu){
+
+    public boolean onCreateOptionsMenu(Menu menu) {
         MenuItem mSendItem;
         getMenuInflater().inflate(R.menu.menu_recipients, menu);
-        mSendItem=menu.getItem(0);
+        mSendItem = menu.getItem(0);
         return true;
     }
-    public void showAction(View view){
+
+    public void showAction(View view) {
         Log.i(TAG, "Pushing send friends.");
-        ParseObject message = createMessage();
-        if(message == null){
+        if (createMessage() == null) {
             //mensaje de error
-        }else{
-            send(message);
+        } else {
+            send(createMessage());
             finish();
         }
     }
-    private void send(ParseObject message){
+
+    private void send(final ParseObject message) {
         message.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {
-                if(e == null){
-                    Toast.makeText(Recipients.this,"¡Mensaje enviado",Toast.LENGTH_SHORT).show();
-                }else{
+                if (e == null) {
+
+                    Toast.makeText(Recipients.this, "¡Mensaje enviado", Toast.LENGTH_SHORT).show();
+                } else {
                     //mensaje de error
-                    Toast.makeText(Recipients.this,"¡Error al enviar el mensaje",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Recipients.this, "¡Error al enviar el mensaje", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
+
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
-        if(l.getCheckedItemCount()>0) {
+        if (l.getCheckedItemCount() > 0) {
             btnsend.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             btnsend.setVisibility(View.INVISIBLE);
         }
     }
 
 
-    private ArrayList<String> getRecipientsIds(){
+    private ArrayList<String> getRecipientsIds() {
         ArrayList<String> recipientList = new ArrayList<>();
-        for(int i = 0; i < getListView().getCount();i++){
-            if(getListView().isItemChecked(i)){
+        for (int i = 0; i < getListView().getCount(); i++) {
+            if (getListView().isItemChecked(i)) {
                 recipientList.add(mFriends.get(i).getObjectId());
             }
         }
         return recipientList;
     }
-    private ParseObject createMessage(){
+
+    private ParseObject createMessage() {
         ParseObject message = new ParseObject(ParseConstants.CLASS_MESSAGES);
-        message.put(ParseConstants.KEY_SENDER_ID,ParseUser.getCurrentUser().getObjectId());
-        message.put(ParseConstants.KEY_SENDER_NAME,ParseUser.getCurrentUser().getUsername());
-        message.put(ParseConstants.KEY_RECIPIENTS_ID,getRecipientsIds());
-        message.put(ParseConstants.KEY_FILE_TYPE,mFileType);
-        byte[] fileBytes = FileHelper.getByteArrayFromFile(this,mMediaUri);
-        if(fileBytes == null){
-            return null;
-        }else{
-            if(mFileType == "imagen"){
-                fileBytes = FileHelper.reduceImageForUpload(fileBytes);
-                String fileName = FileHelper.getFileName(this,mMediaUri,mFileType);
+        message.put(ParseConstants.KEY_SENDER_ID, ParseUser.getCurrentUser().getObjectId());
+        message.put(ParseConstants.KEY_SENDER_NAME, ParseUser.getCurrentUser().getUsername());
+        message.put(ParseConstants.KEY_RECIPIENTS_ID, getRecipientsIds());
+        message.put(ParseConstants.KEY_FILE_TYPE, mFileType);
+        if(mFileType.equals(ParseConstants.TYPE_IMAGE)){
+            byte[] fileBytes = FileHelper.getByteArrayFromFile(this, mMediaUri);
+            fileBytes = FileHelper.reduceImageForUpload(fileBytes);
+            String fileName = FileHelper.getFileName(this, mMediaUri, mFileType);
+            ParseFile file = new ParseFile(fileName, fileBytes);
+            message.put(ParseConstants.KEY_FILE, file);
+        }
+        if(mFileType.equals(ParseConstants.TYPE_VIDEO)){
+            try{
+                InputStream inputStream = this.getContentResolver().openInputStream(mMediaUri);
+                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                byte[] bytesFromFile = new byte[1024*1024];
+                int bytesReaded = inputStream.read(bytesFromFile);
+                while(bytesReaded !=-1){
+                    outputStream.write(bytesFromFile,0,bytesReaded);
+                    bytesReaded = inputStream.read(bytesFromFile);
+                }
+                byte[] fileBytes = outputStream.toByteArray();
+                String fileName = FileHelper.getFileName(this, mMediaUri, mFileType);
                 ParseFile file = new ParseFile(fileName, fileBytes);
                 message.put(ParseConstants.KEY_FILE, file);
+                inputStream.close();
+                outputStream.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
-
         return message;
     }
 }
