@@ -1,27 +1,17 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/album_item"
     android:layout_width="100dp"
     android:layout_height="150dp"
     android:padding="5dp"
-    android:weightSum="1">
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:id="@+id/linearLayout2">
+    android:weightSum="1"
+    android:orientation="vertical"
+    android:background="#D97171">
 
         <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/grid_image" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/linearLayout2">
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/grid_image"
+            android:layout_centerHorizontal="true" />
 
         <TextView
             android:layout_width="match_parent"
@@ -29,8 +19,15 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:id="@+id/grid_text"
             android:layout_gravity="center_horizontal"
-            android:gravity="left"
             android:textSize="20dp"
-            android:text="Bufibol." />
-    </LinearLayout>
+            android:text="Bufibol."
+            android:textColor="#ffffff"
+            android:layout_below="@+id/grid_image"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentTop="false"
+            android:gravity="center_vertical|center_horizontal" />
+
+
 </RelativeLayout>
+
+

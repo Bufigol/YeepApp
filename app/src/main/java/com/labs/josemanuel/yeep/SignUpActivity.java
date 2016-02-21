@@ -179,6 +179,11 @@ public class SignUpActivity extends AppCompatActivity {
         return output;
     }
 
+    public void getToLogin(View view){
+        Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
+        startActivity(intent);
+    }
+
 }
 
 
