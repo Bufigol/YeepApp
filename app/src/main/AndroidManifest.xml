@@ -7,6 +7,11 @@
     // Request permissions
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
 
     <application
         android:name=".YeepApp"
@@ -28,9 +33,10 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
+        >
         <activity
             android:name=".LoginActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".SignUpActivity"
             android:parentActivityName=".LoginActivity"
@@ -41,7 +47,6 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -55,7 +60,17 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.labs.josemanuel.yeep.MainActivity" />
         </activity>
-        <activity android:name=".WebviewActivity"/>
+        <activity android:name=".WebviewActivity" />
+        <activity android:name=".Recipients" />
+        <activity
+            android:name=".ViewImageActivity"
+            android:label="@string/title_activity_view_image"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.labs.josemanuel.yeep.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

@@ -80,7 +80,8 @@
         android:layout_alignRight="@+id/buttondivider"
         android:layout_alignEnd="@+id/buttondivider"
         style="@style/AppTheme"
-        android:layout_marginTop="10dp" />
+        android:layout_marginTop="10dp"
+        android:textColor="@color/text_color" />
 
     <ImageView
         android:id="@+id/buttondivider"
@@ -105,7 +106,8 @@
         android:layout_alignRight="@+id/linearLayout"
         android:layout_alignEnd="@+id/linearLayout"
         style="@style/AppTheme"
-        android:layout_marginTop="10dp" />
+        android:layout_marginTop="10dp"
+        android:textColor="@color/text_color" />
 
 
 </RelativeLayout>

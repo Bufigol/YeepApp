@@ -82,7 +82,7 @@ public class FriendsFragment extends Fragment {
                     grid.setAdapter(adapter);
                     getActivity().setProgressBarIndeterminateVisibility(false);
                     if(mFriends.size()>0){
-                        Log.i("FriendsFragment.","Empty array.");
+                       // Log.i("FriendsFragment.","Empty array.");
                         empty.setVisibility(View.INVISIBLE);
                     }else{
                         empty.setVisibility(View.VISIBLE);

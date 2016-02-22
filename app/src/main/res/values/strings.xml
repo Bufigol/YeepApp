@@ -23,5 +23,23 @@
     <string name="user_deleted_toast">User removed from the list successfully</string>
     <string name="repositorio">Ir al repositorio</string>
     <string name="mensaje_repo">¿Quieres visitar el repositorio en GitHub?</string>
+    <string name="general_error">Ocurrió algún error</string>
+    <string name="dialog_sizeVideo_Notice">El video debe ser inferior a 10Mb</string>
+    <string name="video_size_warning">El video seleccionado es muy grande. Seleccione otro video </string>
+    <string name="error">Error</string>
+    <string name="aviso_limite_video">El video debe ser inferior a 10Mb</string>
+    <string name="error_storage">Error Storage</string>
+    <string name="error_almacenamiento">Error con el almacenamiento externo</string>
+    <string name="problema_video">Hay algún problema al obtener el video</string>
+    <string name="aceptar">Aceptar</string>
+
+    <!-- camera_choices -->
+    <string-array name="camera_choices">
+        <item>Take Picture</item>
+        <item>Take Video</item>
+        <item>Choice Picture</item>
+        <item>Choice Video </item>
+    </string-array>
+    <string name="title_activity_view_image">Wick App</string>
 
 </resources>
