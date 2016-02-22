@@ -115,6 +115,18 @@ public class InboxFragment extends ListFragment {
                 startActivity(i);
             }
         }
+
+        List<String>ids=message.getList(ParseConstants.KEY_RECIPIENTS_ID);
+
+        if(ids.size()>1){
+            ids.remove(ParseUser.getCurrentUser().getObjectId());
+            ArrayList<String>idsToRemove=new ArrayList();
+            idsToRemove.add(ParseUser.getCurrentUser().getObjectId());
+            message.removeAll(ParseConstants.KEY_RECIPIENTS_ID,idsToRemove);
+        }else{
+            message.deleteInBackground();
+        }
+
     }
 
     private void errorEditFriendsFragment(String mensaje) {
