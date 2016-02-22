@@ -6,6 +6,7 @@ import android.graphics.Typeface;
 import android.os.Handler;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.parse.Parse;
 import com.parse.ParseUser;
@@ -17,8 +18,7 @@ public class Splash_Screen extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
         cambiarFont();
-        openApp(true);
-
+        openApp();
     }
 
     /**
@@ -36,11 +36,13 @@ public class Splash_Screen extends Activity {
     /**
       * Metodo que tiene como finalidad de realizar el intent al layout para el inicio de sesión luego
      * de 2 segundos.
-     * @param locationPermission
+     *
     */
-    private void openApp(boolean locationPermission) {
+    private void openApp() {
         Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
+        if(ParseUser.getCurrentUser() == null){
+
+            handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     Intent intent = new Intent(Splash_Screen
@@ -49,6 +51,17 @@ public class Splash_Screen extends Activity {
                     finish();
                 }
             }, 2000);
+        }else{
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent intent = new Intent(Splash_Screen
+                            .this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            }, 2000);
+        }
     }
 
 }
