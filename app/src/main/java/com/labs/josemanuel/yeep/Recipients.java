@@ -3,6 +3,7 @@ import android.app.ListActivity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.Menu;
@@ -12,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,10 +41,9 @@ public class Recipients extends ListActivity {
     public ParseUser mCurrentUser;
     protected TextView empty;
     protected String[] usernames;
-    protected int[] images;
     public String[] emails;
-    public String email;
-    public ImageButton btnsend;
+    private ProgressBar pgrsBar;
+    private FloatingActionButton btnsend;
     private Uri mMediaUri;
     private String mFileType;
 
@@ -50,10 +51,11 @@ public class Recipients extends ListActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipients);
-        btnsend = (ImageButton) findViewById(R.id.sendbutton);
+        btnsend = (FloatingActionButton) findViewById(R.id.btnsend);
         btnsend.setVisibility(View.INVISIBLE);
         // iniciamos el progressBar Spinner
-        //pgrsBar = (ProgressBar) findViewById(R.id.progressBar2);
+        pgrsBar = (ProgressBar) findViewById(R.id.progressBarRecipients);
+        pgrsBar.setVisibility(View.INVISIBLE);
         // activar los checks Y permitir la selección múltiple de registros
         getListView().setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         Intent intent = getIntent();
@@ -64,15 +66,23 @@ public class Recipients extends ListActivity {
     @Override
     public void onResume() {
         super.onResume();
+        pgrsBar.setVisibility(View.VISIBLE);
         mCurrentUser = ParseUser.getCurrentUser();
         mFriendsRelation = mCurrentUser.getRelation(ParseConstants.KEY_FRIENDS_RELATION);
         this.setProgressBarIndeterminateVisibility(true);
+        cargarListaAmigos();
+        pgrsBar.setVisibility(View.INVISIBLE);
+        this.setProgressBarIndeterminateVisibility(false);
+    }
+
+    private void cargarListaAmigos() {
         ParseQuery<ParseUser> query = mFriendsRelation.getQuery();
         query.addAscendingOrder(ParseConstants.KEY_USERNAME);
         query.findInBackground(new FindCallback<ParseUser>() {
             @Override
             public void done(List<ParseUser> friends, ParseException e) {
                 if (e == null) {
+
                     mFriends = friends;
                     usernames = new String[mFriends.size()];
                     emails = new String[usernames.length];
@@ -95,6 +105,7 @@ public class Recipients extends ListActivity {
                     } else {
                         // empty.setVisibility(View.VISIBLE);
                     }
+
                 } else {
                     Log.e(TAG, e.getMessage());
                     AlertDialog.Builder builder = new AlertDialog.Builder(Recipients.this);
@@ -115,7 +126,7 @@ public class Recipients extends ListActivity {
         return true;
     }
 
-    public void showAction(View view) {
+    public void enviarMensaje(View view) {
         Log.i(TAG, "Pushing send friends.");
         if (createMessage() == null) {
             //mensaje de error

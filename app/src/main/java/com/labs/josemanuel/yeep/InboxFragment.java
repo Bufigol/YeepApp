@@ -30,6 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Clase correspondiente al fragmento con los mensajes recibidos.
  * Created by JoseManuel on 27/01/2016.
  */
 public class InboxFragment extends ListFragment {

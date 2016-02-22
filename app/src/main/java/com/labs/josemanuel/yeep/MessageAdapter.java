@@ -1,8 +1,5 @@
 package com.labs.josemanuel.yeep;
 
-/**
- * Created by JoseManuel on 07/02/2016.
- */
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +13,9 @@ import com.parse.ParseObject;
 import java.util.List;
 
 /**
+ * Clase que controla el adaptador de items existente en el fragmento que le enseña al usuario los
+ * mensajes recibidos.
+ *
  * Created by JoseManuel on 05/02/2016.
  */
 public class MessageAdapter extends ArrayAdapter<ParseObject> {
