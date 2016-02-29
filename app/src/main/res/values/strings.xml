@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Wick</string>
+    <string name="app_name">Wish</string>
     <string name="action_settings">Settings</string>
     <string name="action_edit_Friends">Edit Friends</string>
     <string name="action_logout">Logout</string>
@@ -11,8 +11,8 @@
     <string name="emailField_hint">Email</string>
     <string name="signBtn_label">SIGN UP</string>
     <string name="password_sing">Password</string>
-    <string name="subTitle_text">App Message</string>
-    <string name="TitleApp_name">Wick!</string>
+    <string name="subTitle_text">Let your dreams fly…</string>
+    <string name="TitleApp_name">Wish</string>
     <string name="cancelBttn">CANCEL</string>
     <string name="loging_message">Loading...</string>
     <string name="empty_inbox_label">No hay mensajes que mostrar</string>

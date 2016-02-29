@@ -4,7 +4,7 @@
         <shape android:shape="rectangle"  >
             <corners android:radius="25dip" />
             <stroke android:width="1dip" android:color="#ffffff" />
-            <gradient android:angle="-90" android:startColor="#ffffff" android:endColor="#e2d308"  />
+            <gradient android:angle="-90" android:startColor="#c95555" android:endColor="#e20813"  />
         </shape>
     </item>
     <item android:state_focused="true">
@@ -22,18 +22,3 @@
         </shape>
     </item>
 </selector>
-
-
-
-<!--
-
- <?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@color/pressed_purple_button"
-        android:state_pressed="true" />
-    <item android:drawable="@color/focused_purple_button"
-        android:state_focused="true" />
-    <item android:drawable="@color/light_purple_button" />
-</selector>
-
--->

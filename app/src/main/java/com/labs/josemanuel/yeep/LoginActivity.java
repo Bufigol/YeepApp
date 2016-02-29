@@ -31,7 +31,7 @@ public class LoginActivity extends AppCompatActivity {
     MenuItem miActionProgressItem;
 
     @Override
-    public boolean onCreateOptionsMenu (Menu menu){
+    public boolean onCreateOptionsMenu(Menu menu) {
 // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_login, menu);
         return true;
@@ -51,12 +51,10 @@ public class LoginActivity extends AppCompatActivity {
     public void showProgressBar() {
         miActionProgressItem.setVisible(true);
     }
+
     public void hideProgressBar() {
         miActionProgressItem.setVisible(false);
     }
-
-
-
 
 
     @Override
@@ -69,12 +67,14 @@ public class LoginActivity extends AppCompatActivity {
         // elimina la barra superior
         //   ActionBar actionBar =getActionBar();
         //  actionBar.hide();
-        if(getSupportActionBar() != null){
+        if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
 
-        Button buttonSend = (Button) findViewById(R.id.loginBtn);
+        final Button buttonSend = (Button) findViewById(R.id.loginBtn);
         buttonSend.setOnClickListener(new View.OnClickListener() {
+
+
             @Override
             public void onClick(View v) {
 
@@ -88,12 +88,25 @@ public class LoginActivity extends AppCompatActivity {
         mSingUpTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
-                startActivity(intent);
+
+                forwardZoom(mSingUpTextView);
+              //  Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
+              //  startActivity(intent);
             }
         });
 
     }
+
+    /**
+     * Probando transición layout
+     */
+
+    public void forwardZoom(View button) {
+        startActivity(new Intent(this, SignUpActivity.class));
+        overridePendingTransition(R.anim.zoom_forward_in, R.anim.zoom_forward_out);
+    }
+
+
     /**
      * Metodo utilizado para comprobar en primer lugar que el campo correspondiente al usuario y luego
      * el correspondiente a la contraseña no esten vacios. En caso de que alguno de los campos esten
@@ -103,7 +116,6 @@ public class LoginActivity extends AppCompatActivity {
      * @see #parseLogin()
      * @see #getUsernameString()
      * @see #getPasswordString()
-     *
      */
     public void makeLogin(View view) {
         /* ProgressDialog centrado
@@ -113,31 +125,39 @@ public class LoginActivity extends AppCompatActivity {
         dialog.setIndeterminate(true);
         dialog.setCanceledOnTouchOutside(false);
         dialog.show();*/
-
-
+        /*
         Animation shake = AnimationUtils.loadAnimation(this, R.anim.shake);
         view.startAnimation(shake);
         shake.start();
+       */
+
+
         // Toast No username
         if (getUsernameString().isEmpty()) {
-            if(getSupportActionBar() != null){
+            if (getSupportActionBar() != null) {
                 getSupportActionBar().hide();
             }
             hideProgressBar();
+            Animation shake = AnimationUtils.loadAnimation(this, R.anim.shake);
+            findViewById(R.id.userFieldSign).startAnimation(shake);
+            shake.start();
             Toast toast = Toast.makeText(getApplicationContext(), "Debe introducir un nombre de usuario", Toast.LENGTH_SHORT);
             toast.show();
             //dialog.hide();
         }   // Toast No passLogin
         if (getPasswordString().isEmpty()) {
-            if(getSupportActionBar() != null){
+            if (getSupportActionBar() != null) {
                 getSupportActionBar().hide();
             }
             hideProgressBar();
+            Animation shake = AnimationUtils.loadAnimation(this, R.anim.shake);
+            findViewById(R.id.passwordField).startAnimation(shake);
+            shake.start();
             Toast toast = Toast.makeText(getApplicationContext(), "Debe introducir su contraseña", Toast.LENGTH_SHORT);
             toast.show();
             //dialog.hide();
         } else {
-            if(getSupportActionBar() != null){
+            if (getSupportActionBar() != null) {
                 getSupportActionBar().show();
             }
             showProgressBar();
@@ -145,6 +165,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
     }
+
     /**
      * Método que realiza el inicio de sesión y realiza un intent en caso que los campos esten correctos.
      * Este metodo es invocado exclusivamente cuando se ha comprobado de que los campos no estan vacios.
@@ -152,6 +173,7 @@ public class LoginActivity extends AppCompatActivity {
      * ingresada por el usuario con la base de datos albergada en el backend alojado en parse.
      * En caso de que este completamente correcto se realiza el intetn, en caso contrario se mostrara
      * un cuadro de dialogo informando del error.
+     *
      * @see #makeLogin(View view)
      */
     private void parseLogin() {
@@ -171,15 +193,18 @@ public class LoginActivity extends AppCompatActivity {
                                     Toast.LENGTH_LONG).show();
                             LoginActivity.this.finish();
                         } else {
+
                             Toast toast = Toast.makeText(getApplicationContext(), "Error, ingrese de nuevo sus datos", Toast.LENGTH_SHORT);
                             toast.show();
                         }
                     }
                 });
     }
+
     /**
      * Metodo privado para obtener la información albergada en el espacio para el ingreso de la
      * contraseña.
+     *
      * @return string ingresado por el usuario.
      */
     @NonNull
@@ -187,9 +212,11 @@ public class LoginActivity extends AppCompatActivity {
         EditText password = (EditText) findViewById(R.id.passwordField);
         return password.getText().toString();
     }
+
     /**
      * Metodo privado para obtener la información albergada en el espacio para el ingreso del nombre
      * de usuario.
+     *
      * @return string ingresado por el usuario.
      */
     @NonNull
@@ -203,9 +230,9 @@ public class LoginActivity extends AppCompatActivity {
      * en el layout del splash screen.
      */
     private void cambiarFont() {
-        TextView myTitle = (TextView)findViewById(R.id.Title);
-        TextView mySubtitle = (TextView)findViewById(R.id.subTitle);
-        Typeface myFont = Typeface.createFromAsset(getAssets(), "fonts/Gagalin-Regular.otf");
+        TextView myTitle = (TextView) findViewById(R.id.Title);
+        TextView mySubtitle = (TextView) findViewById(R.id.subTitle);
+        Typeface myFont = Typeface.createFromAsset(getAssets(), "fonts/Nickainley-Normal.otf");
         myTitle.setTypeface(myFont);
         mySubtitle.setTypeface(myFont);
     }

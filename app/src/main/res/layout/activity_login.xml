@@ -4,63 +4,52 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background1"
+    android:background="@drawable/bg_wish_5"
     tools:context="com.labs.josemanuel.yeep.LoginActivity">
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:scaleType="fitXY"
-        android:src="@drawable/background1"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
 
 
     <TextView
         android:id="@+id/Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@string/TitleApp_name"
+        android:textAlignment="center"
+        android:textColor="#ffffff"
+        android:textIsSelectable="false"
+        android:textSize="80sp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp"
-        android:text="@string/TitleApp_name"
-        android:textColor="@color/posible_color"
-        android:textIsSelectable="false"
-        android:textSize="60sp"
-        android:textStyle="bold" />
+        android:layout_marginTop="38dp" />
 
     <TextView
         android:id="@+id/subTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/Title"
-        android:layout_centerHorizontal="true"
         android:text="@string/subTitle_text"
-        android:textColor="@color/posible_color"
-        android:textSize="30sp" />
+        android:textColor="#ffffff"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        android:layout_below="@+id/Title"
+        android:layout_centerHorizontal="true" />
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/subTitle"
-        android:background="#28ffffff"
-        android:layout_marginTop="@dimen/login_vertical_margin"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:paddingLeft="@dimen/login_horizontal_margin"
         android:paddingRight="@dimen/login_horizontal_margin"
         android:paddingTop="@dimen/login_horizontal_margin"
         android:paddingBottom="@dimen/login_horizontal_margin"
         android:orientation="vertical"
-        android:id="@+id/linearLayout">
+        android:id="@+id/linearLayout"
+        android:layout_below="@+id/subTitle"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="22dp">
 
         <EditText
             android:id="@+id/userFieldSign"
-            android:layout_width="match_parent"
+            android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:layout_above="@+id/loginBtn"
             android:layout_alignLeft="@+id/imageView"
@@ -68,11 +57,12 @@
             android:layout_alignStart="@+id/imageView"
             android:focusable="true"
             android:hint="@string/username_hint"
-            android:textSize="20sp" />
+            android:textSize="18sp"
+            android:layout_gravity="center_horizontal" />
 
         <EditText
             android:id="@+id/passwordField"
-            android:layout_width="match_parent"
+            android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:layout_above="@+id/loginBtn"
             android:textColorHint="@color/light_gray"
@@ -82,41 +72,41 @@
             android:inputType="textPassword"
             android:password="false"
             android:theme="@style/AppTheme"
-            android:textSize="20sp"
-            android:layout_marginTop="10dp" />
+            android:textSize="18sp"
+            android:layout_gravity="center_horizontal" />
 
 
-
-    <Button
-        android:id="@+id/loginBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/loginBtn_label"
-        android:background="@drawable/button_custom"
-        android:textColor="@color/text_color"
-        android:layout_below="@+id/linearLayout"
-        android:layout_alignLeft="@+id/linearLayout"
-        android:layout_alignStart="@+id/linearLayout"
-        android:layout_alignRight="@+id/linearLayout"
-        android:layout_alignEnd="@+id/linearLayout"
-        android:onClick="loginUsuario"
-        style="@style/ImageButtonAppTheme"
-        android:layout_marginTop="10dp" />
-
-
-</LinearLayout>
+    </LinearLayout>
 
     <TextView
         android:id="@+id/signBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="25dp"
         android:text="@string/signUpText"
-        android:textSize="20sp"
-        android:textColor="@color/posible_color"
+        android:textSize="16sp"
+        android:textColor="#cab9b9"
+        android:layout_marginBottom="20dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/linearLayout"
-        android:layout_alignEnd="@+id/linearLayout" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:id="@+id/loginBtn"
+        android:layout_width="122dp"
+        android:layout_height="wrap_content"
+        android:text="@string/loginBtn_label"
+        android:background="@drawable/button_custom"
+        android:textColor="@color/text_color"
+        android:onClick="loginUsuario"
+        style="@style/ImageButtonAppTheme"
+        android:bottomRightRadius="10dp"
+        android:bottomLeftRadius="10dp"
+        android:topLeftRadius="10dp"
+        android:topRightRadius="10dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_below="@+id/linearLayout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="27dp" />
 
 
 </RelativeLayout>

@@ -6,11 +6,12 @@
     <color name="light_gray">#bbbbbb</color>
     <color name="apptheme_color">#f44336</color>
     <color name="posible_color">#FFFC4F4F</color>
-    <color name="light_purple_button">#82060606</color>
-    <color name="pressed_purple_button">#e7080808</color>
-    <color name="focused_purple_button">#EDC6CF</color>
+    <color name="light_purple_button">#efffffff</color>
+    <color name="pressed_purple_button">#30c73d</color>
+    <color name="focused_purple_button">#66c41d</color>
     <color name="text_color">#FC6C6C</color>
     <color name="text_color_input">#DCDCDC</color>
+    <color name="bg_color_transparent">#00ffffff</color>
 </resources>
 
     <!-- colorPrimary #F44336 -->

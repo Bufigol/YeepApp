@@ -28,7 +28,7 @@ public class Splash_Screen extends Activity {
     private void cambiarFont() {
         TextView myTitle = (TextView)findViewById(R.id.Title);
         TextView mySubtitle = (TextView)findViewById(R.id.subTitle);
-        Typeface myFont = Typeface.createFromAsset(getAssets(), "fonts/Gagalin-Regular.otf");
+        Typeface myFont = Typeface.createFromAsset(getAssets(), "fonts/Nickainley-Normal.otf");
         myTitle.setTypeface(myFont);
         mySubtitle.setTypeface(myFont);
     }
