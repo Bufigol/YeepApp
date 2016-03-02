@@ -4,12 +4,19 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF">
 
-
-
-        <RelativeLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            <GridView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/friendsGrid"
+                android:numColumns="3"
+                android:scrollbars="vertical"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:horizontalSpacing="10dp"
+                android:verticalSpacing="10dp"
+                android:layout_margin="10dp"
+                android:gravity="center"
+                android:paddingBottom="50dp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -23,25 +30,5 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
                 android:textSize="15dp" />
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent">
-                <GridView
-                    android:layout_width="match_parent"
-                    android:layout_height="515dp"
-                    android:id="@+id/friendsGrid"
-                    android:numColumns="3"
-                    android:scrollbars="vertical"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:horizontalSpacing="10dp"
-                    android:verticalSpacing="10dp"
-                    android:layout_margin="10dp"
-                    android:gravity="center" />
-
-            </LinearLayout>
-        </RelativeLayout>
 
 </RelativeLayout>

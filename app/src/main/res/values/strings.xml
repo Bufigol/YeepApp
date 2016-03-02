@@ -15,23 +15,24 @@
     <string name="TitleApp_name">Wish</string>
     <string name="cancelBttn">CANCEL</string>
     <string name="loging_message">Loading...</string>
-    <string name="empty_inbox_label">No hay mensajes que mostrar</string>
-    <string name="empty_friends_label">añade amigos para empezar</string>
+    <string name="empty_inbox_label">The inbox is empty.</string>
+    <string name="empty_friends_label">Add friends to start.</string>
     <string name="title_activity_edit_friends">EditFriendsActivity</string>
-    <string name="error_message">Error al cargar los usuarios...</string>
+    <string name="error_message">Error loading users.</string>
     <string name="user_added_toast">User added to the list successfully</string>
     <string name="user_deleted_toast">User removed from the list successfully</string>
-    <string name="repositorio">Ir al repositorio</string>
-    <string name="mensaje_repo">¿Quieres visitar el repositorio en GitHub?</string>
-    <string name="general_error">Ocurrió algún error</string>
-    <string name="dialog_sizeVideo_Notice">El video debe ser inferior a 10Mb</string>
-    <string name="video_size_warning">El video seleccionado es muy grande. Seleccione otro video </string>
+    <string name="repositorio">Go to the repository.</string>
+    <string name="mensaje_repo">Want to go to the repository?</string>
+    <string name="general_error">An error ocurred.</string>
+    <string name="dialog_sizeVideo_Notice">The size of the video must be inferior to 10MB.</string>
+    <string name="video_size_warning">Selected video is too big. Please, select another one.</string>
     <string name="error">Error</string>
-    <string name="aviso_limite_video">El video debe ser inferior a 10Mb</string>
-    <string name="error_storage">Error Storage</string>
-    <string name="error_almacenamiento">Error con el almacenamiento externo</string>
-    <string name="problema_video">Hay algún problema al obtener el video</string>
-    <string name="aceptar">Aceptar</string>
+    <string name="aviso_limite_video">The size of the video must be inferior to 10MB.</string>
+    <string name="error_storage">Storage error..</string>
+    <string name="error_almacenamiento">Error with external storage.</string>
+    <string name="problema_video">Error obtaining video.</string>
+    <string name="username_length">The username must have less of 10 characters.</string>
+    <string name="aceptar">Accept.</string>
 
     <!-- camera_choices -->
     <string-array name="camera_choices">

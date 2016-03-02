@@ -118,13 +118,16 @@ public class InboxFragment extends ListFragment {
 
         List<String>ids=message.getList(ParseConstants.KEY_RECIPIENTS_ID);
 
-        if(ids.size()>1){
-            ids.remove(ParseUser.getCurrentUser().getObjectId());
-            ArrayList<String>idsToRemove=new ArrayList();
-            idsToRemove.add(ParseUser.getCurrentUser().getObjectId());
-            message.removeAll(ParseConstants.KEY_RECIPIENTS_ID,idsToRemove);
-        }else{
+
+        if (ids.size() == 1) {
             message.deleteInBackground();
+        }
+        else {
+            ids.remove(ParseUser.getCurrentUser().getObjectId());
+            ArrayList<String> idsToRemove = new ArrayList();
+            idsToRemove.add(ParseUser.getCurrentUser().getObjectId());
+            message.removeAll(ParseConstants.KEY_RECIPIENTS_ID, idsToRemove);
+            message.saveInBackground();
         }
 
     }
