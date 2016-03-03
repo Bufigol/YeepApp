@@ -35,15 +35,19 @@
         android:theme="@style/AppTheme"
         style="@style/AppTheme"
         android:textSize="16sp"
-        android:layout_gravity="center_horizontal">
+        android:layout_gravity="center_horizontal"
+        android:singleLine="true"
+        android:maxLines="1"
+        android:maxLength="10"
+        android:lines="1">
         <requestFocus />
         </EditText>
 
     <EditText
+        android:id="@+id/emailFieldSign"
         android:layout_below="@+id/userFieldSign"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:id="@+id/emailFieldSign"
         android:textColor="@android:color/black"
         android:hint="@string/emailField_hint"
         android:textColorHint="@color/light_gray"
@@ -52,7 +56,10 @@
         android:theme="@style/AppTheme"
         style="@style/AppTheme"
         android:textSize="16sp"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:singleLine="true"
+        android:lines="1"
+        android:maxLines="1" />
 
 
     <EditText
@@ -68,7 +75,10 @@
         android:theme="@style/AppTheme"
         style="@style/AppTheme"
         android:textSize="16sp"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:singleLine="true"
+        android:lines="1"
+        android:maxLines="1" />
 
 
 

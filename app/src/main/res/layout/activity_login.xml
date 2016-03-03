@@ -59,7 +59,11 @@
             android:focusable="true"
             android:hint="@string/username_hint"
             android:textSize="18sp"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:singleLine="true"
+            android:maxLines="1"
+            android:lines="1"
+            android:maxLength="10" />
 
         <EditText
             android:id="@+id/passwordField"
@@ -74,7 +78,10 @@
             android:password="false"
             android:theme="@style/AppTheme"
             android:textSize="18sp"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:singleLine="true"
+            android:lines="1"
+            android:maxLines="1" />
 
 
     </LinearLayout>
