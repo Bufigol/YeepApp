@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.labs.josemanuel.yeep.SignUpActivity"
-    android:background="@drawable/bg_wish_6">
+    android:background="@drawable/bg_wish_sign"
+    android:paddingTop="50dp">
     <!--android:background="@style/background_fill1"-->
 
 
@@ -12,9 +13,11 @@
         android:id="@+id/linearLayout"
         style="@style/AuthLinearLayout_Sign"
         android:baselineAligned="false"
-        android:layout_marginTop="142dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true">
+        android:background="@drawable/nube_sign"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="false"
+        android:paddingTop="45dp">
 
     <EditText
         android:layout_width="150dp"

@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_wish_5"
+    android:background="@drawable/bg_wish_log"
     tools:context="com.labs.josemanuel.yeep.LoginActivity">
 
 
@@ -38,14 +38,15 @@
         android:layout_height="wrap_content"
         android:paddingLeft="@dimen/login_horizontal_margin"
         android:paddingRight="@dimen/login_horizontal_margin"
-        android:paddingTop="@dimen/login_horizontal_margin"
+        android:paddingTop="45dp"
         android:paddingBottom="@dimen/login_horizontal_margin"
         android:orientation="vertical"
         android:id="@+id/linearLayout"
         android:layout_below="@+id/subTitle"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="22dp">
+        android:layout_marginTop="22dp"
+        android:background="@drawable/nube_sign">
 
         <EditText
             android:id="@+id/userFieldSign"
@@ -83,7 +84,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/signUpText"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:textColor="#cab9b9"
         android:layout_marginBottom="20dp"
         android:layout_alignParentBottom="true"
