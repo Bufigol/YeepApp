@@ -85,17 +85,7 @@
         android:layout_marginRight="34dp"
         android:layout_marginEnd="34dp"
         android:layout_below="@+id/linearLayout"
-        android:layout_toLeftOf="@+id/buttondivider"
-        android:layout_toStartOf="@+id/buttondivider" />
-
-    <ImageView
-        android:id="@+id/buttondivider"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/button_divider"
-        android:layout_alignTop="@+id/signBtn"
-        android:layout_centerHorizontal="true"
-        android:layout_alignBottom="@+id/signBtn" />
+        android:layout_centerHorizontal="true" />
 
 
     <Button
@@ -108,10 +98,10 @@
         android:textSize="13sp"
         style="@style/AppTheme"
         android:textColor="@color/text_color"
-        android:layout_alignTop="@+id/buttondivider"
-        android:layout_toRightOf="@+id/buttondivider"
         android:layout_marginLeft="25dp"
-        android:layout_marginStart="25dp" />
+        android:layout_marginStart="25dp"
+        android:layout_alignTop="@+id/signBtn"
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>
