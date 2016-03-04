@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#D97171</color>D97171
+    <color name="colorPrimaryDark">#C45C5C</color>
+    <color name="colorAccent">#FF5252</color>
+    <color name="light_gray">#bbbbbb</color>
+    <color name="apptheme_color">#f44336</color>
+    <color name="posible_color">#FFFC4F4F</color>
+    <color name="light_purple_button">#efffffff</color>
+    <color name="pressed_purple_button">#30c73d</color>
+    <color name="focused_purple_button">#66c41d</color>
+    <color name="text_color">#FC6C6C</color>
+    <color name="text_color_input">#DCDCDC</color>
+    <color name="bg_color_transparent">#00ffffff</color>
+</resources>
+
+    <!-- colorPrimary #F44336 -->
+    <!-- colorPrimary #D32F2F -->
+    <!-- colorPrimary #FF5722 -->

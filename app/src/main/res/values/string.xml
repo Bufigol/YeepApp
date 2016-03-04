@@ -1,0 +1,46 @@
+<resources>
+    <string name="app_name">Wish</string>
+    <string name="action_settings">Ajustes</string>
+    <string name="action_edit_Friends">Editar Amigos</string>
+    <string name="action_logout">Cerrar sesión</string>
+    <string name="section_format">Hello World desde la secion: %1$d</string>
+    <string name="username_hint">Nombre de usuario</string>
+    <string name="passwordField_hint">Contraseña</string>
+    <string name="loginBtn_label">INICIAR SESIÓN</string>
+    <string name="signUpText">REGISTRO</string>
+    <string name="emailField_hint">Email</string>
+    <string name="signBtn_label">Registro</string>
+    <string name="password_sing">Constraseña</string>
+    <string name="subTitle_text">Let your dreams fly…</string>
+    <string name="TitleApp_name">Wish</string>
+    <string name="cancelBttn">Cancelar</string>
+    <string name="loging_message">Cargando...</string>
+    <string name="empty_inbox_label">La bandeja de entrada esta vacia</string>
+    <string name="empty_friends_label">Añade amigos para comenzar</string>
+    <string name="title_activity_edit_friends">EditFriendsActivity</string>
+    <string name="error_message">Error al cargar los usuarios</string>
+    <string name="user_added_toast">Amigo añadido a la lista satisfactoriamente</string>
+    <string name="user_deleted_toast">Amigo removido a la lista satisfactoriamente</string>
+    <string name="repositorio">Ir al repositorio</string>
+    <string name="mensaje_repo">¿Quieres ir al repositorio?</string>
+    <string name="general_error">A ocurrido algun error</string>
+    <string name="dialog_sizeVideo_Notice">El tamaño del video debe ser menor que 10MB.</string>
+    <string name="video_size_warning">El video seleccionado es demasiado grande. Por favor selecciones otro.</string>
+    <string name="error">Error</string>
+    <string name="aviso_limite_video">El tamaño del video debe ser menor que 10MB.</string>
+    <string name="error_storage">Error en la memoria</string>
+    <string name="error_almacenamiento">Error en la memoria externa</string>
+    <string name="problema_video">Error al obtener el  video.</string>
+    <string name="username_length">El nombre de usuario debe tener 10 o menos caracteres</string>
+    <string name="aceptar">Aceptar</string>
+
+    <!-- camera_choices -->
+    <string-array name="camera_choices">
+        <item>Sacar fotografia</item>
+        <item>Sacar Video</item>
+        <item>Elegir fotografia</item>
+        <item>Elegir Video </item>
+    </string-array>
+    <string name="title_activity_view_image">Wish App</string>
+
+</resources>

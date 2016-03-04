@@ -1,0 +1,84 @@
+<resources>
+
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:editTextBackground">@drawable/apptheme_edit_text_holo_light</item>
+        <item name="android:imageButtonStyle">@style/ImageButtonAppTheme</item>
+    </style>
+
+    <style name="ImageButtonAppTheme" parent="android:Widget.Holo.Light.ImageButton">
+        <item name="android:background">@drawable/apptheme_btn_default_holo_light</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+
+    <!--    &lt;!&ndash; Aplicaction Theme &ndash;&gt;
+    &lt;!&ndash; Base application theme. &ndash;&gt;
+    <style name="AppTheme" parent="Theme.AppCompat.Light">
+        &lt;!&ndash; Customize your theme here. &ndash;&gt;
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:editTextBackground">@drawable/apptheme_edit_text_holo_light</item>
+        <item name="android:imageButtonStyle">@style/ImageButtonAppTheme</item>
+
+</style>
+
+
+    &lt;!&ndash; <style name="AuthBackground">
+         <item name="android:background">@drawable/background_fill</item>
+     </style>&ndash;&gt;
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+
+    &lt;!&ndash; &ndash;&gt;
+
+    <style name="ImageButtonAppTheme" parent="android:Widget.Holo.Light.ImageButton">
+        <item name="android:background">@drawable/apptheme_btn_default_holo_light</item>
+    </style>
+
+
+    &lt;!&ndash; &ndash;&gt;
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />-->
+
+
+    <!-- Extracción de propiedades de estilo de los componentes de los layout-->
+    <!-- ////////////////////////////////////////////////////////////////////-->
+
+    <style name="AuthLinearLayout_Sign">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_below">@id/subTitle</item>
+        <item name="android:background">@color/bg_color_transparent</item>
+        <item name="android:layout_marginTop">@dimen/sing_vertical_margin</item>
+        <item name="android:layout_marginLeft">@dimen/activity_horizontal_margin</item>
+        <item name="android:layout_marginRight">@dimen/activity_horizontal_margin</item>
+        <item name="android:paddingLeft">@dimen/login_horizontal_margin</item>
+        <item name="android:paddingRight">@dimen/login_horizontal_margin</item>
+        <item name="android:paddingTop">@dimen/login_horizontal_margin</item>
+        <item name="android:paddingBottom">@dimen/login_horizontal_margin</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+
+</resources>
