@@ -1,5 +1,5 @@
 
-# WICK!
+# WISH
 ![Wick app](https://farm2.staticflickr.com/1638/24748868795_856a618b16_m.jpg)
 ## About
 La idea detrás de este proyecto es desarrollar una aplicación de mensajería de archivos multimedia (fotos y vídeos), donde la visualización de los mismos sea por un tiempo limitado. Para el desarrollo del proyecto se ocupara [http://parse.com/](Parse) como servicio de backend, donde se almacenaran los datos de los usuarios y el envío de mensajes.
