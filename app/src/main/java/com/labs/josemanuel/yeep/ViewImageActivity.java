@@ -32,7 +32,7 @@ public class ViewImageActivity extends AppCompatActivity {
             public void run() {
                 finish();
             }
-        }, 10000);
+        }, 25000);
     }
 
 }
