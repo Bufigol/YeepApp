@@ -1,5 +1,5 @@
 
-# WICK!
+# WISH
 ![Wick app](https://farm2.staticflickr.com/1638/24748868795_856a618b16_m.jpg)
 
 ## About
