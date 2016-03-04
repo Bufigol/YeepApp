@@ -1,5 +1,5 @@
 [![Stories in Ready](https://badge.waffle.io/Bufigol/YeepApp.png?label=ready&title=Ready)](https://waffle.io/Bufigol/YeepApp)
-# WICK!
+# WISH
 
 ## Grafico de avances.
 Grafico obtenido desde [waffle.io](https://waffle.io/)
