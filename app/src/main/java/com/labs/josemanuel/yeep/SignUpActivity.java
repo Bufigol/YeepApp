@@ -75,7 +75,7 @@ public class SignUpActivity extends AppCompatActivity {
                         finish(); // cerramos registro al salir del layout
                         // Hooray! Let them use the app now.
                     } else {
-                        mensajeAlerta(e.toString());
+                        mensajeAlerta("Error","No se ha podido iniciar sesion",e.toString());
                     }
 
                     // Sign up didn't succeed. Look at the ParseException
@@ -83,8 +83,6 @@ public class SignUpActivity extends AppCompatActivity {
 
                 }
             });
-        }else{
-            mensajeAlerta("checkInputInformation() returned false");
         }
     }
     /**
@@ -92,7 +90,7 @@ public class SignUpActivity extends AppCompatActivity {
      * realizar un correcto inicio de sesión.
      * @param log_message String utilizado con fines de depuración segun su utilización en el codigo.
      */
-    private void mensajeAlerta(String log_message) {
+    private void mensajeAlerta(String titulo,String mensaje,String log_message) {
         Log.d(TAG, log_message);
         final AlertDialog.Builder alertaSimple = new AlertDialog.Builder(SignUpActivity.this);
         Log.d(TAG, " -*- El popup Dialog se ha creado -*-");
@@ -103,7 +101,8 @@ public class SignUpActivity extends AppCompatActivity {
         alertaSimple.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                setContentView(R.layout.activity_sign_up);
+                Intent intent = new Intent(SignUpActivity.this, SignUpActivity.class);
+                startActivity(intent);
 
             }
         });
@@ -124,23 +123,26 @@ public class SignUpActivity extends AppCompatActivity {
     private boolean checkInputInformation(){
         String[] info = getInputInfo();
         if(info[0].matches("") || info[0].length()>=10){
-            Log.i("SignUpActivity","USER EMPTY.");
+            Log.i("SignUpActivity", "USER EMPTY.");
             Toast toast =  Toast.makeText(getApplicationContext(),R.string.username_length,Toast.LENGTH_SHORT);
             toast.show();
+            mensajeAlerta("Error en el nombre de usuario",String.valueOf(R.string.username_length), String.valueOf(Log.i("SignUpActivity", "USER EMPTY.")));
             return false;
         }else{
             Log.i("SignUpActivity","USER NOT EMPTY.");
             if(info[1].matches("")){
                 Log.i("SignUpActivity","PASS EMPTY.");
+                mensajeAlerta("Error en la contraseña", "Por favor ingrese la contraseña", String.valueOf(Log.i("SignUpActivity","PASS EMPTY.")));
                 return false;
             }else{
                 Log.i("SignUpActivity","PASS NOT EMPTY.");
                 if(info[2].matches("")){
-                    Log.i("SignUpActivity","EMAIL EMPTY.");
+                    mensajeAlerta("Email vacio", "Por favor ingrese un correo electronico", String.valueOf(Log.i("SignUpActivity", "EMAIL EMPTY.")));
                     return false;
                 }else{
                     if(!isValidEmail(info[2])){
                         Log.i("SignUpActivity","WRONG EMAIL.");
+                        mensajeAlerta("Email incorrecto", "Por favor ingrese un correo electronico valido", String.valueOf(Log.i("SignUpActivity", "EMAIL EMPTY.")));
                         return false;
                     }else{
                         Log.i("SignUpActivity","EMAIL OK.");
