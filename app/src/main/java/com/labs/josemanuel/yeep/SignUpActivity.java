@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.parse.ParseException;
 import com.parse.ParseUser;
@@ -18,7 +19,6 @@ import com.parse.SignUpCallback;
 
 public class SignUpActivity extends AppCompatActivity {
     final static String TAG = SignUpActivity.class.getSimpleName();
-
     /**
      * Metodo que inicializa la actividad y que le da la funcionalidad al boton de registro.
      * @param savedInstanceState
@@ -123,8 +123,10 @@ public class SignUpActivity extends AppCompatActivity {
      */
     private boolean checkInputInformation(){
         String[] info = getInputInfo();
-        if(info[0].matches("")){
+        if(info[0].matches("") || info[0].length()>=10){
             Log.i("SignUpActivity","USER EMPTY.");
+            Toast toast =  Toast.makeText(getApplicationContext(),R.string.username_length,Toast.LENGTH_SHORT);
+            toast.show();
             return false;
         }else{
             Log.i("SignUpActivity","USER NOT EMPTY.");
